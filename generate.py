@@ -691,6 +691,77 @@ def build_pillars_html(results):
 
 
 
+#leaderboard charts
+
+def get_weighted_scores():
+
+    import pandas as pd
+
+    # 1. Load the CSV you downloaded from Kaggle
+
+    df = pd.read_csv('wordle-bench_leaderboard.csv')
+    
+    # 2. Filter for your 3 specific tasks
+    relevant_tasks = [
+        'evaluate_wordle_single_turn_v2', 
+        'evaluate_wordle_multi_turn', # Update if your CSV name is exactly 'evaluate_wordle_multi_turn'
+        'evaluate_cognitive_flexibility'
+    ]
+    df_filtered = df[df['Task_Name'].isin(relevant_tasks)]
+    
+    # 3. Create the pivot table (Models as rows, Tasks as columns)
+    grouped = df_filtered.groupby(['Model', 'Task_Name'])['Numerical_Result'].mean().unstack()
+    
+    # 4. Fill missing data with 0 and apply your weights
+    grouped_filled = grouped.fillna(0)
+    
+    weights = {
+        'evaluate_wordle_single_turn_v2': 0.20,
+        'evaluate_wordle_multi_turn': 0.30,
+        'evaluate_cognitive_flexibility': 0.50
+    }
+    
+    grouped_filled['Combined_Score'] = (
+        grouped_filled['evaluate_wordle_single_turn_v2'] * weights['evaluate_wordle_single_turn_v2'] +
+        grouped_filled['evaluate_wordle_multi_turn'] * weights['evaluate_wordle_multi_turn'] +
+        grouped_filled['evaluate_cognitive_flexibility'] * weights['evaluate_cognitive_flexibility']
+    )
+    
+    return grouped_filled.sort_values(by='Combined_Score', ascending=False)
+
+def build_combined_bar_chart_html(combined_df):
+    labels = combined_df.index.tolist()
+    data = combined_df['Combined_Score'].tolist()
+
+    html = """
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-2xl font-bold mb-2">Aggregate Cognitive Performance</h3>
+        <p class="text-gray-600 mb-6 text-sm">Weighted Score: 20% Single-Turn, 30% Multi-Turn, 50% Cognitive Flexibility.</p>
+        <div class="w-full h-96">
+            <canvas id="combinedChart"></canvas>
+        </div>
+    </div>
+    <script>
+    new Chart(document.getElementById('combinedChart'), {
+        type: 'bar',
+        data: {
+            labels: """ + json.dumps(labels) + """,
+            datasets: [{
+                label: 'Weighted Aggregate Score',
+                data: """ + json.dumps(data) + """,
+                backgroundColor: 'rgba(59, 130, 246, 0.8)'
+            }]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+    </script>
+    """
+    return html
+
 # ... (The rest of your Leaderboards section remains the same) ...
 
 
@@ -757,6 +828,12 @@ pillars_data = calculate_cognitive_pillars()
 pillars_html = build_pillars_html(pillars_data)
 
 
+# 6. Calculate the new combined insights
+combined_df = get_weighted_scores()
+combined_bar_html = build_combined_bar_chart_html(combined_df)
+
+
+# ... (The rest of your replacement logic remains the same)
  
 
 # ... (Standard replacement and save logic)
@@ -766,9 +843,9 @@ pillars_html = build_pillars_html(pillars_data)
 with open(HOME_TEMPLATE, encoding="utf-8") as f:
     home = f.read()
 
-# Combine all insights in a logical storytelling order
+# Combine all insights in a logical storytelling order 
 
-combined_insights = degradation_html + pillars_html + strategy_html + compliance_html  + profile_html
+combined_insights = combined_bar_html + pillars_html + degradation_html + strategy_html + compliance_html
 
 home = (
     home
