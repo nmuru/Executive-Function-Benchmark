@@ -767,7 +767,7 @@ with open(HOME_TEMPLATE, encoding="utf-8") as f:
 
 # Combine all insights in a logical storytelling order
 
-combined_insights = pillars_html + degradation_html + strategy_html + compliance_html  
+combined_insights = pillars_html + degradation_html + strategy_html + compliance_html  + profile_html
 
 home = (
     home
