@@ -116,6 +116,7 @@ View Leaderboard →
             </tr>
         </tbody></table></div>
         <div class="bg-gray-50 p-6 rounded-lg border">
+	#
             <h4 class="font-bold text-xl mb-2 text-center text-gray-800">Top 5 Models: Cognitive Profile Map</h4>
             <p class="text-center text-sm text-gray-500 mb-6">Scores normalized 0-100 (where 100 represents cohort state-of-the-art).</p>
             <div class="w-full max-w-3xl mx-auto relative h-[400px]">
@@ -316,114 +317,6 @@ View Leaderboard →
         
         </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <div class="bg-white rounded-lg shadow p-6 border mb-12">
-        <h3 class="text-2xl font-bold mb-2">The 3 Pillars of Executive Function</h3>
-        <p class="text-gray-600 mb-6">Mapping benchmark outcomes directly to cognitive science pillars.</p>
-
-        <div class="overflow-x-auto mb-10">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-gray-100 uppercase text-xs text-gray-600 font-semibold tracking-wider">
-                        <th class="py-3 px-4 border-b">Rank</th>
-                        <th class="py-3 px-4 border-b">Model</th>
-                        <th class="py-3 px-4 border-b" title="Cognitive Degradation Index (Lower is better)">Working Memory (Drift)</th>
-                        <th class="py-3 px-4 border-b" title="Task 3 Score (Higher is better)">Cognitive Flexibility</th>
-                        <th class="py-3 px-4 border-b" title="Multi-turn violations (Lower is better)">Inhibitory Control</th>
-                    </tr>
-                </thead>
-                <tbody>
-    
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">1</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">model-b</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">1.5000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.041</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">2</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">model-c</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">1.7000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.060</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">3</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.1-pro</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">1.1266</td>
-                <td class="py-3 px-4 border-b text-red-700">0.041</td>
-            </tr>
-        </tbody></table></div>
-        <div class="bg-gray-50 p-6 rounded-lg border">
-            <h4 class="font-bold text-xl mb-2 text-center text-gray-800">Top 5 Models: Cognitive Profile Map</h4>
-            <p class="text-center text-sm text-gray-500 mb-6">Scores normalized 0-100 (where 100 represents cohort state-of-the-art).</p>
-            <div class="w-full max-w-3xl mx-auto relative h-[400px]">
-                <canvas id="pillarsChart"></canvas>
-            </div>
-        </div>
-    </div>
-    <script>
-    
-    new Chart(document.getElementById('pillarsChart'), {
-        type: 'radar',
-        data: {
-            labels: ['Working Memory (Stability)', 'Cognitive Flexibility', 'Inhibitory Control'],
-            datasets: [
-        {
-            label: 'model-b',
-            data: [100.0, 88.2, 32.0],
-            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-            borderColor: 'rgba(59, 130, 246, 1)',
-            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
-            borderWidth: 2,
-            tension: 0.1
-        }
-        ,
-        {
-            label: 'model-c',
-            data: [100.0, 100.0, 0.0],
-            backgroundColor: 'rgba(16, 185, 129, 0.1)',
-            borderColor: 'rgba(16, 185, 129, 1)',
-            pointBackgroundColor: 'rgba(16, 185, 129, 1)',
-            borderWidth: 2,
-            tension: 0.1
-        }
-        ,
-        {
-            label: 'gemini-3.1-pro',
-            data: [100.0, 66.3, 32.0],
-            backgroundColor: 'rgba(245, 158, 11, 0.1)',
-            borderColor: 'rgba(245, 158, 11, 1)',
-            pointBackgroundColor: 'rgba(245, 158, 11, 1)',
-            borderWidth: 2,
-            tension: 0.1
-        }
-        ]
-        },
-        options: {
-            maintainAspectRatio: false,
-            scales: {
-                r: {
-                    angleLines: { display: true, color: 'rgba(0,0,0,0.1)' },
-                    grid: { color: 'rgba(0,0,0,0.05)' },
-                    suggestedMin: 0,
-                    suggestedMax: 100,
-                    pointLabels: { font: { size: 14, weight: 'bold' }, color: '#374151' },
-                    ticks: { display: false }
-                }
-            },
-            plugins: {
-                legend: { position: 'bottom', labels: { padding: 20, font: { size: 12, weight: 'bold' } } },
-                tooltip: { backgroundColor: 'rgba(0,0,0,0.8)', padding: 12 }
-            }
-        }
-    });
-    </script>
     
 </div>
 
