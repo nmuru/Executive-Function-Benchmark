@@ -747,10 +747,11 @@ strategy_html = build_strategy_html(strategy_data)
 compliance_data = calculate_compliance_score()
 compliance_html = build_compliance_html(compliance_data)
 
-# 4. Profiles (NEW)
+# 4. Profiles
 profile_data = calculate_executive_profiles()
 profile_html = build_executive_profile_html(profile_data)
 
+# 5. Pillars
 
 pillars_data = calculate_cognitive_pillars()
 pillars_html = build_pillars_html(pillars_data)
@@ -767,7 +768,7 @@ with open(HOME_TEMPLATE, encoding="utf-8") as f:
 
 # Combine all insights in a logical storytelling order
 
-combined_insights = pillars_html + degradation_html + strategy_html + compliance_html  + profile_html
+combined_insights = degradation_html + pillars_html + strategy_html + compliance_html  + profile_html
 
 home = (
     home

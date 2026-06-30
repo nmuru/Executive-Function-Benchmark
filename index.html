@@ -73,6 +73,46 @@ View Leaderboard →
 <div class="mt-16">
     <h2 class="text-3xl font-bold mb-6">Cross-Task Insights</h2>
     
+    <div class="bg-white rounded-lg shadow p-6 border mb-8">
+        <h3 class="text-xl font-bold mb-2">Cognitive Degradation Index (Working Memory Stress Test)</h3>
+        <p class="text-gray-600 mb-6 text-sm">Measures how much a model's rule adherence degrades when transitioning from a single decision to multi-turn gameplay. A lower score indicates better context stability.</p>
+        
+        <table class="w-full text-left">
+            <thead>
+                <tr class="bg-gray-50 uppercase text-xs text-gray-500">
+                    <th class="py-3 px-4 border-b">Rank</th>
+                    <th class="py-3 px-4 border-b">Model</th>
+                    <th class="py-3 px-4 border-b">Single-Turn Violations</th>
+                    <th class="py-3 px-4 border-b">Multi-Turn Violations</th>
+                    <th class="py-3 px-4 border-b">Degradation Score</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">1</td>
+                <td class="py-3 px-4 border-b font-semibold">model-c</td>
+                <td class="py-3 px-4 border-b">0.060</td>
+                <td class="py-3 px-4 border-b">0.060</td>
+                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">2</td>
+                <td class="py-3 px-4 border-b font-semibold">model-b</td>
+                <td class="py-3 px-4 border-b">0.041</td>
+                <td class="py-3 px-4 border-b">0.041</td>
+                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">3</td>
+                <td class="py-3 px-4 border-b font-semibold">gemini-3.1-pro</td>
+                <td class="py-3 px-4 border-b">0.041</td>
+                <td class="py-3 px-4 border-b">0.041</td>
+                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
+            </tr>
+        </tbody></table></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <div class="bg-white rounded-lg shadow p-6 border mb-12">
         <h3 class="text-2xl font-bold mb-2">The 3 Pillars of Executive Function</h3>
@@ -182,46 +222,6 @@ View Leaderboard →
     });
     </script>
     
-    <div class="bg-white rounded-lg shadow p-6 border mb-8">
-        <h3 class="text-xl font-bold mb-2">Cognitive Degradation Index (Working Memory Stress Test)</h3>
-        <p class="text-gray-600 mb-6 text-sm">Measures how much a model's rule adherence degrades when transitioning from a single decision to multi-turn gameplay. A lower score indicates better context stability.</p>
-        
-        <table class="w-full text-left">
-            <thead>
-                <tr class="bg-gray-50 uppercase text-xs text-gray-500">
-                    <th class="py-3 px-4 border-b">Rank</th>
-                    <th class="py-3 px-4 border-b">Model</th>
-                    <th class="py-3 px-4 border-b">Single-Turn Violations</th>
-                    <th class="py-3 px-4 border-b">Multi-Turn Violations</th>
-                    <th class="py-3 px-4 border-b">Degradation Score</th>
-                </tr>
-            </thead>
-            <tbody>
-    
-            <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">1</td>
-                <td class="py-3 px-4 border-b font-semibold">model-c</td>
-                <td class="py-3 px-4 border-b">0.060</td>
-                <td class="py-3 px-4 border-b">0.060</td>
-                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">2</td>
-                <td class="py-3 px-4 border-b font-semibold">model-b</td>
-                <td class="py-3 px-4 border-b">0.041</td>
-                <td class="py-3 px-4 border-b">0.041</td>
-                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">3</td>
-                <td class="py-3 px-4 border-b font-semibold">gemini-3.1-pro</td>
-                <td class="py-3 px-4 border-b">0.041</td>
-                <td class="py-3 px-4 border-b">0.041</td>
-                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
-            </tr>
-        </tbody></table></div>
     <div class="bg-white rounded-lg shadow p-6 border mb-8">
         <h3 class="text-xl font-bold mb-2">Strategy vs. Brute-Force Matrix (Multi-Turn)</h3>
         <p class="text-gray-600 mb-6 text-sm">Compares a model's ability to win against its Information Gain strategy. Placed relative to the cohort median.</p>

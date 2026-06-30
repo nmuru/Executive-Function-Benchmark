@@ -1,0 +1,8 @@
+{
+  "overall_benchmark_score": 0.8376883329851664,
+  "raw_score_before_penalty": 0.8376883329851664,
+  "win_rate": 0.5961538461538461,
+  "avg_violations_per_game": 0.36538461538461536,
+  "api_error_rate": 0.0,
+  "penalty_applied": false
+}
