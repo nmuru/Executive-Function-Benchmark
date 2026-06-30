@@ -1,0 +1,205 @@
+import json
+import os
+import glob
+
+# --------------------------------------------------
+# Configuration
+# --------------------------------------------------
+
+TASKS = [
+    {
+        "id": "multi-turn",
+        "title": "Multi-turn Wordle",
+        "description": "Evaluating executive function and information gain across multi-turn gameplay.",
+    },
+    {
+        "id": "single-turn",
+        "title": "Single-turn Wordle",
+        "description": "Evaluating executive function from a single Wordle decision.",
+    },
+    {
+        "id": "cognitive-flexibility",
+        "title": "Cognitive Flexibility",
+        "description": "Evaluating adaptive reasoning and cognitive flexibility.",
+    },
+]
+
+DATA_ROOT = "data"
+TEMPLATE_DIR = "templates"
+
+HOME_TEMPLATE = os.path.join(TEMPLATE_DIR, "home.html")
+LEADERBOARD_TEMPLATE = os.path.join(TEMPLATE_DIR, "leaderboard.html")
+
+HOME_OUTPUT = "index.html"
+
+ROW_PLACEHOLDER = "{{TABLE_ROWS}}"
+
+TITLE_PLACEHOLDER = "{{TITLE}}"
+
+DESCRIPTION_PLACEHOLDER = "{{DESCRIPTION}}"
+
+NAV_PLACEHOLDER = "{{NAVIGATION}}"
+
+CARDS_PLACEHOLDER = "{{TASK_CARDS}}"
+
+
+# --------------------------------------------------
+# Helpers
+# --------------------------------------------------
+
+def load_json_results(folder):
+
+    results = []
+
+    json_files = sorted(glob.glob(os.path.join(folder, "*.json")))
+
+    for file in json_files:
+
+        try:
+
+            with open(file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            data["model_name"] = os.path.splitext(os.path.basename(file))[0]
+
+            results.append(data)
+
+        except Exception as e:
+
+            print(f"Skipping {file}: {e}")
+
+    results.sort(
+        key=lambda x: x.get("overall_benchmark_score", 0),
+        reverse=True,
+    )
+
+    return results
+
+
+def build_table(results):
+
+    html = ""
+
+    for rank, row in enumerate(results, start=1):
+
+        score = row.get("overall_benchmark_score", 0)
+        win_rate = row.get("win_rate", 0) * 100
+        violations = row.get("avg_violations_per_game", 0)
+        error_rate = row.get("api_error_rate", 0) * 100
+        penalty = row.get("penalty_applied", False)
+
+        if rank == 1:
+            rank_style = "text-yellow-600 font-bold text-lg"
+        elif rank == 2:
+            rank_style = "text-gray-500 font-bold text-lg"
+        elif rank == 3:
+            rank_style = "text-yellow-800 font-bold text-lg"
+        else:
+            rank_style = "text-gray-700"
+
+        violation_style = (
+            "text-green-600"
+            if violations == 0
+            else "text-red-600 font-semibold"
+        )
+
+        penalty_html = (
+            '<span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-1 rounded">Yes</span>'
+            if penalty
+            else "-"
+        )
+
+        html += f"""
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b {rank_style}">{rank}</td>
+<td class="py-4 px-6 border-b font-semibold">{row['model_name']}</td>
+<td class="py-4 px-6 border-b font-mono">{score:.4f}</td>
+<td class="py-4 px-6 border-b">{win_rate:.1f}%</td>
+<td class="py-4 px-6 border-b {violation_style}">{violations:.3f}</td>
+<td class="py-4 px-6 border-b">{error_rate:.1f}%</td>
+<td class="py-4 px-6 border-b text-center">{penalty_html}</td>
+</tr>
+"""
+
+    return html
+
+
+def navigation(active):
+
+    links = ['<a href="index.html" class="hover:text-blue-600">Home</a>']
+
+    for task in TASKS:
+
+        if task["id"] == active:
+            links.append(
+                f'<span class="font-bold text-blue-600">{task["title"]}</span>'
+            )
+        else:
+            links.append(
+                f'<a href="{task["id"]}.html" class="hover:text-blue-600">{task["title"]}</a>'
+            )
+
+    return " | ".join(links)
+
+
+# --------------------------------------------------
+# Leaderboards
+# --------------------------------------------------
+
+with open(LEADERBOARD_TEMPLATE, encoding="utf-8") as f:
+
+    leaderboard_template = f.read()
+
+task_cards = ""
+
+for task in TASKS:
+
+    folder = os.path.join(DATA_ROOT, task["id"])
+
+    results = load_json_results(folder)
+
+    html = (
+        leaderboard_template
+        .replace(TITLE_PLACEHOLDER, task["title"])
+        .replace(DESCRIPTION_PLACEHOLDER, task["description"])
+        .replace(ROW_PLACEHOLDER, build_table(results))
+        .replace(NAV_PLACEHOLDER, navigation(task["id"]))
+    )
+
+    output = f"{task['id']}.html"
+
+    with open(output, "w", encoding="utf-8") as f:
+
+        f.write(html)
+
+    task_cards += f"""
+<div class="bg-white rounded-lg shadow p-6 border">
+<h2 class="text-xl font-bold mb-2">{task['title']}</h2>
+<p class="text-gray-600 mb-4">{task['description']}</p>
+<p class="text-sm text-gray-500 mb-4">{len(results)} models evaluated</p>
+<a class="text-blue-600 font-semibold hover:underline"
+href="{task['id']}.html">
+View Leaderboard →
+</a>
+</div>
+"""
+
+# --------------------------------------------------
+# Home page
+# --------------------------------------------------
+
+with open(HOME_TEMPLATE, encoding="utf-8") as f:
+
+    home = f.read()
+
+home = (
+    home
+    .replace(CARDS_PLACEHOLDER, task_cards)
+    .replace(NAV_PLACEHOLDER, navigation("home"))
+)
+
+with open(HOME_OUTPUT, "w", encoding="utf-8") as f:
+
+    f.write(home)
+
+print("Website generated successfully.")

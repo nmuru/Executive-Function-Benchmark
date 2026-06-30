@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{TITLE}}</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-50">
+
+<div class="max-w-7xl mx-auto py-8 px-6">
+
+<nav class="mb-10 text-gray-700">
+
+{{NAVIGATION}}
+
+</nav>
+
+<h1 class="text-4xl font-extrabold mb-2">
+
+{{TITLE}}
+
+</h1>
+
+<p class="text-lg text-gray-600 mb-8">
+
+{{DESCRIPTION}}
+
+</p>
+
+<div class="bg-white rounded-lg shadow border overflow-hidden">
+
+<table class="w-full text-left">
+
+<thead>
+
+<tr class="bg-gray-100 uppercase text-xs">
+
+<th class="py-4 px-6">Rank</th>
+
+<th class="py-4 px-6">Model</th>
+
+<th class="py-4 px-6">Overall Score</th>
+
+<th class="py-4 px-6">Win Rate</th>
+
+<th class="py-4 px-6">Avg Violations</th>
+
+<th class="py-4 px-6">API Error Rate</th>
+
+<th class="py-4 px-6">Penalty</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{{TABLE_ROWS}}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

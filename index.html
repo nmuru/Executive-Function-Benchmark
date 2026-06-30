@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Executive Function Benchmark</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-50">
+
+<div class="max-w-7xl mx-auto py-8 px-6">
+
+<nav class="mb-10 text-gray-700">
+
+<a href="index.html" class="hover:text-blue-600">Home</a> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <a href="single-turn.html" class="hover:text-blue-600">Single-turn Wordle</a> | <a href="cognitive-flexibility.html" class="hover:text-blue-600">Cognitive Flexibility</a>
+
+</nav>
+
+<h1 class="text-5xl font-extrabold mb-4">
+
+Executive Function & Information Gain Benchmark
+
+</h1>
+
+<p class="text-xl text-gray-600 mb-10">
+
+A benchmark suite for evaluating executive function, planning and information gain in large language models.
+
+</p>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+
+<div class="bg-white rounded-lg shadow p-6 border">
+<h2 class="text-xl font-bold mb-2">Multi-turn Wordle</h2>
+<p class="text-gray-600 mb-4">Evaluating executive function and information gain across multi-turn gameplay.</p>
+<p class="text-sm text-gray-500 mb-4">3 models evaluated</p>
+<a class="text-blue-600 font-semibold hover:underline"
+href="multi-turn.html">
+View Leaderboard →
+</a>
+</div>
+
+<div class="bg-white rounded-lg shadow p-6 border">
+<h2 class="text-xl font-bold mb-2">Single-turn Wordle</h2>
+<p class="text-gray-600 mb-4">Evaluating executive function from a single Wordle decision.</p>
+<p class="text-sm text-gray-500 mb-4">3 models evaluated</p>
+<a class="text-blue-600 font-semibold hover:underline"
+href="single-turn.html">
+View Leaderboard →
+</a>
+</div>
+
+<div class="bg-white rounded-lg shadow p-6 border">
+<h2 class="text-xl font-bold mb-2">Cognitive Flexibility</h2>
+<p class="text-gray-600 mb-4">Evaluating adaptive reasoning and cognitive flexibility.</p>
+<p class="text-sm text-gray-500 mb-4">3 models evaluated</p>
+<a class="text-blue-600 font-semibold hover:underline"
+href="cognitive-flexibility.html">
+View Leaderboard →
+</a>
+</div>
+
+</div>
+
+<div class="mt-16">
+    <h2 class="text-3xl font-bold mb-6">Cross-Task Insights</h2>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-2xl font-bold mb-2">The 3 Pillars of Executive Function</h3>
+        <p class="text-gray-600 mb-6">Mapping benchmark outcomes directly to cognitive science pillars.</p>
+
+        <div class="overflow-x-auto mb-10">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 uppercase text-xs text-gray-600 font-semibold tracking-wider">
+                        <th class="py-3 px-4 border-b">Rank</th>
+                        <th class="py-3 px-4 border-b">Model</th>
+                        <th class="py-3 px-4 border-b" title="Cognitive Degradation Index (Lower is better)">Working Memory (Drift)</th>
+                        <th class="py-3 px-4 border-b" title="Task 3 Score (Higher is better)">Cognitive Flexibility</th>
+                        <th class="py-3 px-4 border-b" title="Multi-turn violations (Lower is better)">Inhibitory Control</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">1</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">model-b</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">1.5000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.041</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">2</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">model-c</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">1.7000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.060</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">3</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.1-pro</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">1.1266</td>
+                <td class="py-3 px-4 border-b text-red-700">0.041</td>
+            </tr>
+        </tbody></table></div>
+        <div class="bg-gray-50 p-6 rounded-lg border">
+            <h4 class="font-bold text-xl mb-2 text-center text-gray-800">Top 5 Models: Cognitive Profile Map</h4>
+            <p class="text-center text-sm text-gray-500 mb-6">Scores normalized 0-100 (where 100 represents cohort state-of-the-art).</p>
+            <div class="w-full max-w-3xl mx-auto relative h-[400px]">
+                <canvas id="pillarsChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+    
+    new Chart(document.getElementById('pillarsChart'), {
+        type: 'radar',
+        data: {
+            labels: ['Working Memory (Stability)', 'Cognitive Flexibility', 'Inhibitory Control'],
+            datasets: [
+        {
+            label: 'model-b',
+            data: [100.0, 88.2, 32.0],
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            borderColor: 'rgba(59, 130, 246, 1)',
+            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'model-c',
+            data: [100.0, 100.0, 0.0],
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            borderColor: 'rgba(16, 185, 129, 1)',
+            pointBackgroundColor: 'rgba(16, 185, 129, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'gemini-3.1-pro',
+            data: [100.0, 66.3, 32.0],
+            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            borderColor: 'rgba(245, 158, 11, 1)',
+            pointBackgroundColor: 'rgba(245, 158, 11, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: { display: true, color: 'rgba(0,0,0,0.1)' },
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    pointLabels: { font: { size: 14, weight: 'bold' }, color: '#374151' },
+                    ticks: { display: false }
+                }
+            },
+            plugins: {
+                legend: { position: 'bottom', labels: { padding: 20, font: { size: 12, weight: 'bold' } } },
+                tooltip: { backgroundColor: 'rgba(0,0,0,0.8)', padding: 12 }
+            }
+        }
+    });
+    </script>
+    
+    <div class="bg-white rounded-lg shadow p-6 border mb-8">
+        <h3 class="text-xl font-bold mb-2">Cognitive Degradation Index (Working Memory Stress Test)</h3>
+        <p class="text-gray-600 mb-6 text-sm">Measures how much a model's rule adherence degrades when transitioning from a single decision to multi-turn gameplay. A lower score indicates better context stability.</p>
+        
+        <table class="w-full text-left">
+            <thead>
+                <tr class="bg-gray-50 uppercase text-xs text-gray-500">
+                    <th class="py-3 px-4 border-b">Rank</th>
+                    <th class="py-3 px-4 border-b">Model</th>
+                    <th class="py-3 px-4 border-b">Single-Turn Violations</th>
+                    <th class="py-3 px-4 border-b">Multi-Turn Violations</th>
+                    <th class="py-3 px-4 border-b">Degradation Score</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">1</td>
+                <td class="py-3 px-4 border-b font-semibold">model-c</td>
+                <td class="py-3 px-4 border-b">0.060</td>
+                <td class="py-3 px-4 border-b">0.060</td>
+                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">2</td>
+                <td class="py-3 px-4 border-b font-semibold">model-b</td>
+                <td class="py-3 px-4 border-b">0.041</td>
+                <td class="py-3 px-4 border-b">0.041</td>
+                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">3</td>
+                <td class="py-3 px-4 border-b font-semibold">gemini-3.1-pro</td>
+                <td class="py-3 px-4 border-b">0.041</td>
+                <td class="py-3 px-4 border-b">0.041</td>
+                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
+            </tr>
+        </tbody></table></div>
+    <div class="bg-white rounded-lg shadow p-6 border mb-8">
+        <h3 class="text-xl font-bold mb-2">Strategy vs. Brute-Force Matrix (Multi-Turn)</h3>
+        <p class="text-gray-600 mb-6 text-sm">Compares a model's ability to win against its Information Gain strategy. Placed relative to the cohort median.</p>
+        
+        <div class="grid grid-cols-2 gap-4">
+            <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-48 flex flex-col relative">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Lucky Guessers</span>
+                <span class="text-xs text-gray-400 mb-2">High Win Rate, Low Strategy</span>
+                <ul class="text-sm font-semibold text-blue-700">
+    <li>gemini-3.1-pro</li>
+                </ul>
+            </div>
+            
+            <div class="border-2 border-blue-200 bg-blue-50 p-4 rounded-lg h-48 flex flex-col relative">
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">Reasoning Masters</span>
+                <span class="text-xs text-blue-400 mb-2">High Win Rate, High Strategy</span>
+                <ul class="text-sm font-bold text-gray-900">
+    <li>model-c</li><li>model-b</li>
+                </ul>
+            </div>
+
+            <div class="border-2 border-dashed border-gray-200 bg-gray-50 p-4 rounded-lg h-48 flex flex-col relative opacity-75">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Struggling</span>
+                <span class="text-xs text-gray-400 mb-2">Low Win Rate, Low Strategy</span>
+                <ul class="text-sm font-medium text-gray-600">
+    
+                </ul>
+            </div>
+
+            <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-48 flex flex-col relative">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Over-thinkers</span>
+                <span class="text-xs text-gray-400 mb-2">Low Win Rate, High Strategy</span>
+                <ul class="text-sm font-medium text-purple-700">
+    
+                </ul>
+            </div>
+        </div>
+        
+        <div class="flex justify-between text-xs font-bold text-gray-400 mt-2 px-2 uppercase tracking-wide">
+            <span>&larr; Lower Info Gain</span>
+            <span>Strategy Score (Overall Benchmark)</span>
+            <span>Higher Info Gain &rarr;</span>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-xl font-bold mb-2">Deployment Safety & Compliance</h3>
+        <p class="text-gray-600 mb-6 text-sm">Ranks models based on format adherence and API stability. Models that trigger the >20% error penalty are placed in the Hall of Shame.</p>
+        
+        <div class="grid md:grid-cols-2 gap-4">
+    
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-blue-50 border-blue-200 text-blue-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">✅</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">model-c</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Stable</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">94.2<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 5.8%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-blue-50 border-blue-200 text-blue-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">✅</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">model-b</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Stable</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">94.2<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 5.8%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-blue-50 border-blue-200 text-blue-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">✅</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gemini-3.1-pro</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Stable</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">94.2<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 5.8%</div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-2xl font-bold mb-2">The 3 Pillars of Executive Function</h3>
+        <p class="text-gray-600 mb-6">Mapping benchmark outcomes directly to cognitive science pillars.</p>
+
+        <div class="overflow-x-auto mb-10">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 uppercase text-xs text-gray-600 font-semibold tracking-wider">
+                        <th class="py-3 px-4 border-b">Rank</th>
+                        <th class="py-3 px-4 border-b">Model</th>
+                        <th class="py-3 px-4 border-b" title="Cognitive Degradation Index (Lower is better)">Working Memory (Drift)</th>
+                        <th class="py-3 px-4 border-b" title="Task 3 Score (Higher is better)">Cognitive Flexibility</th>
+                        <th class="py-3 px-4 border-b" title="Multi-turn violations (Lower is better)">Inhibitory Control</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">1</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">model-b</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">1.5000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.041</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">2</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">model-c</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">1.7000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.060</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">3</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.1-pro</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">1.1266</td>
+                <td class="py-3 px-4 border-b text-red-700">0.041</td>
+            </tr>
+        </tbody></table></div>
+        <div class="bg-gray-50 p-6 rounded-lg border">
+            <h4 class="font-bold text-xl mb-2 text-center text-gray-800">Top 5 Models: Cognitive Profile Map</h4>
+            <p class="text-center text-sm text-gray-500 mb-6">Scores normalized 0-100 (where 100 represents cohort state-of-the-art).</p>
+            <div class="w-full max-w-3xl mx-auto relative h-[400px]">
+                <canvas id="pillarsChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+    
+    new Chart(document.getElementById('pillarsChart'), {
+        type: 'radar',
+        data: {
+            labels: ['Working Memory (Stability)', 'Cognitive Flexibility', 'Inhibitory Control'],
+            datasets: [
+        {
+            label: 'model-b',
+            data: [100.0, 88.2, 32.0],
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            borderColor: 'rgba(59, 130, 246, 1)',
+            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'model-c',
+            data: [100.0, 100.0, 0.0],
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            borderColor: 'rgba(16, 185, 129, 1)',
+            pointBackgroundColor: 'rgba(16, 185, 129, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'gemini-3.1-pro',
+            data: [100.0, 66.3, 32.0],
+            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            borderColor: 'rgba(245, 158, 11, 1)',
+            pointBackgroundColor: 'rgba(245, 158, 11, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: { display: true, color: 'rgba(0,0,0,0.1)' },
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    pointLabels: { font: { size: 14, weight: 'bold' }, color: '#374151' },
+                    ticks: { display: false }
+                }
+            },
+            plugins: {
+                legend: { position: 'bottom', labels: { padding: 20, font: { size: 12, weight: 'bold' } } },
+                tooltip: { backgroundColor: 'rgba(0,0,0,0.8)', padding: 12 }
+            }
+        }
+    });
+    </script>
+    
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
