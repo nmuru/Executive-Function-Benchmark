@@ -25,13 +25,13 @@
 
 <h1 class="text-5xl font-extrabold mb-4">
 
-Executive Function & Information Gain Benchmark
+Executive Function Benchmark for AI Models
 
 </h1>
 
 <p class="text-xl text-gray-600 mb-10">
 
-A benchmark suite for evaluating executive function, planning and information gain in large language models.
+A benchmark suite for evaluating executive function capabilities of AI models using Wordle Game
 
 </p>
 
@@ -41,7 +41,7 @@ A benchmark suite for evaluating executive function, planning and information ga
 <div class="bg-white rounded-lg shadow p-6 border">
 <h2 class="text-xl font-bold mb-2">Multi-turn Wordle</h2>
 <p class="text-gray-600 mb-4">Evaluating executive function and information gain across multi-turn gameplay.</p>
-<p class="text-sm text-gray-500 mb-4">3 models evaluated</p>
+<p class="text-sm text-gray-500 mb-4">16 models evaluated</p>
 <a class="text-blue-600 font-semibold hover:underline"
 href="multi-turn.html">
 View Leaderboard →
@@ -51,7 +51,7 @@ View Leaderboard →
 <div class="bg-white rounded-lg shadow p-6 border">
 <h2 class="text-xl font-bold mb-2">Single-turn Wordle</h2>
 <p class="text-gray-600 mb-4">Evaluating executive function from a single Wordle decision.</p>
-<p class="text-sm text-gray-500 mb-4">3 models evaluated</p>
+<p class="text-sm text-gray-500 mb-4">13 models evaluated</p>
 <a class="text-blue-600 font-semibold hover:underline"
 href="single-turn.html">
 View Leaderboard →
@@ -61,7 +61,7 @@ View Leaderboard →
 <div class="bg-white rounded-lg shadow p-6 border">
 <h2 class="text-xl font-bold mb-2">Cognitive Flexibility</h2>
 <p class="text-gray-600 mb-4">Evaluating adaptive reasoning and cognitive flexibility.</p>
-<p class="text-sm text-gray-500 mb-4">3 models evaluated</p>
+<p class="text-sm text-gray-500 mb-4">15 models evaluated</p>
 <a class="text-blue-600 font-semibold hover:underline"
 href="cognitive-flexibility.html">
 View Leaderboard →
@@ -91,26 +91,82 @@ View Leaderboard →
     
             <tr class="hover:bg-gray-50">
                 <td class="py-3 px-4 border-b font-medium text-gray-700">1</td>
-                <td class="py-3 px-4 border-b font-semibold">model-c</td>
-                <td class="py-3 px-4 border-b">0.060</td>
-                <td class="py-3 px-4 border-b">0.060</td>
-                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
+                <td class="py-3 px-4 border-b font-semibold">gemini-3.1-pro-preview</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.041</td>
+                <td class="py-3 px-4 border-b text-yellow-600 font-bold">+0.041 (Slight Drift)</td>
             </tr>
         
             <tr class="hover:bg-gray-50">
                 <td class="py-3 px-4 border-b font-medium text-gray-700">2</td>
-                <td class="py-3 px-4 border-b font-semibold">model-b</td>
-                <td class="py-3 px-4 border-b">0.041</td>
-                <td class="py-3 px-4 border-b">0.041</td>
-                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
+                <td class="py-3 px-4 border-b font-semibold">claude-opus-4.6</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.077</td>
+                <td class="py-3 px-4 border-b text-yellow-600 font-bold">+0.077 (Slight Drift)</td>
             </tr>
         
             <tr class="hover:bg-gray-50">
                 <td class="py-3 px-4 border-b font-medium text-gray-700">3</td>
-                <td class="py-3 px-4 border-b font-semibold">gemini-3.1-pro</td>
-                <td class="py-3 px-4 border-b">0.041</td>
-                <td class="py-3 px-4 border-b">0.041</td>
-                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
+                <td class="py-3 px-4 border-b font-semibold">claude-sonnet-4.6</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.173</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.173 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">4</td>
+                <td class="py-3 px-4 border-b font-semibold">gemini-3-flash-preview</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.258</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.258 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">5</td>
+                <td class="py-3 px-4 border-b font-semibold">qwen-3-next-80b-instruct</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.260</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.260 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">6</td>
+                <td class="py-3 px-4 border-b font-semibold">gpt-5.4</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.365</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.365 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">7</td>
+                <td class="py-3 px-4 border-b font-semibold">deepseek-r1</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.381</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.381 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">8</td>
+                <td class="py-3 px-4 border-b font-semibold">glm-5</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.490</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.490 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">9</td>
+                <td class="py-3 px-4 border-b font-semibold">deepseek-v3.2</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.872</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.872 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">10</td>
+                <td class="py-3 px-4 border-b font-semibold">gpt-5.4-mini</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">1.731</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+1.731 (Severe Drift)</td>
             </tr>
         </tbody></table></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -133,26 +189,178 @@ View Leaderboard →
     
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">1</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">model-b</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.5</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">1.5000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.041</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.9966</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">2</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">model-c</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.2-reasoning</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">1.7000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.060</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.9677</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">3</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.1-pro</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">1.1266</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.1-pro-preview</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.041</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.9217</td>
                 <td class="py-3 px-4 border-b text-red-700">0.041</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">4</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-4-31b</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.149</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.9419</td>
+                <td class="py-3 px-4 border-b text-red-700">0.149</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">5</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-opus-4.6</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.077</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.8255</td>
+                <td class="py-3 px-4 border-b text-red-700">0.077</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">6</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-sonnet-4.6</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.173</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.8082</td>
+                <td class="py-3 px-4 border-b text-red-700">0.173</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">7</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-next-80b-thinking</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.5425</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">8</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3-flash-preview</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.258</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.7810</td>
+                <td class="py-3 px-4 border-b text-red-700">0.258</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">9</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.2-non-reasoning</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.4284</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">10</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.4</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.365</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.6724</td>
+                <td class="py-3 px-4 border-b text-red-700">0.365</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">11</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">glm-5</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.490</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.7427</td>
+                <td class="py-3 px-4 border-b text-red-700">0.490</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">12</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">openai-gpt-5.5</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">13</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">google-gemma-4</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">14</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">Qwen-3-next-80b-thinking</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">15</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-3-4b</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">-0.1693</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">16</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-3-12b</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">-0.1818</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">17</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">deepseek-v3.2</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.872</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.7495</td>
+                <td class="py-3 px-4 border-b text-red-700">0.872</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">18</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-next-80b-instruct</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.260</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.260</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">19</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">deepseek-r1</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.381</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.381</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">20</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-235b-A22b-instruct</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.540</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.540</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">21</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.4-mini</td>
+                <td class="py-3 px-4 border-b text-blue-700">1.731</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.3256</td>
+                <td class="py-3 px-4 border-b text-red-700">1.731</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">22</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.4-nano</td>
+                <td class="py-3 px-4 border-b text-blue-700">1.481</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">1.481</td>
             </tr>
         </tbody></table></div>
         <div class="bg-gray-50 p-6 rounded-lg border">
@@ -172,8 +380,8 @@ View Leaderboard →
             labels: ['Working Memory (Stability)', 'Cognitive Flexibility', 'Inhibitory Control'],
             datasets: [
         {
-            label: 'model-b',
-            data: [100.0, 88.2, 32.0],
+            label: 'gpt-5.5',
+            data: [100.0, 100.0, 100.0],
             backgroundColor: 'rgba(59, 130, 246, 0.1)',
             borderColor: 'rgba(59, 130, 246, 1)',
             pointBackgroundColor: 'rgba(59, 130, 246, 1)',
@@ -182,8 +390,8 @@ View Leaderboard →
         }
         ,
         {
-            label: 'model-c',
-            data: [100.0, 100.0, 0.0],
+            label: 'grok-4.2-reasoning',
+            data: [100.0, 97.1, 100.0],
             backgroundColor: 'rgba(16, 185, 129, 0.1)',
             borderColor: 'rgba(16, 185, 129, 1)',
             pointBackgroundColor: 'rgba(16, 185, 129, 1)',
@@ -192,11 +400,31 @@ View Leaderboard →
         }
         ,
         {
-            label: 'gemini-3.1-pro',
-            data: [100.0, 66.3, 32.0],
+            label: 'gemini-3.1-pro-preview',
+            data: [97.6, 92.5, 97.6],
             backgroundColor: 'rgba(245, 158, 11, 0.1)',
             borderColor: 'rgba(245, 158, 11, 1)',
             pointBackgroundColor: 'rgba(245, 158, 11, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'gemma-4-31b',
+            data: [91.4, 94.5, 91.4],
+            backgroundColor: 'rgba(139, 92, 246, 0.1)',
+            borderColor: 'rgba(139, 92, 246, 1)',
+            pointBackgroundColor: 'rgba(139, 92, 246, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'claude-opus-4.6',
+            data: [95.6, 82.8, 95.6],
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            borderColor: 'rgba(239, 68, 68, 1)',
+            pointBackgroundColor: 'rgba(239, 68, 68, 1)',
             borderWidth: 2,
             tension: 0.1
         }
@@ -231,7 +459,7 @@ View Leaderboard →
                 <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Lucky Guessers</span>
                 <span class="text-xs text-gray-400 mb-2">High Win Rate, Low Strategy</span>
                 <ul class="text-sm font-semibold text-blue-700">
-    <li>gemini-3.1-pro</li>
+    <li>gemini-3-flash-preview</li>
                 </ul>
             </div>
             
@@ -239,7 +467,7 @@ View Leaderboard →
                 <span class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">Reasoning Masters</span>
                 <span class="text-xs text-blue-400 mb-2">High Win Rate, High Strategy</span>
                 <ul class="text-sm font-bold text-gray-900">
-    <li>model-c</li><li>model-b</li>
+    <li>gemini-3.1-pro-preview</li><li>gpt-5.5</li><li>claude-sonnet-4.6</li><li>claude-opus-4.6</li><li>gemma-4-31b</li><li>glm-5</li><li>gpt-5.4</li>
                 </ul>
             </div>
 
@@ -247,7 +475,7 @@ View Leaderboard →
                 <span class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Struggling</span>
                 <span class="text-xs text-gray-400 mb-2">Low Win Rate, Low Strategy</span>
                 <ul class="text-sm font-medium text-gray-600">
-    
+    <li>deepseek-v3.2</li><li>qwen-3-next-80b-instruct</li><li>qwen-3-235b-A22b-instruct</li><li>gpt-5.4-mini</li><li>gpt-5.4-nano</li><li>grok-4.2-reasoning</li><li>qwen-3-next-80b-thinking</li>
                 </ul>
             </div>
 
@@ -255,7 +483,7 @@ View Leaderboard →
                 <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Over-thinkers</span>
                 <span class="text-xs text-gray-400 mb-2">Low Win Rate, High Strategy</span>
                 <ul class="text-sm font-medium text-purple-700">
-    
+    <li>deepseek-r1</li>
                 </ul>
             </div>
         </div>
@@ -273,11 +501,123 @@ View Leaderboard →
         
         <div class="grid md:grid-cols-2 gap-4">
     
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gpt-5.5</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">claude-sonnet-4.6</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">claude-opus-4.6</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gpt-5.4</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gpt-5.4-mini</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gpt-5.4-nano</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
             <div class="border rounded-lg p-4 flex items-center justify-between bg-blue-50 border-blue-200 text-blue-800">
                 <div class="flex items-center gap-3">
                     <span class="text-2xl">✅</span>
                     <div>
-                        <h4 class="font-bold text-lg leading-tight">model-c</h4>
+                        <h4 class="font-bold text-lg leading-tight">qwen-3-next-80b-instruct</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Stable</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">96.2<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 3.8%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-blue-50 border-blue-200 text-blue-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">✅</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">qwen-3-235b-A22b-instruct</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Stable</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">96.2<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 3.8%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-blue-50 border-blue-200 text-blue-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">✅</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gemini-3.1-pro-preview</h4>
                         <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Stable</span>
                     </div>
                 </div>
@@ -291,7 +631,7 @@ View Leaderboard →
                 <div class="flex items-center gap-3">
                     <span class="text-2xl">✅</span>
                     <div>
-                        <h4 class="font-bold text-lg leading-tight">model-b</h4>
+                        <h4 class="font-bold text-lg leading-tight">glm-5</h4>
                         <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Stable</span>
                     </div>
                 </div>
@@ -305,13 +645,83 @@ View Leaderboard →
                 <div class="flex items-center gap-3">
                     <span class="text-2xl">✅</span>
                     <div>
-                        <h4 class="font-bold text-lg leading-tight">gemini-3.1-pro</h4>
+                        <h4 class="font-bold text-lg leading-tight">gemma-4-31b</h4>
                         <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Stable</span>
                     </div>
                 </div>
                 <div class="text-right">
-                    <div class="text-2xl font-black">94.2<span class="text-lg text-gray-500 font-medium">%</span></div>
-                    <div class="text-xs opacity-75 mt-1">API Errors: 5.8%</div>
+                    <div class="text-2xl font-black">90.4<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 9.6%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-blue-50 border-blue-200 text-blue-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">✅</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">deepseek-v3.2</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Stable</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">90.4<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 9.6%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-yellow-50 border-yellow-200 text-yellow-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">⚠️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">deepseek-r1</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Fragile</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">80.8<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 19.2%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-red-50 border-red-200 text-red-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">☠️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gemini-3-flash-preview</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Hall of Shame (Penalty)</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">59.6<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 40.4%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-red-50 border-red-200 text-red-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">☠️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">qwen-3-next-80b-thinking</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Hall of Shame (Penalty)</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">57.7<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 42.3%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-red-50 border-red-200 text-red-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">☠️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">grok-4.2-reasoning</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Hall of Shame (Penalty)</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">0.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 100.0%</div>
                 </div>
             </div>
         
@@ -326,23 +736,37 @@ View Leaderboard →
         <div class="grid md:grid-cols-3 gap-6">
     
             <div class="border rounded-lg p-4 flex flex-col items-center bg-gray-50">
-                <h4 class="font-bold text-gray-800 mb-2">model-c</h4>
+                <h4 class="font-bold text-gray-800 mb-2">gpt-5.5</h4>
                 <div class="w-full relative" style="max-width: 250px;">
                     <canvas id="radarChart_0"></canvas>
                 </div>
             </div>
         
             <div class="border rounded-lg p-4 flex flex-col items-center bg-gray-50">
-                <h4 class="font-bold text-gray-800 mb-2">model-b</h4>
+                <h4 class="font-bold text-gray-800 mb-2">gemini-3.1-pro-preview</h4>
                 <div class="w-full relative" style="max-width: 250px;">
                     <canvas id="radarChart_1"></canvas>
                 </div>
             </div>
         
             <div class="border rounded-lg p-4 flex flex-col items-center bg-gray-50">
-                <h4 class="font-bold text-gray-800 mb-2">gemini-3.1-pro</h4>
+                <h4 class="font-bold text-gray-800 mb-2">gemma-4-31b</h4>
                 <div class="w-full relative" style="max-width: 250px;">
                     <canvas id="radarChart_2"></canvas>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex flex-col items-center bg-gray-50">
+                <h4 class="font-bold text-gray-800 mb-2">claude-sonnet-4.6</h4>
+                <div class="w-full relative" style="max-width: 250px;">
+                    <canvas id="radarChart_3"></canvas>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex flex-col items-center bg-gray-50">
+                <h4 class="font-bold text-gray-800 mb-2">claude-opus-4.6</h4>
+                <div class="w-full relative" style="max-width: 250px;">
+                    <canvas id="radarChart_4"></canvas>
                 </div>
             </div>
         
@@ -356,7 +780,7 @@ View Leaderboard →
                 labels: ['Single-Turn', 'Multi-Turn', 'Cognitive Flex'],
                 datasets: [{
                     label: 'Normalized Score',
-                    data: [100.0, 100.0, 100.0],
+                    data: [0.0, 96.9, 100.0],
                     backgroundColor: 'rgba(59, 130, 246, 0.2)',
                     borderColor: 'rgba(59, 130, 246, 1)',
                     pointBackgroundColor: 'rgba(59, 130, 246, 1)',
@@ -384,7 +808,7 @@ View Leaderboard →
                 labels: ['Single-Turn', 'Multi-Turn', 'Cognitive Flex'],
                 datasets: [{
                     label: 'Normalized Score',
-                    data: [88.2, 88.2, 88.2],
+                    data: [0.0, 100.0, 92.5],
                     backgroundColor: 'rgba(59, 130, 246, 0.2)',
                     borderColor: 'rgba(59, 130, 246, 1)',
                     pointBackgroundColor: 'rgba(59, 130, 246, 1)',
@@ -412,7 +836,63 @@ View Leaderboard →
                 labels: ['Single-Turn', 'Multi-Turn', 'Cognitive Flex'],
                 datasets: [{
                     label: 'Normalized Score',
-                    data: [66.3, 66.3, 66.3],
+                    data: [0.0, 89.6, 94.5],
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        ticks: { stepSize: 20, display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+        
+        new Chart(document.getElementById('radarChart_3'), {
+            type: 'radar',
+            data: {
+                labels: ['Single-Turn', 'Multi-Turn', 'Cognitive Flex'],
+                datasets: [{
+                    label: 'Normalized Score',
+                    data: [0.0, 92.8, 81.1],
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        ticks: { stepSize: 20, display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+        
+        new Chart(document.getElementById('radarChart_4'), {
+            type: 'radar',
+            data: {
+                labels: ['Single-Turn', 'Multi-Turn', 'Cognitive Flex'],
+                datasets: [{
+                    label: 'Normalized Score',
+                    data: [0.0, 90.0, 82.8],
                     backgroundColor: 'rgba(59, 130, 246, 0.2)',
                     borderColor: 'rgba(59, 130, 246, 1)',
                     pointBackgroundColor: 'rgba(59, 130, 246, 1)',
