@@ -76,27 +76,116 @@ View Leaderboard →
     
     <div class="bg-white rounded-lg shadow p-6 border mb-12">
         <h3 class="text-2xl font-bold mb-2">Aggregate Cognitive Performance</h3>
-        <p class="text-gray-600 mb-6 text-sm">Weighted Score: 20% Single-Turn, 30% Multi-Turn, 50% Cognitive Flexibility.</p>
-        <div class="w-full h-96">
+        <p class="text-gray-600 mb-4 text-sm">Adjust the weights to see how different evaluation priorities affect the leaderboard.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 p-4 bg-gray-50 rounded-lg border">
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Single-Turn Weight: <span id="stWeightVal" class="text-blue-600">20%</span></label>
+                <input type="range" id="stWeight" min="0" max="100" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">30%</span></label>
+                <input type="range" id="mtWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">50%</span></label>
+                <input type="range" id="cfWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+        </div>
+        <p id="weightWarning" class="text-red-500 text-sm font-bold hidden mb-4">Weights must sum to 100%!</p>
+
+        <div class="relative w-full" style="height: 400px;">
             <canvas id="combinedChart"></canvas>
         </div>
     </div>
+    
     <script>
-    new Chart(document.getElementById('combinedChart'), {
-        type: 'bar',
-        data: {
-            labels: ["gpt-5.5-2026-04-23", "gemini-3.1-pro-preview", "gemma-4-31b-it", "claude-sonnet-4-6-default", "claude-opus-4-6-default", "glm-5", "gpt-5.4-2026-03-05", "deepseek-v3.2", "gemini-3-flash-preview", "grok-4.20-0309-reasoning", "qwen3-next-80b-a3b-thinking", "gpt-5.4-mini-2026-03-17", "deepseek-r1-0528", "qwen3-next-80b-a3b-instruct", "grok-4.20-0309-non-reasoning", "qwen3-235b-a22b-instruct-2507", "gemma-4-26b-a4b-it", "gemini-2.5-pro", "gpt-oss-120b", "claude-sonnet-4-5-20250929", "qwen3-coder-480b-a35b-instruct", "claude-haiku-4-5-20251001", "gemma-3-4b-it", "gemma-3-12b-it"],
-            datasets: [{
-                label: 'Weighted Aggregate Score',
-                data: [0.9557606156597709, 0.9318336992029943, 0.9026251786273523, 0.8488517197168747, 0.8260279878870304, 0.764559283111298, 0.7055324863614685, 0.6717153379112739, 0.5141003782397546, 0.4838717500186099, 0.3936466212796739, 0.33578427422885593, 0.2956328028346118, 0.25848266827000366, 0.21420120063180895, 0.12771624902882123, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.08462910075848995, -0.09091781936355665],
-                backgroundColor: 'rgba(59, 130, 246, 0.8)'
-            }]
-        },
-        options: { 
-            responsive: true, 
-            maintainAspectRatio: false,
-            scales: { y: { beginAtZero: true } }
+    window.addEventListener('load', function() {
+        // Raw Data from Python
+        const rawData = {
+            models: ["gpt-5.5-2026-04-23", "gemini-3.1-pro-preview", "gemma-4-31b-it", "claude-sonnet-4-6-default", "claude-opus-4-6-default", "glm-5", "gpt-5.4-2026-03-05", "deepseek-v3.2", "gemini-3-flash-preview", "grok-4.20-0309-reasoning", "qwen3-next-80b-a3b-thinking", "gpt-5.4-mini-2026-03-17", "deepseek-r1-0528", "qwen3-next-80b-a3b-instruct", "grok-4.20-0309-non-reasoning", "qwen3-235b-a22b-instruct-2507", "gemma-4-26b-a4b-it", "gemini-2.5-pro", "gpt-oss-120b", "claude-sonnet-4-5-20250929", "qwen3-coder-480b-a35b-instruct", "claude-haiku-4-5-20251001", "gemma-3-4b-it", "gemma-3-12b-it"],
+            singleTurn: [0.6494402710300904, 0.6650086170104182, 0.6435080389416064, 0.6555865425268759, 0.5461174092521417, 0.6347407683754347, 0.5902364654464408, 0.517461687503926, 0.6178779397406238, 0.0, 0.6120277057788934, 0.5372243994761418, 0.2835784017090313, 0.5176104437224545, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+            multiTurn: [1.0919422742841198, 1.1265893144936887, 1.0098527570470677, 1.0454631647325263, 1.0135860578237357, 0.8875744766567493, 0.8376883329851664, 0.6449445334056403, 0.0, 0.0, 0.0, 0.2184537695676898, 0.7963904083093518, 0.5165352650850427, 0.0, 0.4257208300960708, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+            cognitiveFlex: [0.9965797583370336, 0.921710362905608, 0.9419354874498213, 0.8081909235834832, 0.8254573773789626, 0.7426775728783724, 0.6723573867532608, 0.7494792807775933, 0.7810495805832598, 0.9677435000372198, 0.5424821602477905, 0.3256065269266412, 0.0, 0.0, 0.4284024012636179, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.1692582015169799, -0.1818356387271133]
+        };
+
+        let myChart = null;
+
+        function updateChart() {
+            // Get current slider values
+            const wST = parseInt(document.getElementById('stWeight').value);
+            const wMT = parseInt(document.getElementById('mtWeight').value);
+            const wCF = parseInt(document.getElementById('cfWeight').value);
+
+            // Update text labels
+            document.getElementById('stWeightVal').innerText = wST + '%';
+            document.getElementById('mtWeightVal').innerText = wMT + '%';
+            document.getElementById('cfWeightVal').innerText = wCF + '%';
+
+            const totalWeight = wST + wMT + wCF;
+            const warningEl = document.getElementById('weightWarning');
+
+            if (totalWeight !== 100) {
+                warningEl.classList.remove('hidden');
+                warningEl.innerText = `Weights currently sum to ${totalWeight}%. They must equal 100%.`;
+                return; // Stop updating chart if weights are invalid
+            } else {
+                warningEl.classList.add('hidden');
+            }
+
+            // Calculate new combined scores
+            let calculatedScores = [];
+            for (let i = 0; i < rawData.models.length; i++) {
+                const score = (rawData.singleTurn[i] * (wST / 100)) + 
+                              (rawData.multiTurn[i] * (wMT / 100)) + 
+                              (rawData.cognitiveFlex[i] * (wCF / 100));
+                
+                calculatedScores.push({
+                    model: rawData.models[i],
+                    score: score
+                });
+            }
+
+            // Sort descending by new score
+            calculatedScores.sort((a, b) => b.score - a.score);
+
+            const sortedLabels = calculatedScores.map(item => item.model);
+            const sortedData = calculatedScores.map(item => item.score);
+
+            // Render or Update Chart
+            const ctx = document.getElementById('combinedChart').getContext('2d');
+            
+            if (myChart) {
+                myChart.data.labels = sortedLabels;
+                myChart.data.datasets[0].data = sortedData;
+                myChart.update();
+            } else {
+                myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: sortedLabels,
+                        datasets: [{
+                            label: 'Weighted Aggregate Score',
+                            data: sortedData,
+                            backgroundColor: 'rgba(59, 130, 246, 0.8)'
+                        }]
+                    },
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+            }
         }
+
+        // Attach event listeners to sliders
+        document.getElementById('stWeight').addEventListener('input', updateChart);
+        document.getElementById('mtWeight').addEventListener('input', updateChart);
+        document.getElementById('cfWeight').addEventListener('input', updateChart);
+
+        // Initial render
+        updateChart();
     });
     </script>
     
@@ -208,7 +297,7 @@ View Leaderboard →
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">12</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">google-gemma-4</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">Qwen-3-next-80b-thinking</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
                 <td class="py-3 px-4 border-b text-red-700">0.000</td>
@@ -216,7 +305,7 @@ View Leaderboard →
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">13</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">openai-gpt-5.5</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">google-gemma-4</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
                 <td class="py-3 px-4 border-b text-red-700">0.000</td>
@@ -224,7 +313,7 @@ View Leaderboard →
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">14</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">Qwen-3-next-80b-thinking</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">openai-gpt-5.5</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
                 <td class="py-3 px-4 border-b text-red-700">0.000</td>

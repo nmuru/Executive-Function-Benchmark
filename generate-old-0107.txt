@@ -730,132 +730,39 @@ def get_weighted_scores():
     return grouped_filled.sort_values(by='Combined_Score', ascending=False)
 
 def build_combined_bar_chart_html(combined_df):
-    # We need to pass the raw unweighted data to the frontend 
-    # so JavaScript can recalculate the weights dynamically.
-    models = combined_df.index.tolist()
-    
-    # Extract the raw scores for each task per model
-    st_scores = combined_df['evaluate_wordle_single_turn_v2'].tolist()
-    mt_scores = combined_df['evaluate_wordle_multi_turn'].tolist()
-    cf_scores = combined_df['evaluate_cognitive_flexibility'].tolist()
+    labels = combined_df.index.tolist()
+    data = combined_df['Combined_Score'].tolist()
 
     html = """
     <div class="bg-white rounded-lg shadow p-6 border mb-12">
         <h3 class="text-2xl font-bold mb-2">Aggregate Cognitive Performance</h3>
-        <p class="text-gray-600 mb-4 text-sm">Adjust the weights to see how different evaluation priorities affect the leaderboard.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 p-4 bg-gray-50 rounded-lg border">
-            <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Single-Turn Weight: <span id="stWeightVal" class="text-blue-600">20%</span></label>
-                <input type="range" id="stWeight" min="0" max="100" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-            </div>
-            <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">30%</span></label>
-                <input type="range" id="mtWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-            </div>
-            <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">50%</span></label>
-                <input type="range" id="cfWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-            </div>
-        </div>
-        <p id="weightWarning" class="text-red-500 text-sm font-bold hidden mb-4">Weights must sum to 100%!</p>
-
-        <div class="relative w-full" style="height: 400px;">
+        <p class="text-gray-600 mb-6 text-sm">Weighted Score: 20% Single-Turn, 30% Multi-Turn, 50% Cognitive Flexibility.</p>
+        <div class="w-full h-96">
             <canvas id="combinedChart"></canvas>
         </div>
     </div>
-    
+
     <script>
-    window.addEventListener('load', function() {
-        // Raw Data from Python
-        const rawData = {
-            models: """ + json.dumps(models) + """,
-            singleTurn: """ + json.dumps(st_scores) + """,
-            multiTurn: """ + json.dumps(mt_scores) + """,
-            cognitiveFlex: """ + json.dumps(cf_scores) + """
-        };
-
-        let myChart = null;
-
-        function updateChart() {
-            // Get current slider values
-            const wST = parseInt(document.getElementById('stWeight').value);
-            const wMT = parseInt(document.getElementById('mtWeight').value);
-            const wCF = parseInt(document.getElementById('cfWeight').value);
-
-            // Update text labels
-            document.getElementById('stWeightVal').innerText = wST + '%';
-            document.getElementById('mtWeightVal').innerText = wMT + '%';
-            document.getElementById('cfWeightVal').innerText = wCF + '%';
-
-            const totalWeight = wST + wMT + wCF;
-            const warningEl = document.getElementById('weightWarning');
-
-            if (totalWeight !== 100) {
-                warningEl.classList.remove('hidden');
-                warningEl.innerText = `Weights currently sum to ${totalWeight}%. They must equal 100%.`;
-                return; // Stop updating chart if weights are invalid
-            } else {
-                warningEl.classList.add('hidden');
-            }
-
-            // Calculate new combined scores
-            let calculatedScores = [];
-            for (let i = 0; i < rawData.models.length; i++) {
-                const score = (rawData.singleTurn[i] * (wST / 100)) + 
-                              (rawData.multiTurn[i] * (wMT / 100)) + 
-                              (rawData.cognitiveFlex[i] * (wCF / 100));
-                
-                calculatedScores.push({
-                    model: rawData.models[i],
-                    score: score
-                });
-            }
-
-            // Sort descending by new score
-            calculatedScores.sort((a, b) => b.score - a.score);
-
-            const sortedLabels = calculatedScores.map(item => item.model);
-            const sortedData = calculatedScores.map(item => item.score);
-
-            // Render or Update Chart
-            const ctx = document.getElementById('combinedChart').getContext('2d');
-            
-            if (myChart) {
-                myChart.data.labels = sortedLabels;
-                myChart.data.datasets[0].data = sortedData;
-                myChart.update();
-            } else {
-                myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: sortedLabels,
-                        datasets: [{
-                            label: 'Weighted Aggregate Score',
-                            data: sortedData,
-                            backgroundColor: 'rgba(59, 130, 246, 0.8)'
-                        }]
-                    },
-                    options: { 
-                        responsive: true, 
-                        maintainAspectRatio: false,
-                        scales: { y: { beginAtZero: true } }
-                    }
-                });
-            }
+    new Chart(document.getElementById('combinedChart'), {
+        type: 'bar',
+        data: {
+            labels: """ + json.dumps(labels) + """,
+            datasets: [{
+                label: 'Weighted Aggregate Score',
+                data: """ + json.dumps(data) + """,
+                backgroundColor: 'rgba(59, 130, 246, 0.8)'
+            }]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } }
         }
-
-        // Attach event listeners to sliders
-        document.getElementById('stWeight').addEventListener('input', updateChart);
-        document.getElementById('mtWeight').addEventListener('input', updateChart);
-        document.getElementById('cfWeight').addEventListener('input', updateChart);
-
-        // Initial render
-        updateChart();
     });
     </script>
     """
     return html
+
 # ... (The rest of your Leaderboards section remains the same) ...
 
 
@@ -923,11 +830,9 @@ pillars_html = build_pillars_html(pillars_data)
 
 
 # 6. Calculate the new combined insights
+
 combined_df = get_weighted_scores()
-combined_bar_html = build_combined_bar_chart_html(combined_df)
-
-
-# ... (The rest of your replacement logic remains the same)
+combined_bar_html = build_combined_bar_chart_html(combined_df) 
  
 
 # ... (Standard replacement and save logic)
