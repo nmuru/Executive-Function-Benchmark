@@ -756,7 +756,7 @@ def build_combined_bar_chart_html(combined_df):
 
     html = """
     <div class="bg-white rounded-lg shadow p-6 border mb-12">
-        <h3 class="text-2xl font-bold mb-2">Aggregate Cognitive Performance</h3>
+        <h3 class="text-2xl font-bold mb-2">Aggregate Executive Function Performance</h3>
         <p class="text-gray-600 mb-4 text-sm">Adjust the weights to see how different evaluation priorities affect the leaderboard.</p>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 p-4 bg-gray-50 rounded-lg border">
