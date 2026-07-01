@@ -605,11 +605,13 @@ def build_pillars_html(results):
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-gray-100 uppercase text-xs text-gray-600 font-semibold tracking-wider">
+                        <tr class="bg-gray-100 uppercase text-xs text-gray-600 font-semibold tracking-wider">
                         <th class="py-3 px-4 border-b">Rank</th>
                         <th class="py-3 px-4 border-b">Model</th>
-                        <th class="py-3 px-4 border-b" title="Cognitive Degradation Index (Lower is better)">Working Memory (Drift)</th>
-                        <th class="py-3 px-4 border-b" title="Task 3 Score (Higher is better)">Cognitive Flexibility</th>
-                        <th class="py-3 px-4 border-b" title="Multi-turn violations (Lower is better)">Inhibitory Control</th>
+                        <th class="py-3 px-4 border-b">Working Memory (Drift)</th>
+                        <th class="py-3 px-4 border-b">Cognitive Flexibility</th>
+                        <th class="py-3 px-4 border-b">Inhibitory Control</th>
+                        <th class="py-3 px-4 border-b bg-blue-50 text-blue-900 rounded-tr-lg">Overall EF Score (0-100)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -622,6 +624,7 @@ def build_pillars_html(results):
                 <td class="py-3 px-4 border-b text-blue-700">{r['raw_wm_deg']:.3f}</td>
                 <td class="py-3 px-4 border-b text-purple-700">{r['raw_cf_score']:.4f}</td>
                 <td class="py-3 px-4 border-b text-red-700">{r['raw_inhibition']:.3f}</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">{r['avg_norm']:.1f}</td>
             </tr>
         """
     html += "</tbody></table></div>"
