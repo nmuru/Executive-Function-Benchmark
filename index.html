@@ -428,15 +428,6 @@ View Leaderboard →
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">13</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">openai-gpt-5.5</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">66.7</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">14</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">Qwen-3-next-80b-thinking</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
@@ -445,8 +436,17 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">15</td>
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">14</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">google-gemma-4</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">66.7</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">15</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">openai-gpt-5.5</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
                 <td class="py-3 px-4 border-b text-red-700">0.000</td>
@@ -607,41 +607,48 @@ View Leaderboard →
         <h3 class="text-xl font-bold mb-2">Strategy vs. Brute-Force Matrix (Multi-Turn)</h3>
         <p class="text-gray-600 mb-6 text-sm">Compares a model's ability to win against its Information Gain strategy. Placed relative to the cohort median.</p>
         
-        <div class="grid grid-cols-2 gap-4">
-            <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-48 flex flex-col relative">
-                <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Lucky Guessers</span>
-                <span class="text-xs text-gray-400 mb-2">High Win Rate, Low Strategy</span>
-                <ul class="text-sm font-semibold text-blue-700">
-    <li>gemini-3-flash-preview</li>
-                </ul>
-            </div>
+        <div class="flex items-center gap-4">
             
-            <div class="border-2 border-blue-200 bg-blue-50 p-4 rounded-lg h-48 flex flex-col relative">
-                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">Reasoning Masters</span>
-                <span class="text-xs text-blue-400 mb-2">High Win Rate, High Strategy</span>
-                <ul class="text-sm font-bold text-gray-900">
+            <div class="flex flex-col justify-between items-center h-[528px] text-xs font-bold text-gray-400 uppercase tracking-wide py-4 select-none" style="writing-mode: vertical-rl; transform: rotate(180deg);">
+                <span>&larr; Win Rate &rarr;</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 flex-1">
+                <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-64 flex flex-col relative">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Lucky Guessers</span>
+                    <span class="text-xs text-gray-400 mb-2">High Win Rate, Low Strategy</span>
+                    <ul class="text-sm font-semibold text-blue-700">
+    <li>gemini-3-flash-preview</li>
+                    </ul>
+                </div>
+                
+                <div class="border-2 border-blue-200 bg-blue-50 p-4 rounded-lg h-64 flex flex-col relative">
+                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">Reasoning Masters</span>
+                    <span class="text-xs text-blue-400 mb-2">High Win Rate, High Strategy</span>
+                    <ul class="text-sm font-bold text-gray-900">
     <li>gemini-3.1-pro-preview</li><li>gpt-5.5</li><li>claude-sonnet-4.6</li><li>claude-opus-4.6</li><li>gemma-4-31b</li><li>glm-5</li><li>gpt-5.4</li>
-                </ul>
-            </div>
+                    </ul>
+                </div>
 
-            <div class="border-2 border-dashed border-gray-200 bg-gray-50 p-4 rounded-lg h-48 flex flex-col relative opacity-75">
-                <span class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Struggling</span>
-                <span class="text-xs text-gray-400 mb-2">Low Win Rate, Low Strategy</span>
-                <ul class="text-sm font-medium text-gray-600">
+                <div class="border-2 border-dashed border-gray-200 bg-gray-50 p-4 rounded-lg h-64 flex flex-col relative opacity-75">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Struggling</span>
+                    <span class="text-xs text-gray-400 mb-2">Low Win Rate, Low Strategy</span>
+                    <ul class="text-sm font-medium text-gray-600">
     <li>deepseek-v3.2</li><li>qwen-3-next-80b-instruct</li><li>qwen-3-235b-A22b-instruct</li><li>gpt-5.4-mini</li><li>gpt-5.4-nano</li><li>grok-4.2-reasoning</li><li>qwen-3-next-80b-thinking</li>
-                </ul>
-            </div>
+                    </ul>
+                </div>
 
-            <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-48 flex flex-col relative">
-                <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Over-thinkers</span>
-                <span class="text-xs text-gray-400 mb-2">Low Win Rate, High Strategy</span>
-                <ul class="text-sm font-medium text-purple-700">
+                <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-64 flex flex-col relative">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Over-thinkers</span>
+                    <span class="text-xs text-gray-400 mb-2">Low Win Rate, High Strategy</span>
+                    <ul class="text-sm font-medium text-purple-700">
     <li>deepseek-r1</li>
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
         
-        <div class="flex justify-between text-xs font-bold text-gray-400 mt-2 px-2 uppercase tracking-wide">
+        <div class="flex justify-between text-xs font-bold text-gray-400 mt-4 pl-10 pr-2 uppercase tracking-wide">
             <span>&larr; Lower Info Gain</span>
             <span>Strategy Score (Overall Benchmark)</span>
             <span>Higher Info Gain &rarr;</span>
@@ -650,7 +657,7 @@ View Leaderboard →
     
     <div class="bg-white rounded-lg shadow p-6 border mb-12">
         <h3 class="text-xl font-bold mb-2">Deployment Safety & Compliance</h3>
-        <p class="text-gray-600 mb-6 text-sm">Ranks models based on format adherence and API stability. Models that trigger the >20% error penalty are placed in the Hall of Shame.</p>
+        <p class="text-gray-600 mb-6 text-sm">Ranks models based on format adherence and API stability. Models that trigger the >20% error penalty are placed in the Penalty category.</p>
         
         <div class="grid md:grid-cols-2 gap-4">
     
@@ -841,7 +848,7 @@ View Leaderboard →
                     <span class="text-2xl">☠️</span>
                     <div>
                         <h4 class="font-bold text-lg leading-tight">gemini-3-flash-preview</h4>
-                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Hall of Shame (Penalty)</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Penalty</span>
                     </div>
                 </div>
                 <div class="text-right">
@@ -855,7 +862,7 @@ View Leaderboard →
                     <span class="text-2xl">☠️</span>
                     <div>
                         <h4 class="font-bold text-lg leading-tight">qwen-3-next-80b-thinking</h4>
-                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Hall of Shame (Penalty)</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Penalty</span>
                     </div>
                 </div>
                 <div class="text-right">
@@ -869,7 +876,7 @@ View Leaderboard →
                     <span class="text-2xl">☠️</span>
                     <div>
                         <h4 class="font-bold text-lg leading-tight">grok-4.2-reasoning</h4>
-                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Hall of Shame (Penalty)</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Penalty</span>
                     </div>
                 </div>
                 <div class="text-right">

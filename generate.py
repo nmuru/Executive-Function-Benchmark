@@ -258,53 +258,60 @@ def build_strategy_html(quadrants):
         <h3 class="text-xl font-bold mb-2">Strategy vs. Brute-Force Matrix (Multi-Turn)</h3>
         <p class="text-gray-600 mb-6 text-sm">Compares a model's ability to win against its Information Gain strategy. Placed relative to the cohort median.</p>
         
-        <div class="grid grid-cols-2 gap-4">
-            <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-48 flex flex-col relative">
-                <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Lucky Guessers</span>
-                <span class="text-xs text-gray-400 mb-2">High Win Rate, Low Strategy</span>
-                <ul class="text-sm font-semibold text-blue-700">
+        <div class="flex items-center gap-4">
+            
+            <div class="flex flex-col justify-between items-center h-[528px] text-xs font-bold text-gray-400 uppercase tracking-wide py-4 select-none" style="writing-mode: vertical-rl; transform: rotate(180deg);">
+                <span>&larr; Win Rate &rarr;</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 flex-1">
+                <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-64 flex flex-col relative">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Lucky Guessers</span>
+                    <span class="text-xs text-gray-400 mb-2">High Win Rate, Low Strategy</span>
+                    <ul class="text-sm font-semibold text-blue-700">
     """
     for model in quadrants["lucky"]: html += f"<li>{model}</li>"
     
     html += """
-                </ul>
-            </div>
-            
-            <div class="border-2 border-blue-200 bg-blue-50 p-4 rounded-lg h-48 flex flex-col relative">
-                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">Reasoning Masters</span>
-                <span class="text-xs text-blue-400 mb-2">High Win Rate, High Strategy</span>
-                <ul class="text-sm font-bold text-gray-900">
+                    </ul>
+                </div>
+                
+                <div class="border-2 border-blue-200 bg-blue-50 p-4 rounded-lg h-64 flex flex-col relative">
+                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">Reasoning Masters</span>
+                    <span class="text-xs text-blue-400 mb-2">High Win Rate, High Strategy</span>
+                    <ul class="text-sm font-bold text-gray-900">
     """
     for model in quadrants["masters"]: html += f"<li>{model}</li>"
 
     html += """
-                </ul>
-            </div>
+                    </ul>
+                </div>
 
-            <div class="border-2 border-dashed border-gray-200 bg-gray-50 p-4 rounded-lg h-48 flex flex-col relative opacity-75">
-                <span class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Struggling</span>
-                <span class="text-xs text-gray-400 mb-2">Low Win Rate, Low Strategy</span>
-                <ul class="text-sm font-medium text-gray-600">
+                <div class="border-2 border-dashed border-gray-200 bg-gray-50 p-4 rounded-lg h-64 flex flex-col relative opacity-75">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Struggling</span>
+                    <span class="text-xs text-gray-400 mb-2">Low Win Rate, Low Strategy</span>
+                    <ul class="text-sm font-medium text-gray-600">
     """
     for model in quadrants["struggling"]: html += f"<li>{model}</li>"
 
     html += """
-                </ul>
-            </div>
+                    </ul>
+                </div>
 
-            <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-48 flex flex-col relative">
-                <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Over-thinkers</span>
-                <span class="text-xs text-gray-400 mb-2">Low Win Rate, High Strategy</span>
-                <ul class="text-sm font-medium text-purple-700">
+                <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-64 flex flex-col relative">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Over-thinkers</span>
+                    <span class="text-xs text-gray-400 mb-2">Low Win Rate, High Strategy</span>
+                    <ul class="text-sm font-medium text-purple-700">
     """
     for model in quadrants["overthinkers"]: html += f"<li>{model}</li>"
 
     html += """
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
         
-        <div class="flex justify-between text-xs font-bold text-gray-400 mt-2 px-2 uppercase tracking-wide">
+        <div class="flex justify-between text-xs font-bold text-gray-400 mt-4 pl-10 pr-2 uppercase tracking-wide">
             <span>&larr; Lower Info Gain</span>
             <span>Strategy Score (Overall Benchmark)</span>
             <span>Higher Info Gain &rarr;</span>
@@ -312,7 +319,6 @@ def build_strategy_html(quadrants):
     </div>
     """
     return html
-
 
 
 
@@ -333,7 +339,7 @@ def calculate_compliance_score():
         
         # Determine Tier
         if penalty:
-            tier = "Hall of Shame (Penalty)"
+            tier = "Penalty"
             color = "bg-red-50 border-red-200 text-red-800"
             icon = "☠️"
         elif reliability_score >= 99.0:
@@ -370,7 +376,7 @@ def build_compliance_html(results):
     html = """
     <div class="bg-white rounded-lg shadow p-6 border mb-12">
         <h3 class="text-xl font-bold mb-2">Deployment Safety & Compliance</h3>
-        <p class="text-gray-600 mb-6 text-sm">Ranks models based on format adherence and API stability. Models that trigger the >20% error penalty are placed in the Hall of Shame.</p>
+        <p class="text-gray-600 mb-6 text-sm">Ranks models based on format adherence and API stability. Models that trigger the >20% error penalty are placed in the Penalty category.</p>
         
         <div class="grid md:grid-cols-2 gap-4">
     """
