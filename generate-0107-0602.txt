@@ -1,0 +1,382 @@
+import os
+import json
+import pandas as pd
+
+DATA_ROOT = "data"
+
+# ==========================================
+# 1. DATA LOADING FUNCTIONS
+# ==========================================
+
+def load_json_results(directory):
+    """Loads all JSON files from a specified directory."""
+    results = []
+    if not os.path.exists(directory):
+        return results
+    for filename in os.listdir(directory):
+        if filename.endswith(".json"):
+            with open(os.path.join(directory, filename), 'r', encoding='utf-8') as f:
+                try:
+                    data = json.load(f)
+                    results.append(data)
+                except json.JSONDecodeError:
+                    print(f"Error reading {filename}")
+    return results
+
+def get_weighted_scores():
+    """Reads Kaggle CSV and prepares raw data for the interactive bar chart."""
+    try:
+        df = pd.read_csv('wordle-bench_leaderboard.csv')
+    except FileNotFoundError:
+        print("Warning: wordle-bench_leaderboard.csv not found. Returning empty dataframe.")
+        return pd.DataFrame()
+
+    relevant_tasks = [
+        'evaluate_wordle_single_turn_v2', 
+        'evaluate_wordle_multi_turn', 
+        'evaluate_cognitive_flexibility'
+    ]
+    df_filtered = df[df['Task_Name'].isin(relevant_tasks)]
+    
+    # Pivot so models are rows and tasks are columns
+    grouped = df_filtered.groupby(['Model', 'Task_Name'])['Numerical_Result'].mean().unstack()
+    grouped_filled = grouped.fillna(0)
+    
+    # Calculate a default Combined Score to initialize the sorting
+    weights = {
+        'evaluate_wordle_single_turn_v2': 0.20,
+        'evaluate_wordle_multi_turn': 0.30,
+        'evaluate_cognitive_flexibility': 0.50
+    }
+    
+    grouped_filled['Combined_Score'] = (
+        grouped_filled.get('evaluate_wordle_single_turn_v2', 0) * weights['evaluate_wordle_single_turn_v2'] +
+        grouped_filled.get('evaluate_wordle_multi_turn', 0) * weights['evaluate_wordle_multi_turn'] +
+        grouped_filled.get('evaluate_cognitive_flexibility', 0) * weights['evaluate_cognitive_flexibility']
+    )
+    
+    return grouped_filled.sort_values(by='Combined_Score', ascending=False)
+
+def calculate_cognitive_pillars():
+    """Maps JSON data to the 3 pillars of Executive Function and normalizes for charting."""
+    st_data = load_json_results(os.path.join(DATA_ROOT, "single-turn"))
+    mt_data = load_json_results(os.path.join(DATA_ROOT, "multi-turn"))
+    cf_data = load_json_results(os.path.join(DATA_ROOT, "cognitive-flexibility"))
+
+    # Create lookups
+    st_dict = {m["model_name"]: m.get("avg_violations_per_game", 0) for m in st_data}
+    mt_dict = {m["model_name"]: m.get("avg_violations_per_game", 0) for m in mt_data}
+    cf_viol_dict = {m["model_name"]: m.get("avg_violations_per_game", 0) for m in cf_data}
+    cf_dict = {m["model_name"]: m.get("overall_benchmark_score", 0) for m in cf_data}
+
+    # Unique list of all models
+    models = set(list(st_dict.keys()) + list(mt_dict.keys()) + list(cf_dict.keys()))
+
+    results = []
+    max_deg = 0.0001
+    max_viol = 0.0001
+    max_cf = 0.0001
+
+    # Step 1: Extract Raw Data
+    for model in models:
+        st_v = st_dict.get(model, 0)
+        mt_v = mt_dict.get(model, 0)
+        cf_v = cf_viol_dict.get(model, 0)
+        cf_score = cf_dict.get(model, 0)
+
+        # Working Memory proxy (Multi-turn violations minus Single-turn)
+        degradation = max(0, mt_v - st_v) 
+        
+        # Inhibitory Control proxy (Spike in violations during CF task vs MT task)
+        inhibition = max(0, cf_v - mt_v)
+
+        # Track maximums across the cohort for scaling
+        max_deg = max(max_deg, degradation)
+        max_viol = max(max_viol, inhibition)
+        max_cf = max(max_cf, cf_score)
+
+        results.append({
+            "model_name": model,
+            "raw_wm_deg": degradation,
+            "raw_cf_score": cf_score,
+            "raw_inhibition": inhibition
+        })
+
+    # Step 2: Normalize to 0-100 (where 100 is always the BEST performance)
+    for r in results:
+        # WM & Inhibition: Lower is better. So 0 violations = 100%. 
+        r["norm_wm"] = max(0, 100 - ((r["raw_wm_deg"] / max_deg) * 100)) if max_deg > 0 else 100
+        r["norm_inhibition"] = max(0, 100 - ((r["raw_inhibition"] / max_viol) * 100)) if max_viol > 0 else 100
+        
+        # CF: Higher is better.
+        r["norm_cf"] = (r["raw_cf_score"] / max_cf) * 100 if max_cf > 0 else 0
+
+        # Create an average score strictly for ranking the Top 5
+        r["avg_norm"] = (r["norm_wm"] + r["norm_cf"] + r["norm_inhibition"]) / 3
+
+    # Sort by the highest average normalized score
+    results.sort(key=lambda x: x["avg_norm"], reverse=True)
+    return results
+
+# ==========================================
+# 2. HTML GENERATION FUNCTIONS
+# ==========================================
+
+def build_combined_bar_chart_html(combined_df):
+    """Builds the interactive weighted bar chart using JavaScript."""
+    if combined_df.empty:
+        return ""
+
+    models = combined_df.index.tolist()
+    st_scores = combined_df.get('evaluate_wordle_single_turn_v2', pd.Series([0]*len(models))).tolist()
+    mt_scores = combined_df.get('evaluate_wordle_multi_turn', pd.Series([0]*len(models))).tolist()
+    cf_scores = combined_df.get('evaluate_cognitive_flexibility', pd.Series([0]*len(models))).tolist()
+
+    html = """
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-2xl font-bold mb-2">Aggregate Cognitive Performance</h3>
+        <p class="text-gray-600 mb-4 text-sm">Adjust the weights to see how different evaluation priorities affect the leaderboard.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 p-4 bg-gray-50 rounded-lg border">
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Single-Turn Weight: <span id="stWeightVal" class="text-blue-600">20%</span></label>
+                <input type="range" id="stWeight" min="0" max="100" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">30%</span></label>
+                <input type="range" id="mtWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">50%</span></label>
+                <input type="range" id="cfWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+        </div>
+        <p id="weightWarning" class="text-red-500 text-sm font-bold hidden mb-4">Weights must sum to 100%!</p>
+
+        <div class="relative w-full" style="height: 400px;">
+            <canvas id="combinedChart"></canvas>
+        </div>
+    </div>
+    
+    <script>
+    window.addEventListener('load', function() {
+        const rawData = {
+            models: """ + json.dumps(models) + """,
+            singleTurn: """ + json.dumps(st_scores) + """,
+            multiTurn: """ + json.dumps(mt_scores) + """,
+            cognitiveFlex: """ + json.dumps(cf_scores) + """
+        };
+
+        let myChart = null;
+
+        function updateChart() {
+            const wST = parseInt(document.getElementById('stWeight').value);
+            const wMT = parseInt(document.getElementById('mtWeight').value);
+            const wCF = parseInt(document.getElementById('cfWeight').value);
+
+            document.getElementById('stWeightVal').innerText = wST + '%';
+            document.getElementById('mtWeightVal').innerText = wMT + '%';
+            document.getElementById('cfWeightVal').innerText = wCF + '%';
+
+            const totalWeight = wST + wMT + wCF;
+            const warningEl = document.getElementById('weightWarning');
+
+            if (totalWeight !== 100) {
+                warningEl.classList.remove('hidden');
+                warningEl.innerText = `Weights currently sum to ${totalWeight}%. They must equal 100%.`;
+                return; 
+            } else {
+                warningEl.classList.add('hidden');
+            }
+
+            let calculatedScores = [];
+            for (let i = 0; i < rawData.models.length; i++) {
+                const score = (rawData.singleTurn[i] * (wST / 100)) + 
+                              (rawData.multiTurn[i] * (wMT / 100)) + 
+                              (rawData.cognitiveFlex[i] * (wCF / 100));
+                calculatedScores.push({ model: rawData.models[i], score: score });
+            }
+
+            calculatedScores.sort((a, b) => b.score - a.score);
+
+            const sortedLabels = calculatedScores.map(item => item.model);
+            const sortedData = calculatedScores.map(item => item.score);
+
+            const ctx = document.getElementById('combinedChart').getContext('2d');
+            
+            if (myChart) {
+                myChart.data.labels = sortedLabels;
+                myChart.data.datasets[0].data = sortedData;
+                myChart.update();
+            } else {
+                myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: sortedLabels,
+                        datasets: [{
+                            label: 'Weighted Aggregate Score',
+                            data: sortedData,
+                            backgroundColor: 'rgba(59, 130, 246, 0.8)'
+                        }]
+                    },
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+            }
+        }
+
+        document.getElementById('stWeight').addEventListener('input', updateChart);
+        document.getElementById('mtWeight').addEventListener('input', updateChart);
+        document.getElementById('cfWeight').addEventListener('input', updateChart);
+
+        updateChart();
+    });
+    </script>
+    """
+    return html
+
+def build_pillars_html(results):
+    """Builds the table and radar chart for the 3 pillars."""
+    if not results:
+        return ""
+
+    html = """
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-2xl font-bold mb-2">The 3 Pillars of Executive Function</h3>
+        <p class="text-gray-600 mb-6">Mapping benchmark outcomes directly to cognitive science pillars.</p>
+
+        <div class="overflow-x-auto mb-10">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 uppercase text-xs text-gray-600 font-semibold tracking-wider">
+                        <th class="py-3 px-4 border-b">Rank</th>
+                        <th class="py-3 px-4 border-b">Model</th>
+                        <th class="py-3 px-4 border-b" title="Cognitive Degradation Index (Lower is better)">Working Memory (Drift)</th>
+                        <th class="py-3 px-4 border-b" title="Task 3 Score (Higher is better)">Cognitive Flexibility</th>
+                        <th class="py-3 px-4 border-b" title="Multi-turn violations (Lower is better)">Inhibitory Control</th>
+                    </tr>
+                </thead>
+                <tbody>
+    """
+    for i, r in enumerate(results, start=1):
+        html += f"""
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">{i}</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">{r['model_name']}</td>
+                <td class="py-3 px-4 border-b text-blue-700">{r['raw_wm_deg']:.3f}</td>
+                <td class="py-3 px-4 border-b text-purple-700">{r['raw_cf_score']:.4f}</td>
+                <td class="py-3 px-4 border-b text-red-700">{r['raw_inhibition']:.3f}</td>
+            </tr>
+        """
+    html += "</tbody></table></div>"
+
+    top_5 = results[:5]
+    html += """
+        <div class="bg-gray-50 p-6 rounded-lg border">
+            <h4 class="font-bold text-xl mb-2 text-center text-gray-800">Top 5 Models: Cognitive Profile Map</h4>
+            <p class="text-center text-sm text-gray-500 mb-6">Scores normalized 0-100 (where 100 represents cohort state-of-the-art).</p>
+            <div class="w-full max-w-3xl mx-auto relative h-[400px]">
+                <canvas id="pillarsChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+    window.addEventListener('load', function() {
+    """
+    
+    colors = [
+        ("rgba(59, 130, 246, 0.1)", "rgba(59, 130, 246, 1)"),   
+        ("rgba(16, 185, 129, 0.1)", "rgba(16, 185, 129, 1)"),   
+        ("rgba(245, 158, 11, 0.1)", "rgba(245, 158, 11, 1)"),   
+        ("rgba(139, 92, 246, 0.1)", "rgba(139, 92, 246, 1)"),   
+        ("rgba(239, 68, 68, 0.1)", "rgba(239, 68, 68, 1)")      
+    ]
+
+    datasets_js = []
+    for i, r in enumerate(top_5):
+        bg_color, border_color = colors[i % len(colors)]
+        datasets_js.append(f"""
+        {{
+            label: '{r['model_name']}',
+            data: [{r['norm_wm']:.1f}, {r['norm_cf']:.1f}, {r['norm_inhibition']:.1f}],
+            backgroundColor: '{bg_color}',
+            borderColor: '{border_color}',
+            pointBackgroundColor: '{border_color}',
+            borderWidth: 2,
+            tension: 0.1
+        }}
+        """)
+
+    html += f"""
+        new Chart(document.getElementById('pillarsChart'), {{
+            type: 'radar',
+            data: {{
+                labels: ['Working Memory (Stability)', 'Cognitive Flexibility', 'Inhibitory Control'],
+                datasets: [{','.join(datasets_js)}]
+            }},
+            options: {{
+                maintainAspectRatio: false,
+                scales: {{
+                    r: {{
+                        angleLines: {{ display: true, color: 'rgba(0,0,0,0.1)' }},
+                        grid: {{ color: 'rgba(0,0,0,0.05)' }},
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        pointLabels: {{ font: {{ size: 14, weight: 'bold' }}, color: '#374151' }},
+                        ticks: {{ display: false }}
+                    }}
+                }},
+                plugins: {{
+                    legend: {{ position: 'bottom', labels: {{ padding: 20, font: {{ size: 12, weight: 'bold' }} }} }},
+                    tooltip: {{ backgroundColor: 'rgba(0,0,0,0.8)', padding: 12 }}
+                }}
+            }}
+        }});
+    }});
+    </script>
+    """
+    return html
+
+
+# ==========================================
+# 3. MAIN EXECUTION
+# ==========================================
+
+if __name__ == "__main__":
+    print("Generating Dashboard Insights...")
+
+    # 1. Generate Interactive Bar Chart (Aggregate Data)
+    combined_df = get_weighted_scores()
+    combined_bar_html = build_combined_bar_chart_html(combined_df)
+
+    # 2. Generate 3 Pillars Data & Chart
+    pillars_data = calculate_cognitive_pillars()
+    pillars_html = build_pillars_html(pillars_data)
+
+    # Note: If you have functions for degradation_html, strategy_html, etc.
+    # initialize them here. Otherwise, leave as empty strings.
+    degradation_html = "" 
+    strategy_html = ""
+    compliance_html = ""
+
+    # 3. Assemble all insights
+    combined_insights = combined_bar_html + pillars_html + degradation_html + strategy_html + compliance_html
+
+    # 4. Inject into home.html to create index.html
+    try:
+        with open('templates/home.html', 'r', encoding='utf-8') as f:
+            template = f.read()
+
+        # Replace a specific marker in your template with the generated insights
+        # Ensure your home.html has where you want this to appear
+        final_html = template.replace('', combined_insights)
+
+        with open('index.html', 'w', encoding='utf-8') as f:
+            f.write(final_html)
+            
+        print("Successfully generated index.html!")
+    except FileNotFoundError:
+        print("Error: templates/home.html not found. Ensure the directory structure is correct.")

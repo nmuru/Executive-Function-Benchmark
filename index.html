@@ -189,287 +189,6 @@ View Leaderboard →
     });
     </script>
     
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <div class="bg-white rounded-lg shadow p-6 border mb-12">
-        <h3 class="text-2xl font-bold mb-2">The 3 Pillars of Executive Function</h3>
-        <p class="text-gray-600 mb-6">Mapping benchmark outcomes directly to cognitive science pillars.</p>
-
-        <div class="overflow-x-auto mb-10">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-gray-100 uppercase text-xs text-gray-600 font-semibold tracking-wider">
-                        <th class="py-3 px-4 border-b">Rank</th>
-                        <th class="py-3 px-4 border-b">Model</th>
-                        <th class="py-3 px-4 border-b" title="Cognitive Degradation Index (Lower is better)">Working Memory (Drift)</th>
-                        <th class="py-3 px-4 border-b" title="Task 3 Score (Higher is better)">Cognitive Flexibility</th>
-                        <th class="py-3 px-4 border-b" title="Multi-turn violations (Lower is better)">Inhibitory Control</th>
-                    </tr>
-                </thead>
-                <tbody>
-    
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">1</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.5</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.9966</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">2</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.2-reasoning</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.9677</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">3</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.1-pro-preview</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.041</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.9217</td>
-                <td class="py-3 px-4 border-b text-red-700">0.041</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">4</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-4-31b</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.149</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.9419</td>
-                <td class="py-3 px-4 border-b text-red-700">0.149</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">5</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-opus-4.6</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.077</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.8255</td>
-                <td class="py-3 px-4 border-b text-red-700">0.077</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">6</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-sonnet-4.6</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.173</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.8082</td>
-                <td class="py-3 px-4 border-b text-red-700">0.173</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">7</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-next-80b-thinking</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.5425</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">8</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3-flash-preview</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.258</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.7810</td>
-                <td class="py-3 px-4 border-b text-red-700">0.258</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">9</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.2-non-reasoning</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.4284</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">10</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.4</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.365</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.6724</td>
-                <td class="py-3 px-4 border-b text-red-700">0.365</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">11</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">glm-5</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.490</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.7427</td>
-                <td class="py-3 px-4 border-b text-red-700">0.490</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">12</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">Qwen-3-next-80b-thinking</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">13</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">google-gemma-4</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">14</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">openai-gpt-5.5</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">15</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-3-4b</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">-0.1693</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">16</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-3-12b</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">-0.1818</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">17</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">deepseek-v3.2</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.872</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.7495</td>
-                <td class="py-3 px-4 border-b text-red-700">0.872</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">18</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-next-80b-instruct</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.260</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.260</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">19</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">deepseek-r1</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.381</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.381</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">20</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-235b-A22b-instruct</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.540</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.540</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">21</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.4-mini</td>
-                <td class="py-3 px-4 border-b text-blue-700">1.731</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.3256</td>
-                <td class="py-3 px-4 border-b text-red-700">1.731</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">22</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.4-nano</td>
-                <td class="py-3 px-4 border-b text-blue-700">1.481</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
-                <td class="py-3 px-4 border-b text-red-700">1.481</td>
-            </tr>
-        </tbody></table></div>
-        <div class="bg-gray-50 p-6 rounded-lg border">
-	#
-            <h4 class="font-bold text-xl mb-2 text-center text-gray-800">Top 5 Models: Cognitive Profile Map</h4>
-            <p class="text-center text-sm text-gray-500 mb-6">Scores normalized 0-100 (where 100 represents cohort state-of-the-art).</p>
-            <div class="w-full max-w-3xl mx-auto relative h-[400px]">
-                <canvas id="pillarsChart"></canvas>
-            </div>
-        </div>
-    </div>
-    <script>
-    
-    new Chart(document.getElementById('pillarsChart'), {
-        type: 'radar',
-        data: {
-            labels: ['Working Memory (Stability)', 'Cognitive Flexibility', 'Inhibitory Control'],
-            datasets: [
-        {
-            label: 'gpt-5.5',
-            data: [100.0, 100.0, 100.0],
-            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-            borderColor: 'rgba(59, 130, 246, 1)',
-            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
-            borderWidth: 2,
-            tension: 0.1
-        }
-        ,
-        {
-            label: 'grok-4.2-reasoning',
-            data: [100.0, 97.1, 100.0],
-            backgroundColor: 'rgba(16, 185, 129, 0.1)',
-            borderColor: 'rgba(16, 185, 129, 1)',
-            pointBackgroundColor: 'rgba(16, 185, 129, 1)',
-            borderWidth: 2,
-            tension: 0.1
-        }
-        ,
-        {
-            label: 'gemini-3.1-pro-preview',
-            data: [97.6, 92.5, 97.6],
-            backgroundColor: 'rgba(245, 158, 11, 0.1)',
-            borderColor: 'rgba(245, 158, 11, 1)',
-            pointBackgroundColor: 'rgba(245, 158, 11, 1)',
-            borderWidth: 2,
-            tension: 0.1
-        }
-        ,
-        {
-            label: 'gemma-4-31b',
-            data: [91.4, 94.5, 91.4],
-            backgroundColor: 'rgba(139, 92, 246, 0.1)',
-            borderColor: 'rgba(139, 92, 246, 1)',
-            pointBackgroundColor: 'rgba(139, 92, 246, 1)',
-            borderWidth: 2,
-            tension: 0.1
-        }
-        ,
-        {
-            label: 'claude-opus-4.6',
-            data: [95.6, 82.8, 95.6],
-            backgroundColor: 'rgba(239, 68, 68, 0.1)',
-            borderColor: 'rgba(239, 68, 68, 1)',
-            pointBackgroundColor: 'rgba(239, 68, 68, 1)',
-            borderWidth: 2,
-            tension: 0.1
-        }
-        ]
-        },
-        options: {
-            maintainAspectRatio: false,
-            scales: {
-                r: {
-                    angleLines: { display: true, color: 'rgba(0,0,0,0.1)' },
-                    grid: { color: 'rgba(0,0,0,0.05)' },
-                    suggestedMin: 0,
-                    suggestedMax: 100,
-                    pointLabels: { font: { size: 14, weight: 'bold' }, color: '#374151' },
-                    ticks: { display: false }
-                }
-            },
-            plugins: {
-                legend: { position: 'bottom', labels: { padding: 20, font: { size: 12, weight: 'bold' } } },
-                tooltip: { backgroundColor: 'rgba(0,0,0,0.8)', padding: 12 }
-            }
-        }
-    });
-    </script>
-    
     <div class="bg-white rounded-lg shadow p-6 border mb-8">
         <h3 class="text-xl font-bold mb-2">Cognitive Degradation Index (Working Memory Stress Test)</h3>
         <p class="text-gray-600 mb-6 text-sm">Measures how much a model's rule adherence degrades when transitioning from a single decision to multi-turn gameplay. A lower score indicates better context stability.</p>
@@ -566,6 +285,292 @@ View Leaderboard →
                 <td class="py-3 px-4 border-b text-red-600 font-bold">+1.731 (Severe Drift)</td>
             </tr>
         </tbody></table></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-2xl font-bold mb-2">The 3 Pillars of Executive Function</h3>
+        <p class="text-gray-600 mb-6">Mapping benchmark outcomes directly to cognitive science pillars.</p>
+	<p class="text-xs text-gray-500 mb-6">
+    <span class="font-bold">Working Memory:</span> MT Violations &minus; ST Violations &nbsp;|&nbsp; 
+    <span class="font-bold">Cognitive Flex:</span> Task 3 Score &nbsp;|&nbsp; 
+    <span class="font-bold">Inhibitory Control:</span> Task 3 Violations &minus; MT Violations
+	</p>
+
+        <div class="overflow-x-auto mb-10">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 uppercase text-xs text-gray-600 font-semibold tracking-wider">
+                        <th class="py-3 px-4 border-b">Rank</th>
+                        <th class="py-3 px-4 border-b">Model</th>
+                        <th class="py-3 px-4 border-b" title="Cognitive Degradation Index (Lower is better)">Working Memory (Drift)</th>
+                        <th class="py-3 px-4 border-b" title="Task 3 Score (Higher is better)">Cognitive Flexibility</th>
+                        <th class="py-3 px-4 border-b" title="Multi-turn violations (Lower is better)">Inhibitory Control</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">1</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-opus-4.6</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.077</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.8255</td>
+                <td class="py-3 px-4 border-b text-red-700">1.173</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">2</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.1-pro-preview</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.041</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.9217</td>
+                <td class="py-3 px-4 border-b text-red-700">2.117</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">3</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.5</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.9966</td>
+                <td class="py-3 px-4 border-b text-red-700">2.875</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">4</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-sonnet-4.6</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.173</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.8082</td>
+                <td class="py-3 px-4 border-b text-red-700">0.802</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">5</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-4-31b</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.149</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.9419</td>
+                <td class="py-3 px-4 border-b text-red-700">2.082</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">6</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.2-reasoning</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.9677</td>
+                <td class="py-3 px-4 border-b text-red-700">3.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">7</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-next-80b-thinking</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.5425</td>
+                <td class="py-3 px-4 border-b text-red-700">0.031</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">8</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">glm-5</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.490</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.7427</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">9</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.4</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.365</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.6724</td>
+                <td class="py-3 px-4 border-b text-red-700">0.035</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">10</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3-flash-preview</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.258</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.7810</td>
+                <td class="py-3 px-4 border-b text-red-700">1.357</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">11</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">deepseek-v3.2</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.872</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.7495</td>
+                <td class="py-3 px-4 border-b text-red-700">1.560</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">12</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.2-non-reasoning</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.4284</td>
+                <td class="py-3 px-4 border-b text-red-700">3.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">13</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">openai-gpt-5.5</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">14</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">google-gemma-4</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">15</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">Qwen-3-next-80b-thinking</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">16</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-next-80b-instruct</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.260</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">17</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">deepseek-r1</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.381</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">18</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-235b-A22b-instruct</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.540</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">19</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-3-12b</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">-0.1818</td>
+                <td class="py-3 px-4 border-b text-red-700">2.975</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">20</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.4-mini</td>
+                <td class="py-3 px-4 border-b text-blue-700">1.731</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.3256</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">21</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.4-nano</td>
+                <td class="py-3 px-4 border-b text-blue-700">1.481</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">22</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-3-4b</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">-0.1693</td>
+                <td class="py-3 px-4 border-b text-red-700">7.600</td>
+            </tr>
+        </tbody></table></div>
+        <div class="bg-gray-50 p-6 rounded-lg border">
+	#
+            <h4 class="font-bold text-xl mb-2 text-center text-gray-800">Top 5 Models: Cognitive Profile Map</h4>
+            <p class="text-center text-sm text-gray-500 mb-6">Scores normalized 0-100 (where 100 represents cohort state-of-the-art).</p>
+            <div class="w-full max-w-3xl mx-auto relative h-[400px]">
+                <canvas id="pillarsChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+    
+    new Chart(document.getElementById('pillarsChart'), {
+        type: 'radar',
+        data: {
+            labels: ['Working Memory (Stability)', 'Cognitive Flexibility', 'Inhibitory Control'],
+            datasets: [
+        {
+            label: 'claude-opus-4.6',
+            data: [95.6, 82.8, 84.6],
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            borderColor: 'rgba(59, 130, 246, 1)',
+            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'gemini-3.1-pro-preview',
+            data: [97.6, 92.5, 72.1],
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            borderColor: 'rgba(16, 185, 129, 1)',
+            pointBackgroundColor: 'rgba(16, 185, 129, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'gpt-5.5',
+            data: [100.0, 100.0, 62.2],
+            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            borderColor: 'rgba(245, 158, 11, 1)',
+            pointBackgroundColor: 'rgba(245, 158, 11, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'claude-sonnet-4.6',
+            data: [90.0, 81.1, 89.4],
+            backgroundColor: 'rgba(139, 92, 246, 0.1)',
+            borderColor: 'rgba(139, 92, 246, 1)',
+            pointBackgroundColor: 'rgba(139, 92, 246, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'gemma-4-31b',
+            data: [91.4, 94.5, 72.6],
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            borderColor: 'rgba(239, 68, 68, 1)',
+            pointBackgroundColor: 'rgba(239, 68, 68, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: { display: true, color: 'rgba(0,0,0,0.1)' },
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    pointLabels: { font: { size: 14, weight: 'bold' }, color: '#374151' },
+                    ticks: { display: false }
+                }
+            },
+            plugins: {
+                legend: { position: 'bottom', labels: { padding: 20, font: { size: 12, weight: 'bold' } } },
+                tooltip: { backgroundColor: 'rgba(0,0,0,0.8)', padding: 12 }
+            }
+        }
+    });
+    </script>
+    
     <div class="bg-white rounded-lg shadow p-6 border mb-8">
         <h3 class="text-xl font-bold mb-2">Strategy vs. Brute-Force Matrix (Multi-Turn)</h3>
         <p class="text-gray-600 mb-6 text-sm">Compares a model's ability to win against its Information Gain strategy. Placed relative to the cohort median.</p>

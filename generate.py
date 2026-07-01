@@ -529,12 +529,13 @@ def calculate_cognitive_pillars():
     mt_data = load_json_results(os.path.join(DATA_ROOT, "multi-turn"))
     cf_data = load_json_results(os.path.join(DATA_ROOT, "cognitive-flexibility"))
 
-    # Create lookups for easy matching
+    # Create lookups
     st_dict = {m["model_name"]: m.get("avg_violations_per_game", 0) for m in st_data}
     mt_dict = {m["model_name"]: m.get("avg_violations_per_game", 0) for m in mt_data}
+    cf_viol_dict = {m["model_name"]: m.get("avg_violations_per_game", 0) for m in cf_data}
     cf_dict = {m["model_name"]: m.get("overall_benchmark_score", 0) for m in cf_data}
 
-    # Get a unique list of all models
+    # Unique list of all models
     models = set(list(st_dict.keys()) + list(mt_dict.keys()) + list(cf_dict.keys()))
 
     results = []
@@ -546,12 +547,14 @@ def calculate_cognitive_pillars():
     for model in models:
         st_v = st_dict.get(model, 0)
         mt_v = mt_dict.get(model, 0)
+        cf_v = cf_viol_dict.get(model, 0)
         cf_score = cf_dict.get(model, 0)
 
-        # Working Memory proxy (Degradation: Multi-turn violations minus Single-turn)
+        # Working Memory proxy (Multi-turn violations minus Single-turn)
         degradation = max(0, mt_v - st_v) 
-        # Inhibitory Control proxy (Raw multi-turn violations)
-        inhibition = mt_v
+        
+        # Inhibitory Control proxy (Spike in violations during CF task vs MT task)
+        inhibition = max(0, cf_v - mt_v)
 
         # Track maximums across the cohort for scaling
         max_deg = max(max_deg, degradation)
@@ -582,8 +585,6 @@ def calculate_cognitive_pillars():
     return results
 
 
-
-
 def build_pillars_html(results):
     if not results:
         return ""
@@ -594,6 +595,11 @@ def build_pillars_html(results):
     <div class="bg-white rounded-lg shadow p-6 border mb-12">
         <h3 class="text-2xl font-bold mb-2">The 3 Pillars of Executive Function</h3>
         <p class="text-gray-600 mb-6">Mapping benchmark outcomes directly to cognitive science pillars.</p>
+	<p class="text-xs text-gray-500 mb-6">
+    <span class="font-bold">Working Memory:</span> MT Violations &minus; ST Violations &nbsp;|&nbsp; 
+    <span class="font-bold">Cognitive Flex:</span> Task 3 Score &nbsp;|&nbsp; 
+    <span class="font-bold">Inhibitory Control:</span> Task 3 Violations &minus; MT Violations
+	</p>
 
         <div class="overflow-x-auto mb-10">
             <table class="w-full text-left border-collapse">
@@ -923,11 +929,9 @@ pillars_html = build_pillars_html(pillars_data)
 
 
 # 6. Calculate the new combined insights
+
 combined_df = get_weighted_scores()
-combined_bar_html = build_combined_bar_chart_html(combined_df)
-
-
-# ... (The rest of your replacement logic remains the same)
+combined_bar_html = build_combined_bar_chart_html(combined_df) 
  
 
 # ... (Standard replacement and save logic)
@@ -939,7 +943,7 @@ with open(HOME_TEMPLATE, encoding="utf-8") as f:
 
 # Combine all insights in a logical storytelling order 
 
-combined_insights = combined_bar_html + pillars_html + degradation_html + strategy_html + compliance_html
+combined_insights = combined_bar_html + degradation_html + pillars_html +  strategy_html + compliance_html
 
 home = (
     home
