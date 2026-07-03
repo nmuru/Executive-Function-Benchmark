@@ -15,6 +15,8 @@ It is based on the kaggle benchmarks and allows cross-task insights showing the 
 Explore the full, interactive cross-task leaderboard, adjust scoring weights dynamically, and view normalized model cognitive maps here:
 👉 **[Live Dashboard](https://nmuru.github.io/Executive-Function-Benchmark/)**
 
+This dashboard give more metrics and insights based on kaggle benchmark task outputs.
+
 ## 📂 Repository Structure
 * `/data` - Standardized JSON evaluation outputs for single-turn, multi-turn, and cognitive flexibility tasks.
 * `/templates` - HTML UI layout templates.
