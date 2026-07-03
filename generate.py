@@ -986,9 +986,222 @@ def build_efficiency_html(task_resources):
 
 
 
+######################################
+
+import pandas as pd
+import os
+
+def get_resource_insights_data():
+    """Reads and aggregates resource and score data from resource_metrics.csv across ALL tasks."""
+    merged = []
+    csv_path = "data/resource_metrics.csv" # Ensure this matches your file location
+    
+    if not os.path.exists(csv_path):
+        print(f"Warning: Could not find {csv_path}!")
+        return merged
+        
+    try:
+        df = pd.read_csv(csv_path)
+    except Exception as e:
+        print(f"Error reading CSV: {e}")
+        return merged
+        
+    # Clean the data: replace any empty cells with 0 to prevent math errors
+    df = df.fillna(0)
+        
+    # Aggregate the data across all tasks (Single, Multi, and Cognitive)
+    # Average the score, but SUM the costs, time, and tokens!
+    agg_df = df.groupby('model_name').agg({
+        'score': 'mean',
+        'cost_usd': 'sum',
+        'time_seconds': 'sum',
+        'output_tokens': 'sum'
+    }).reset_index()
+    
+    for _, row in agg_df.iterrows():
+        model = str(row['model_name'])
+        cost = float(row['cost_usd'])
+        time_s = float(row['time_seconds'])
+        tokens = float(row['output_tokens'])
+        score = float(row['score'])
+        
+        merged.append({
+            "model_name": model,
+            "score": score,
+            "cost": cost,
+            "time_mins": time_s / 60.0,
+            "tokens": tokens,
+            # Safe math to prevent DivisionByZero crashes
+            "score_per_dollar": score / cost if cost > 0 else 0,
+            "score_per_min": score / (time_s / 60.0) if time_s > 0 else 0,
+            "score_per_10k_tokens": (score / tokens) * 10000 if tokens > 0 else 0
+        })
+        
+    return merged
 
 
 
+
+
+def build_efficiency_kpis_html(data):
+    if not data:
+        return ""
+
+    # Find the winners
+    top_dollar = max(data, key=lambda x: x["score_per_dollar"])
+    top_speed = max(data, key=lambda x: x["score_per_min"])
+    top_dense = max(data, key=lambda x: x["score_per_10k_tokens"])
+
+    html = f"""
+    <div class="mb-12">
+        <h3 class="text-2xl font-bold mb-4">Operational Excellence Highlights</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+            
+            <div class="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-6 shadow-sm">
+                <div class="text-green-800 text-xs font-bold uppercase tracking-wider mb-1">Most Economical Genius</div>
+                <div class="text-gray-600 text-sm mb-4">Highest Score per Dollar</div>
+                <div class="text-2xl font-black text-gray-900 mb-1">{top_dollar['model_name']}</div>
+                <div class="text-green-700 font-semibold">{top_dollar['score_per_dollar']:.3f} <span class="text-sm font-normal text-green-600">points/$</span></div>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 shadow-sm">
+                <div class="text-blue-800 text-xs font-bold uppercase tracking-wider mb-1">Fastest Decision Maker</div>
+                <div class="text-gray-600 text-sm mb-4">Highest Score per Minute</div>
+                <div class="text-2xl font-black text-gray-900 mb-1">{top_speed['model_name']}</div>
+                <div class="text-blue-700 font-semibold">{top_speed['score_per_min']:.3f} <span class="text-sm font-normal text-blue-600">points/min</span></div>
+            </div>
+
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-6 shadow-sm">
+                <div class="text-purple-800 text-xs font-bold uppercase tracking-wider mb-1">Most Concise Thinker</div>
+                <div class="text-gray-600 text-sm mb-4">Highest Score per 10k Tokens</div>
+                <div class="text-2xl font-black text-gray-900 mb-1">{top_dense['model_name']}</div>
+                <div class="text-purple-700 font-semibold">{top_dense['score_per_10k_tokens']:.3f} <span class="text-sm font-normal text-purple-600">points/10k</span></div>
+            </div>
+
+        </div>
+    </div>
+    """
+    return html
+
+
+
+
+
+import statistics
+
+import statistics
+
+def build_efficiency_scatter_html(data):
+    if not data:
+        return ""
+
+    # Calculate medians for the crosshairs
+    median_cost = statistics.median([d["cost"] for d in data])
+    median_score = statistics.median([d["score"] for d in data])
+
+    # Prepare datasets colored by quadrant
+    datasets = {
+        "Value Champions (High Score, Low Cost)": {"color": "rgba(16, 185, 129, 1)", "data": []},
+        "Premium Brains (High Score, High Cost)": {"color": "rgba(59, 130, 246, 1)", "data": []},
+        "Lightweight (Low Score, Low Cost)": {"color": "rgba(156, 163, 175, 1)", "data": []},
+        "Overpriced (Low Score, High Cost)": {"color": "rgba(239, 68, 68, 1)", "data": []},
+    }
+
+    for d in data:
+        if d["score"] >= median_score and d["cost"] <= median_cost:
+            cat = "Value Champions (High Score, Low Cost)"
+        elif d["score"] >= median_score and d["cost"] > median_cost:
+            cat = "Premium Brains (High Score, High Cost)"
+        elif d["score"] < median_score and d["cost"] <= median_cost:
+            cat = "Lightweight (Low Score, Low Cost)"
+        else:
+            cat = "Overpriced (Low Score, High Cost)"
+            
+        datasets[cat]["data"].append({
+            "x": d["cost"],
+            "y": d["score"],
+            "model": d["model_name"]
+        })
+
+    # Generate Chart.js Dataset syntax
+    js_datasets = []
+    for label, info in datasets.items():
+        if info["data"]:
+            data_str = ", ".join([f"{{x: {v['x']}, y: {v['y']}, model: '{v['model']}'}}" for v in info["data"]])
+            js_datasets.append(f"""
+            {{
+                label: '{label}',
+                data: [{data_str}],
+                backgroundColor: '{info["color"]}',
+                borderColor: '{info["color"]}',
+                pointRadius: 6,
+                pointHoverRadius: 8
+            }}
+            """)
+
+    html = f"""
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-2xl font-bold mb-2">Efficiency Quadrant: Brains vs. Wallet</h3>
+        <p class="text-gray-600 mb-6 text-sm">Evaluating Multi-Turn cognitive performance against API cost. The ideal model sits in the top-left (Value Champions).</p>
+        
+        <div class="w-full relative h-[900px]">
+            <canvas id="scatterChart"></canvas>
+        </div>
+    </div>
+    
+   # <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    
+    <script>
+    // Register the plugin
+    Chart.register(ChartDataLabels);
+    
+    new Chart(document.getElementById('scatterChart'), {{
+        type: 'scatter',
+        data: {{
+            datasets: [{",".join(js_datasets)}]
+        }},
+        options: {{
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {{
+                padding: {{ top: 20, right: 30 }} // Give labels room to breathe
+            }},
+            scales: {{
+                x: {{
+                    title: {{ display: true, text: 'Total API Cost ($)', font: {{ weight: 'bold' }} }},
+                    grid: {{ color: (ctx) => ctx.tick.value === {median_cost} ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.05)' }}
+                }},
+                y: {{
+                    title: {{ display: true, text: 'Overall Executive Score', font: {{ weight: 'bold' }} }},
+                    grid: {{ color: (ctx) => ctx.tick.value === {median_score} ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.05)' }}
+                }}
+            }},
+            plugins: {{
+                legend: {{ position: 'bottom', labels: {{ usePointStyle: true, padding: 20 }} }},
+                // Configure the permanent labels
+                datalabels: {{
+                    align: 'top',
+                    offset: 6,
+                    color: '#4B5563', // Tailwind gray-600
+                    font: {{ size: 10, weight: 'bold' }},
+                    formatter: function(value, context) {{
+                        return value.model;
+                    }}
+                }},
+                tooltip: {{
+                    callbacks: {{
+                        label: function(context) {{
+                            let item = context.raw;
+                            return item.model + ': Score ' + item.y.toFixed(3) + ' | Cost $' + item.x.toFixed(2);
+                        }}
+                    }}
+                }}
+            }}
+        }}
+    }});
+    </script>
+    """
+    return html
 
 
 # ... (The rest of your Leaderboards section remains the same) ...
@@ -1086,6 +1299,19 @@ combined_df = get_weighted_scores()
 combined_bar_html = build_combined_bar_chart_html(combined_df) 
  
 
+
+#7. New Efficiency Insights ---
+resource_insights_data = get_resource_insights_data()
+kpi_html = build_efficiency_kpis_html(resource_insights_data)
+scatter_html = build_efficiency_scatter_html(resource_insights_data)
+
+
+
+
+
+
+
+
 # ... (Standard replacement and save logic)
 
 
@@ -1095,7 +1321,21 @@ with open(HOME_TEMPLATE, encoding="utf-8") as f:
 
 # Combine all insights in a logical storytelling order 
 
-combined_insights = combined_bar_html + degradation_html + pillars_html +  strategy_html + compliance_html
+# Combine all insights in a logical storytelling order 
+
+combined_insights = (
+    kpi_html + 
+    combined_bar_html + 
+    scatter_html + 
+    degradation_html + 
+    pillars_html +  
+    strategy_html + 
+    compliance_html
+)
+
+
+
+#combined_insights = combined_bar_html + degradation_html + pillars_html +  strategy_html + compliance_html
 
 home = (
     home
