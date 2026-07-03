@@ -52,17 +52,23 @@ def load_json_results(folder):
         try:
             with open(file, "r", encoding="utf-8") as f:
                 data = json.load(f)
+            
+            # --- THE FIX: Normalize the score key across all tasks ---
+            # If the JSON uses 'overall_score', map it to 'overall_benchmark_score'
+            if "overall_score" in data and "overall_benchmark_score" not in data:
+                data["overall_benchmark_score"] = data["overall_score"]
+                
             data["model_name"] = os.path.splitext(os.path.basename(file))[0]
             results.append(data)
         except Exception as e:
             print(f"Skipping {file}: {e}")
 
+    # Now the sort will work perfectly for both naming conventions!
     results.sort(
         key=lambda x: x.get("overall_benchmark_score", 0),
         reverse=True,
     )
     return results
-
 
 def build_table(results):
     html = ""
@@ -871,6 +877,104 @@ def build_combined_bar_chart_html(combined_df):
     </script>
     """
     return html
+
+
+
+
+import pandas as pd
+import math
+
+def load_resource_metrics(csv_path="data/resource_metrics.csv"):
+    """Loads resource data from CSV and groups it by task_id and model_name."""
+    resources = {}
+    if os.path.exists(csv_path):
+        df = pd.read_csv(csv_path)
+        for _, row in df.iterrows():
+            task = row.get('task_id')
+            model = row.get('model_name')
+            
+            if pd.isna(task) or pd.isna(model): continue
+            
+            if task not in resources:
+                resources[task] = {}
+                
+            resources[task][model] = {
+                'input_tokens': float(row.get('input_tokens', 0)),
+                'output_tokens': float(row.get('output_tokens', 0)),
+                'cost_usd': float(row.get('cost_usd', 0.0)),
+                'time_seconds': float(row.get('time_seconds', 0.0))
+            }
+    return resources
+
+def build_efficiency_html(results):
+    """Builds a UI section for Resource Efficiency metrics."""
+    # Filter out models that don't have resource data for this task
+    valid_results = [r for r in results if 'cost_usd' in r and r['cost_usd'] > 0]
+    
+    if not valid_results:
+        return ""
+
+    html = """
+    <div class="mt-12 bg-white rounded-lg shadow p-6 border">
+        <h3 class="text-2xl font-bold mb-2">Resource & Efficiency Metrics</h3>
+        <p class="text-gray-600 mb-6 text-sm">Evaluating the operational footprint: Cost, speed, and token density relative to cognitive performance.</p>
+        
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-50 uppercase text-xs text-gray-500 font-semibold">
+                        <th class="py-3 px-4 border-b">Model</th>
+                        <th class="py-3 px-4 border-b">Cost ($)</th>
+                        <th class="py-3 px-4 border-b">Bang-for-Buck (Score/$)</th>
+                        <th class="py-3 px-4 border-b">Time (Mins)</th>
+                        <th class="py-3 px-4 border-b">Velocity (Score/Min)</th>
+                        <th class="py-3 px-4 border-b">Info Density (Score/10k Tokens)</th>
+                    </tr>
+                </thead>
+                <tbody>
+    """
+    
+    for row in valid_results:
+        cost = row['cost_usd']
+        time_mins = row['time_seconds'] / 60.0
+        out_tokens = row['output_tokens']
+        score = row.get('overall_benchmark_score', 0)
+        
+        # Calculate derived metrics safely
+        bang_for_buck = score / cost if cost > 0 else 0
+        velocity = score / time_mins if time_mins > 0 else 0
+        # Scaling to per 10k output tokens so the number is readable (e.g., 0.13 instead of 0.000013)
+        density = (score / out_tokens) * 10000 if out_tokens > 0 else 0
+
+        html += f"""
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">{row['model_name']}</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">${cost:.4f}</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">{bang_for_buck:.3f}</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">{time_mins:.1f}m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">{velocity:.4f}</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">{density:.3f}</td>
+            </tr>
+        """
+        
+    html += """
+                </tbody>
+            </table>
+        </div>
+    </div>
+    """
+    return html
+
+
+
+
+
+
+
+
+
+
+
 # ... (The rest of your Leaderboards section remains the same) ...
 
 
@@ -883,23 +987,46 @@ with open(LEADERBOARD_TEMPLATE, encoding="utf-8") as f:
 
 task_cards = ""
 
+ 
+
+# Load all resource data globally before the loop
+resource_data = load_resource_metrics()
+
 for task in TASKS:
     folder = os.path.join(DATA_ROOT, task["id"])
     results = load_json_results(folder)
+    
+    # 1. Merge resource data into the JSON results
+    task_resources = resource_data.get(task["id"], {})
+    for r in results:
+        model_name = r["model_name"]
+        res = task_resources.get(model_name, {})
+        
+        # Inject CSV data if it exists, otherwise default to 0
+        r["input_tokens"] = res.get("input_tokens", 0)
+        r["output_tokens"] = res.get("output_tokens", 0)
+        r["cost_usd"] = res.get("cost_usd", 0.0)
+        r["time_seconds"] = res.get("time_seconds", 0.0)
 
+    # 2. Build the resource HTML section
+    resource_section_html = build_efficiency_html(results)
+
+    # 3. Inject everything into the template
     html = (
         leaderboard_template
         .replace(TITLE_PLACEHOLDER, task["title"])
         .replace(DESCRIPTION_PLACEHOLDER, task["description"])
         .replace(ROW_PLACEHOLDER, build_table(results))
         .replace(NAV_PLACEHOLDER, navigation(task["id"]))
+        .replace("{{RESOURCE_METRICS}}", resource_section_html) # NEW PLACEHOLDER
     )
 
     output = f"{task['id']}.html"
     with open(output, "w", encoding="utf-8") as f:
-        f.write(html)
+        f.write(html) 
 
     task_cards += f"""
+
 <div class="bg-white rounded-lg shadow p-6 border">
 <h2 class="text-xl font-bold mb-2">{task['title']}</h2>
 <p class="text-gray-600 mb-4">{task['description']}</p>
