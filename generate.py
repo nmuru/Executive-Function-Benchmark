@@ -972,9 +972,9 @@ def build_efficiency_html(task_resources):
     max_den = max_den if max_den > 0 else 1.0
 
     # 3. Define Weights
-    WEIGHT_BFB = 0.40   
-    WEIGHT_VEL = 0.40   
-    WEIGHT_DEN = 0.20   
+    WEIGHT_BFB = 0.33   
+    WEIGHT_VEL = 0.34   
+    WEIGHT_DEN = 0.33  
 
     # 4. Calculate the Combined Score out of 100
     for m in metrics_list:
