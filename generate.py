@@ -916,61 +916,120 @@ def load_resource_metrics(csv_path="data/resource_metrics.csv"):
                 'time_seconds': float(row.get('time_seconds', 0.0))
             }
     return resources
+
 def build_efficiency_html(task_resources):
-    """Builds a UI section for Resource Efficiency metrics directly from CSV data."""
+    """Builds a UI section for Resource Efficiency metrics, strictly from CSV data."""
     valid_results = []
     
-    # Iterate directly over the CSV data, ignoring JSON entirely
-    for model_name, res in task_resources.items():
-        if res.get('cost_usd', 0) > 0:
-            row = res.copy()
-            row['model_name'] = model_name
-            valid_results.append(row)
+    # task_resources is a dict containing only CSV data for this specific task
+    for model_name, metrics in task_resources.items():
+        try:
+            cost = float(metrics.get('cost_usd', 0.0))
+            if cost > 0:
+                valid_results.append({
+                    'model_name': str(model_name),
+                    'cost_usd': cost,
+                    'time_seconds': float(metrics.get('time_seconds', 0.0)),
+                    'output_tokens': float(metrics.get('output_tokens', 0.0)),
+                    # STRICTLY extract only 'score'
+                    'score': float(metrics.get('score', 0.0))
+                })
+        except (ValueError, TypeError):
+            continue
             
-    # Sort by 'Bang-for-Buck' automatically
-    valid_results.sort(key=lambda x: (x['score'] / x['cost_usd']) if x['cost_usd'] > 0 else 0, reverse=True)
-    
     if not valid_results:
         return ""
 
-    html = """
-    <div class="mt-12 bg-white rounded-lg shadow p-6 border">
-        <h3 class="text-2xl font-bold mb-2">Resource & Efficiency Metrics</h3>
-        <p class="text-gray-600 mb-6 text-sm">Evaluating the operational footprint: Cost, speed, and token density relative to cognitive performance.</p>
-        
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-gray-50 uppercase text-xs text-gray-500 font-semibold">
-                        <th class="py-3 px-4 border-b">Model</th>
-                        <th class="py-3 px-4 border-b">Cost ($)</th>
-                        <th class="py-3 px-4 border-b" title="Score per Dollar spent">Bang-for-Buck (Score/$)</th>
-                        <th class="py-3 px-4 border-b">Time (Mins)</th>
-                        <th class="py-3 px-4 border-b" title="Score per Minute">Velocity (Score/Min)</th>
-                        <th class="py-3 px-4 border-b" title="Score per 10k output tokens">Info Density (Score/10k Tokens)</th>
-                    </tr>
-                </thead>
-                <tbody>
-    """
-    
+    # 1. Calculate raw metrics for all valid models
+    metrics_list = []
     for row in valid_results:
         cost = row['cost_usd']
         time_mins = row['time_seconds'] / 60.0
         out_tokens = row['output_tokens']
         score = row['score']
         
-        bang_for_buck = score / cost if cost > 0 else 0
-        velocity = score / time_mins if time_mins > 0 else 0
-        density = (score / out_tokens) * 10000 if out_tokens > 0 else 0
+        bang_for_buck = score / cost if cost > 0 else 0.0
+        velocity = score / time_mins if time_mins > 0 else 0.0
+        density = (score / out_tokens) * 10000 if out_tokens > 0 else 0.0
+        
+        metrics_list.append({
+            'model_name': row['model_name'],
+            'cost': cost,
+            'bang_for_buck': bang_for_buck,
+            'time_mins': time_mins,
+            'velocity': velocity,
+            'density': density
+        })
+
+    # 2. Normalize to a 0-1 scale (using the Max value)
+    max_bfb = max([m['bang_for_buck'] for m in metrics_list]) if metrics_list else 1.0
+    max_vel = max([m['velocity'] for m in metrics_list]) if metrics_list else 1.0
+    max_den = max([m['density'] for m in metrics_list]) if metrics_list else 1.0
+    
+    # Prevent division by zero
+    max_bfb = max_bfb if max_bfb > 0 else 1.0
+    max_vel = max_vel if max_vel > 0 else 1.0
+    max_den = max_den if max_den > 0 else 1.0
+
+    # 3. Define Weights
+    WEIGHT_BFB = 0.40   
+    WEIGHT_VEL = 0.40   
+    WEIGHT_DEN = 0.20   
+
+    # 4. Calculate the Combined Score out of 100
+    for m in metrics_list:
+        norm_bfb = m['bang_for_buck'] / max_bfb
+        norm_vel = m['velocity'] / max_vel
+        norm_den = m['density'] / max_den
+        
+        m['combined_score'] = (norm_bfb * WEIGHT_BFB + norm_vel * WEIGHT_VEL + norm_den * WEIGHT_DEN) * 100
+
+    # 5. Sort the list by Combined Score
+    metrics_list.sort(key=lambda x: x['combined_score'], reverse=True)
+
+    # 6. Build the HTML Table
+    html = """
+    <div class="bg-white rounded-lg shadow p-6 border mt-8 w-full">
+        <h3 class="text-xl font-bold mb-2">Resource & Efficiency Metrics</h3>
+        <p class="text-gray-600 mb-6 text-sm">Evaluating operational footprint. Sorted by a <strong>Combined Efficiency Score</strong> (40% Cost, 40% Speed, 20% Density).</p>
+        
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-50 uppercase text-xs text-gray-500 font-semibold tracking-wider">
+                        <th class="py-3 px-4 border-b">Rank</th>
+                        <th class="py-3 px-4 border-b">Model</th>
+                        <th class="py-3 px-4 border-b text-indigo-700">Combined Score</th>
+                        <th class="py-3 px-4 border-b">Cost ($)</th>
+                        <th class="py-3 px-4 border-b">Bang-for-Buck</th>
+                        <th class="py-3 px-4 border-b">Time (Mins)</th>
+                        <th class="py-3 px-4 border-b">Velocity</th>
+                        <th class="py-3 px-4 border-b">Info Density</th>
+                    </tr>
+                </thead>
+                <tbody>
+    """
+    
+    for rank, row in enumerate(metrics_list, start=1):
+        if rank == 1:
+            rank_style = "text-yellow-600 font-bold text-lg"
+        elif rank == 2:
+            rank_style = "text-gray-500 font-bold text-lg"
+        elif rank == 3:
+            rank_style = "text-yellow-800 font-bold text-lg"
+        else:
+            rank_style = "text-gray-700 font-semibold"
 
         html += f"""
             <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b font-semibold text-gray-800">{row['model_name']}</td>
-                <td class="py-3 px-4 border-b font-mono text-gray-600">${cost:.4f}</td>
-                <td class="py-3 px-4 border-b font-bold text-green-600">{bang_for_buck:.3f}</td>
-                <td class="py-3 px-4 border-b font-mono text-gray-600">{time_mins:.1f}m</td>
-                <td class="py-3 px-4 border-b font-bold text-blue-600">{velocity:.4f}</td>
-                <td class="py-3 px-4 border-b font-bold text-purple-600">{density:.3f}</td>
+                <td class="py-3 px-4 border-b {rank_style}">{rank}</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-800">{row['model_name']}</td>
+                <td class="py-3 px-4 border-b font-black text-indigo-600">{row['combined_score']:.1f} <span class="text-xs font-normal text-gray-400">/ 100</span></td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">${row['cost']:.4f}</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">{row['bang_for_buck']:.3f}</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">{row['time_mins']:.1f}m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">{row['velocity']:.4f}</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">{row['density']:.3f}</td>
             </tr>
         """
         
@@ -981,10 +1040,6 @@ def build_efficiency_html(task_resources):
     </div>
     """
     return html
-
-
-
-
 
 ######################################
 
