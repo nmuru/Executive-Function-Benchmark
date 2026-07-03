@@ -97,15 +97,15 @@ View Leaderboard →
             <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 shadow-sm">
                 <div class="text-blue-800 text-xs font-bold uppercase tracking-wider mb-1">Fastest Decision Maker</div>
                 <div class="text-gray-600 text-sm mb-4">Highest Score per Minute</div>
-                <div class="text-2xl font-black text-gray-900 mb-1">grok-4.20-0309-non-reasoning</div>
-                <div class="text-blue-700 font-semibold">0.103 <span class="text-sm font-normal text-blue-600">points/min</span></div>
+                <div class="text-2xl font-black text-gray-900 mb-1">gpt-5.4-mini-2026-03-17</div>
+                <div class="text-blue-700 font-semibold">0.020 <span class="text-sm font-normal text-blue-600">points/min</span></div>
             </div>
 
             <div class="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-6 shadow-sm">
                 <div class="text-purple-800 text-xs font-bold uppercase tracking-wider mb-1">Most Concise Thinker</div>
                 <div class="text-gray-600 text-sm mb-4">Highest Score per 10k Tokens</div>
-                <div class="text-2xl font-black text-gray-900 mb-1">grok-4.20-0309-reasoning</div>
-                <div class="text-purple-700 font-semibold">0.385 <span class="text-sm font-normal text-purple-600">points/10k</span></div>
+                <div class="text-2xl font-black text-gray-900 mb-1">gpt-5.4-2026-03-05</div>
+                <div class="text-purple-700 font-semibold">0.068 <span class="text-sm font-normal text-purple-600">points/10k</span></div>
             </div>
 
         </div>
@@ -247,7 +247,7 @@ View Leaderboard →
             datasets: [
             {
                 label: 'Value Champions (High Score, Low Cost)',
-                data: [{x: 1.8627, y: 0.6366666666666667, model: 'deepseek-v3.2'}, {x: 0.6092, y: 0.8633333333333333, model: 'gemma-4-31b-it'}, {x: 3.4159, y: 0.97, model: 'grok-4.20-0309-reasoning'}],
+                data: [{x: 1.8627, y: 0.6366666666666667, model: 'deepseek-v3.2'}, {x: 0.6092, y: 0.8633333333333333, model: 'gemma-4-31b-it'}, {x: 3.7587, y: 0.7000000000000001, model: 'gpt-5.4-2026-03-05'}],
                 backgroundColor: 'rgba(16, 185, 129, 1)',
                 borderColor: 'rgba(16, 185, 129, 1)',
                 pointRadius: 6,
@@ -256,7 +256,7 @@ View Leaderboard →
             ,
             {
                 label: 'Premium Brains (High Score, High Cost)',
-                data: [{x: 25.139699999999998, y: 0.7966666666666667, model: 'claude-opus-4-6-default'}, {x: 21.2267, y: 0.84, model: 'claude-sonnet-4-6-default'}, {x: 11.779, y: 0.54, model: 'deepseek-r1-0528'}, {x: 30.8265, y: 0.9066666666666666, model: 'gemini-3.1-pro-preview'}, {x: 5.1224, y: 0.7533333333333333, model: 'glm-5'}, {x: 3.7587, y: 0.7000000000000001, model: 'gpt-5.4-2026-03-05'}, {x: 16.9799, y: 0.9133333333333334, model: 'gpt-5.5-2026-04-23'}],
+                data: [{x: 25.139699999999998, y: 0.7966666666666667, model: 'claude-opus-4-6-default'}, {x: 21.2267, y: 0.84, model: 'claude-sonnet-4-6-default'}, {x: 30.8265, y: 0.9066666666666666, model: 'gemini-3.1-pro-preview'}, {x: 5.1224, y: 0.7533333333333333, model: 'glm-5'}, {x: 16.9799, y: 0.9133333333333334, model: 'gpt-5.5-2026-04-23'}],
                 backgroundColor: 'rgba(59, 130, 246, 1)',
                 borderColor: 'rgba(59, 130, 246, 1)',
                 pointRadius: 6,
@@ -265,7 +265,7 @@ View Leaderboard →
             ,
             {
                 label: 'Lightweight (Low Score, Low Cost)',
-                data: [{x: 0.035, y: -0.18, model: 'gemma-3-12b-it'}, {x: 0.0434, y: -0.17, model: 'gemma-3-4b-it'}, {x: 1.2854, y: 0.36333333333333334, model: 'gpt-5.4-mini-2026-03-17'}, {x: 0.1449, y: 0.04, model: 'gpt-5.4-nano-2026-03-17'}, {x: 0.8744, y: 0.43, model: 'grok-4.20-0309-non-reasoning'}, {x: 0.4197, y: 0.43, model: 'qwen3-235b-a22b-instruct-2507'}, {x: 0.7989999999999999, y: 0.52, model: 'qwen3-next-80b-a3b-instruct'}],
+                data: [{x: 0.035, y: -0.18, model: 'gemma-3-12b-it'}, {x: 0.0434, y: -0.17, model: 'gemma-3-4b-it'}, {x: 1.2854, y: 0.36333333333333334, model: 'gpt-5.4-mini-2026-03-17'}, {x: 0.1449, y: 0.04, model: 'gpt-5.4-nano-2026-03-17'}, {x: 0.7989999999999999, y: 0.52, model: 'qwen3-next-80b-a3b-instruct'}],
                 backgroundColor: 'rgba(156, 163, 175, 1)',
                 borderColor: 'rgba(156, 163, 175, 1)',
                 pointRadius: 6,
@@ -274,7 +274,7 @@ View Leaderboard →
             ,
             {
                 label: 'Overpriced (Low Score, High Cost)',
-                data: [{x: 6.8825, y: 0.4666666666666666, model: 'gemini-3-flash-preview'}, {x: 4.1974, y: 0.3833333333333333, model: 'qwen3-next-80b-a3b-thinking'}],
+                data: [{x: 11.779, y: 0.54, model: 'deepseek-r1-0528'}, {x: 6.8825, y: 0.4666666666666666, model: 'gemini-3-flash-preview'}, {x: 4.1974, y: 0.3833333333333333, model: 'qwen3-next-80b-a3b-thinking'}],
                 backgroundColor: 'rgba(239, 68, 68, 1)',
                 borderColor: 'rgba(239, 68, 68, 1)',
                 pointRadius: 6,
@@ -291,11 +291,11 @@ View Leaderboard →
             scales: {
                 x: {
                     title: { display: true, text: 'Total API Cost ($)', font: { weight: 'bold' } },
-                    grid: { color: (ctx) => ctx.tick.value === 3.4159 ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.05)' }
+                    grid: { color: (ctx) => ctx.tick.value === 3.97805 ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.05)' }
                 },
                 y: {
                     title: { display: true, text: 'Overall Executive Score', font: { weight: 'bold' } },
-                    grid: { color: (ctx) => ctx.tick.value === 0.54 ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.05)' }
+                    grid: { color: (ctx) => ctx.tick.value === 0.5883333333333334 ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.05)' }
                 }
             },
             plugins: {
