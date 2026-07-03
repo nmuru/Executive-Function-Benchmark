@@ -885,10 +885,20 @@ import pandas as pd
 import math
 
 def load_resource_metrics(csv_path="data/resource_metrics.csv"):
-    """Loads resource data from CSV and groups it by task_id and model_name."""
+    """Loads resource data from CSV independently of JSON data."""
     resources = {}
     if os.path.exists(csv_path):
         df = pd.read_csv(csv_path)
+        
+        # Normalize columns safely so it doesn't matter if they are capitalized
+        df.columns = [str(c).strip().lower() for c in df.columns]
+        
+        # Fallbacks for header mapping
+        if 'task' in df.columns and 'task_id' not in df.columns:
+            df = df.rename(columns={'task': 'task_id'})
+        if 'model' in df.columns and 'model_name' not in df.columns:
+            df = df.rename(columns={'model': 'model_name'})
+
         for _, row in df.iterrows():
             task = row.get('task_id')
             model = row.get('model_name')
@@ -899,17 +909,26 @@ def load_resource_metrics(csv_path="data/resource_metrics.csv"):
                 resources[task] = {}
                 
             resources[task][model] = {
+                'score': float(row.get('score', 0.0) if pd.notna(row.get('score')) else 0.0),
                 'input_tokens': float(row.get('input_tokens', 0)),
                 'output_tokens': float(row.get('output_tokens', 0)),
                 'cost_usd': float(row.get('cost_usd', 0.0)),
                 'time_seconds': float(row.get('time_seconds', 0.0))
             }
     return resources
-
-def build_efficiency_html(results):
-    """Builds a UI section for Resource Efficiency metrics."""
-    # Filter out models that don't have resource data for this task
-    valid_results = [r for r in results if 'cost_usd' in r and r['cost_usd'] > 0]
+def build_efficiency_html(task_resources):
+    """Builds a UI section for Resource Efficiency metrics directly from CSV data."""
+    valid_results = []
+    
+    # Iterate directly over the CSV data, ignoring JSON entirely
+    for model_name, res in task_resources.items():
+        if res.get('cost_usd', 0) > 0:
+            row = res.copy()
+            row['model_name'] = model_name
+            valid_results.append(row)
+            
+    # Sort by 'Bang-for-Buck' automatically
+    valid_results.sort(key=lambda x: (x['score'] / x['cost_usd']) if x['cost_usd'] > 0 else 0, reverse=True)
     
     if not valid_results:
         return ""
@@ -925,10 +944,10 @@ def build_efficiency_html(results):
                     <tr class="bg-gray-50 uppercase text-xs text-gray-500 font-semibold">
                         <th class="py-3 px-4 border-b">Model</th>
                         <th class="py-3 px-4 border-b">Cost ($)</th>
-                        <th class="py-3 px-4 border-b">Bang-for-Buck (Score/$)</th>
+                        <th class="py-3 px-4 border-b" title="Score per Dollar spent">Bang-for-Buck (Score/$)</th>
                         <th class="py-3 px-4 border-b">Time (Mins)</th>
-                        <th class="py-3 px-4 border-b">Velocity (Score/Min)</th>
-                        <th class="py-3 px-4 border-b">Info Density (Score/10k Tokens)</th>
+                        <th class="py-3 px-4 border-b" title="Score per Minute">Velocity (Score/Min)</th>
+                        <th class="py-3 px-4 border-b" title="Score per 10k output tokens">Info Density (Score/10k Tokens)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -938,12 +957,10 @@ def build_efficiency_html(results):
         cost = row['cost_usd']
         time_mins = row['time_seconds'] / 60.0
         out_tokens = row['output_tokens']
-        score = row.get('overall_benchmark_score', 0)
+        score = row['score']
         
-        # Calculate derived metrics safely
         bang_for_buck = score / cost if cost > 0 else 0
         velocity = score / time_mins if time_mins > 0 else 0
-        # Scaling to per 10k output tokens so the number is readable (e.g., 0.13 instead of 0.000013)
         density = (score / out_tokens) * 10000 if out_tokens > 0 else 0
 
         html += f"""
@@ -964,7 +981,6 @@ def build_efficiency_html(results):
     </div>
     """
     return html
-
 
 
 
@@ -1009,7 +1025,7 @@ for task in TASKS:
         r["time_seconds"] = res.get("time_seconds", 0.0)
 
     # 2. Build the resource HTML section
-    resource_section_html = build_efficiency_html(results)
+    resource_section_html = build_efficiency_html(task_resources)
 
     # 3. Inject everything into the template
     html = (

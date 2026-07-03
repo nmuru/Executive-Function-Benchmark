@@ -236,30 +236,129 @@ Evaluating adaptive reasoning and cognitive flexibility.
                     <tr class="bg-gray-50 uppercase text-xs text-gray-500 font-semibold">
                         <th class="py-3 px-4 border-b">Model</th>
                         <th class="py-3 px-4 border-b">Cost ($)</th>
-                        <th class="py-3 px-4 border-b">Bang-for-Buck (Score/$)</th>
+                        <th class="py-3 px-4 border-b" title="Score per Dollar spent">Bang-for-Buck (Score/$)</th>
                         <th class="py-3 px-4 border-b">Time (Mins)</th>
-                        <th class="py-3 px-4 border-b">Velocity (Score/Min)</th>
-                        <th class="py-3 px-4 border-b">Info Density (Score/10k Tokens)</th>
+                        <th class="py-3 px-4 border-b" title="Score per Minute">Velocity (Score/Min)</th>
+                        <th class="py-3 px-4 border-b" title="Score per 10k output tokens">Info Density (Score/10k Tokens)</th>
                     </tr>
                 </thead>
                 <tbody>
     
             <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b font-semibold text-gray-800">gpt-5.5</td>
-                <td class="py-3 px-4 border-b font-mono text-gray-600">$12.5000</td>
-                <td class="py-3 px-4 border-b font-bold text-green-600">0.080</td>
-                <td class="py-3 px-4 border-b font-mono text-gray-600">90.0m</td>
-                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0111</td>
-                <td class="py-3 px-4 border-b font-bold text-purple-600">0.133</td>
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">gemma-4-31b-it</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$0.2206</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">2.901</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">309.1m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0021</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.048</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">qwen3-next-80b-a3b-instruct</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$0.3845</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">1.352</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">21.2m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0245</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.018</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">gpt-5.4-mini-2026-03-17</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$0.4277</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">1.263</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">8.1m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0668</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.109</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">deepseek-v3.2</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$0.5757</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.903</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">240.7m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0022</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.018</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">gpt-5.4-2026-03-05</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$1.3106</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.450</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">14.9m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0396</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.140</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">glm-5</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$1.8296</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.344</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">128.5m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0049</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.012</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">gemini-3-flash-preview</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$1.9580</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.317</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">56.8m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0109</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.082</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">qwen3-next-80b-a3b-thinking</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$2.0730</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.294</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">153.4m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0040</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.004</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">gpt-5.5-2026-04-23</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$5.1552</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.126</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">52.1m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0125</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.051</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">claude-sonnet-4-6-default</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$5.5556</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.119</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">72.7m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0091</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.021</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">claude-opus-4-6-default</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$7.0870</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.078</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">65.2m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0084</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.025</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b font-semibold text-gray-800">gemini-3.1-pro-preview</td>
-                <td class="py-3 px-4 border-b font-mono text-gray-600">$8.8613</td>
-                <td class="py-3 px-4 border-b font-bold text-green-600">0.104</td>
-                <td class="py-3 px-4 border-b font-mono text-gray-600">108.9m</td>
-                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0085</td>
-                <td class="py-3 px-4 border-b font-bold text-purple-600">0.113</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$10.6459</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.063</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">191.2m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0035</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.059</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b font-semibold text-gray-800">deepseek-r1-0528</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$6.9837</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.040</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">156.4m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0018</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.002</td>
             </tr>
         
                 </tbody>
