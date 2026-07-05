@@ -653,7 +653,7 @@ def build_pillars_html(results):
     
     html += """
         <div class="bg-gray-50 p-6 rounded-lg border">
-	#
+	
             <h4 class="font-bold text-xl mb-2 text-center text-gray-800">Top 5 Models: Cognitive Profile Map</h4>
             <p class="text-center text-sm text-gray-500 mb-6">Scores normalized 0-100 (where 100 represents cohort state-of-the-art).</p>
             <div class="w-full max-w-3xl mx-auto relative h-[400px]">
@@ -1148,9 +1148,7 @@ def build_efficiency_kpis_html(data):
 
 
 
-
-import statistics
-
+ 
 import statistics
 
 def build_efficiency_scatter_html(data):
@@ -1211,7 +1209,7 @@ def build_efficiency_scatter_html(data):
         </div>
     </div>
     
-   # <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  
     
     <script>
     // Register the plugin
@@ -1416,10 +1414,7 @@ core_insights_html = """
 
 with open(HOME_TEMPLATE, encoding="utf-8") as f:
     home = f.read()
-
-# Combine all insights in a logical storytelling order 
-
-# Combine all insights in a logical storytelling order 
+ 
 
 combined_insights = (
 core_insights_html +
