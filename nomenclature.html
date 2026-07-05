@@ -63,18 +63,22 @@
                 </p>
                 
                 <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mt-4">
-                    <h3 class="text-xl font-bold text-gray-900 border-b border-blue-200 pb-2 mb-4">How Wordle Mechanics Perfectly Isolate EF Skills:</h3>
-                    <ul class="space-y-4 text-gray-700 text-sm">
+                    <h3 class="text-xl font-bold text-gray-900 border-b border-blue-200 pb-4 mb-4">How Wordle Mechanics Perfectly Isolate EF Skills:</h3>
+                    <ul class="space-y-6 text-gray-700 text-sm">
                         <li>
-                            <strong class="text-blue-800 text-base block mb-1">1. Multi-Context Working Memory</strong>
-                            Wordle requires maintaining a continuously expanding web of constraints. As a multi-turn game progresses, the model must simultaneously remember known green, yellow, and gray letters. This state-tracking becomes exponentially more difficult with each turn, perfectly simulating context degradation and working memory strain.
+                            <strong class="text-blue-800 text-base block mb-1">1. Single-Turn Working Memory (Reasoning vs. EF)</strong>
+                            This benchmark exposes the critical boundary between traditional reasoning and Executive Function. Even in a single-turn Wordle state, maintaining a long, strict list of constraints (e.g., specific letter positions and known dead letters) requires a highly resilient working memory. We have observed that models possessing exceptional reasoning logic (e.g., DeepSeek) or highly elaborate reasoning traces (e.g., Qwen) frequently fail the single-turn test. Their reasoning pathways become so complex that their working memory degrades mid-prompt, causing them to forget foundational constraints.
                         </li>
                         <li>
-                            <strong class="text-blue-800 text-base block mb-1">2. Cognitive Flexibility</strong>
+                            <strong class="text-blue-800 text-base block mb-1">2. Multi-Context Working Memory</strong>
+                            Beyond single turns, Wordle requires maintaining a continuously expanding web of constraints. As a multi-turn game progresses, the model must simultaneously remember known green, yellow, and gray letters across an extended interaction. This state-tracking becomes exponentially more difficult with each turn, perfectly simulating context degradation and working memory strain.
+                        </li>
+                        <li>
+                            <strong class="text-blue-800 text-base block mb-1">3. Cognitive Flexibility</strong>
                             Wordle is a strict constraint-satisfaction environment. By dynamically altering the rules mid-game (e.g., changing dictionary constraints or altering how feedback is interpreted), the game acts as a perfect sandbox to measure how quickly a model can abandon an old paradigm and adopt a new one.
                         </li>
                         <li>
-                            <strong class="text-blue-800 text-base block mb-1">3. Inhibitory Control</strong>
+                            <strong class="text-blue-800 text-base block mb-1">4. Inhibitory Control</strong>
                             LLMs are fundamentally predictive text engines that want to output high-frequency tokens. In Wordle, models face the immense temptation to guess a common, statistically likely word (e.g., "AUDIO") even when the letter 'A' is a known gray constraint. Suppressing that statistical impulse to calculate a valid word requires true inhibitory control.
                         </li>
                     </ul>
@@ -89,11 +93,17 @@
             </div>
             <div class="pl-11 space-y-8">
                 
-                <div class="border-l-4 border-blue-500 pl-4">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Working Memory (Drift Resistance)</h3>
-                    <p class="text-gray-600"><strong>What it is:</strong> The cognitive system responsible for temporarily holding and manipulating information. In LLMs, this translates to context retention over extended interactions.</p>
-                    <p class="text-gray-600 mt-2"><strong>How we measure it:</strong> Evaluated via the Multi-Turn task. Models must remember previous guesses and shifting feedback over a long context window. Forgetting a known "dead letter" on guess #4 represents a direct failure of working memory.</p>
-                </div>
+                
+
+<div class="border-l-4 border-blue-500 pl-4">
+    <h3 class="text-xl font-bold text-gray-800 mb-2">Working Memory (Drift Resistance)</h3>
+    <p class="text-gray-600"><strong>What it is:</strong> The cognitive system responsible for temporarily holding and manipulating information. In LLMs, this translates to context retention over extended interactions. It is important to note that the Wordle game in its entirety perfectly captures a model's working memory capability, as merely playing the game successfully requires maintaining a continuous, complex state.</p>
+    <p class="text-gray-600 mt-2"><strong>How we measure it:</strong> While the overall game is already a holistic test of working memory, we try to quantify this specific component directly based on wordle game performance. We achieve this by defining an isolated <strong>proxy</strong> based on the game's outputs. By tracking multi-turn rule violations (e.g., forgetting a known "dead letter" on guess #4), we create a rigorous, mathematical proxy that explicitly measures context degradation and memory drift over time. The beauty of using the Wordle game as a benchmark is that it has tremendous potential for analyzing EF skills. By reconstructing datasets, changing scoring metrics, and evaluating different outputs, we can develop more complex and robust metrics to further isolate these critical AGI skills.</p>
+</div>
+
+
+
+
 
                 <div class="border-l-4 border-purple-500 pl-4">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Cognitive Flexibility</h3>
@@ -124,7 +134,7 @@
                     </div>
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
                         <h4 class="font-bold text-gray-900">Cognitive Degradation: Working Memory Stress Test</h4>
-                        <p class="text-gray-600 text-sm mt-1">Tracks the rule violation rate between isolated single-turn states and continuous multi-turn states to highlight which models suffer from severe context drift over prolonged interactions. While frontier models currently achieve perfect compliance (zero violations) in standard single-turn games, future iterations of this benchmark will introduce higher-complexity constraints to establish a more granular baseline for working memory degradation.</p>
+                        <p class="text-gray-600 text-sm mt-1">Tracks the rule violation rate between isolated single-turn states and continuous multi-turn states to highlight which models suffer from severe context drift over prolonged interactions. While some models achieve zero violations in simple states, future iterations of this benchmark will introduce higher-complexity adversarial constraints to establish an even more granular baseline for memory degradation.</p>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
                         <h4 class="font-bold text-gray-900">Executive Function Pillars (Table)</h4>
@@ -169,7 +179,7 @@
                     <ul class="space-y-5 text-gray-700">
                         <li>
                             <strong class="text-blue-700 block text-lg">Working Memory (Drift) Score</strong>
-                            Because models display 0.000 violations in single-turn isolation, multi-turn violations act as a direct proxy for context drift. Lower is better.<br>
+                            Multi-turn violations act as a direct proxy for context drift over time. Lower is better.<br>
                             <code class="mt-2 inline-block bg-white border border-gray-300 text-gray-800 p-2 rounded text-sm font-mono shadow-sm">Drift = Average Multi-Turn Violations (MT_Violations)</code>
                         </li>
                         <li>
