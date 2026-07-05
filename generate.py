@@ -1376,7 +1376,7 @@ core_insights_html = """
         <div class="bg-blue-600 text-white p-2 rounded-lg">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
-        <h3 class="text-2xl font-bold text-gray-900">Core Insights: Why Wordle Exposes True EF Capability</h3>
+        <h3 class="text-2xl font-bold text-gray-900">Core Insights: Wordle is a perfect benchmark for measuring EF capability of frontier AI models</h3>
     </div>
     <p class="text-gray-600 mb-6 text-lg">The mechanics of the Wordle game—requiring strict state-tracking, rule adherence, and dynamic adaptation—make it an exceptional sandbox for measuring Executive Function (EF). The benchmark results yield several fundamental insights into the current landscape of AI capabilities:</p>
     
