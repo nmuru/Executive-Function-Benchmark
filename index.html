@@ -95,6 +95,40 @@ View Leaderboard →
 <div class="mt-16">
     <h2 class="text-3xl font-bold mb-6">Cross-Task Insights</h2>
     
+<div class="mb-12 bg-white rounded-lg shadow-sm border border-gray-200 p-8 mt-4">
+    <div class="flex items-center gap-3 mb-6">
+        <div class="bg-blue-600 text-white p-2 rounded-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900">Core Insights: Why Wordle Exposes True EF Capability</h3>
+    </div>
+    <p class="text-gray-600 mb-6 text-lg">The mechanics of the Wordle game—requiring strict state-tracking, rule adherence, and dynamic adaptation—make it an exceptional sandbox for measuring Executive Function (EF). The benchmark results yield several fundamental insights into the current landscape of AI capabilities:</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">1. Reasoning ≠ Executive Function</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">While traditional benchmarks measure static logic, EF requires dynamic cognitive control. Dedicated reasoning models that excel on standard logic tests (e.g., DeepSeek, Qwen) unexpectedly struggle here, failing to crack the Top 5. This divergence proves that EF—specifically maintaining context and suppressing errors under constraints—is a distinct, higher-tier capability than pure reasoning.</p>
+        </div>
+        
+        <div class="bg-purple-50 p-6 rounded-xl border border-purple-100">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">2. The Frontier Advantage</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">Top honors across the EF pillars are dominated by massive frontier models (e.g., GPT-5.5, Claude 4.6 Opus). Their superior performance likely stems from highly resilient working memory capacities, allowing them to track complex states and adapt seamlessly to mid-task rule changes. The exact architectural features enabling this remain a vital area for research.</p>
+        </div>
+        
+        <div class="bg-green-50 p-6 rounded-xl border border-green-100">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">3. The Viability of Mid-Weight Models</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">Parameter count isn't the sole dictator of EF capability. The strong placements of mid-weight architectures like Gemma-4-31b demonstrate that highly efficient design and targeted alignment can yield strong executive control. Further evaluation of similar lightweight models is needed to definitively map EF scaling laws.</p>
+        </div>
+        
+        <div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">4. The "Illusion of Thinking" (Token Inefficiency)</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">Our efficiency metrics expose a critical flaw in models designed to generate massive reasoning traces (e.g., DeepSeek-R1, Qwen-Thinking). While they output thousands of reasoning tokens to solve a turn, they frequently land in the "Over-thinkers" quadrant—burning massive compute without achieving proportional Information Gain. This proves that excessive verbosity and "thinking" tokens cannot compensate for a fundamental lack of Executive Function and rule retention.</p>
+
+
+        </div>
+    </div>
+</div>
+
     <div class="mb-12">
         <h3 class="text-2xl font-bold mb-4">Operational Excellence Highlights</h3>
         <div class="grid md:grid-cols-3 gap-6">
