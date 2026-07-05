@@ -114,6 +114,8 @@ def build_table(results):
     return html
 
 
+
+
 def navigation(active):
     links = ['<a href="index.html" class="hover:text-blue-600">Home</a>']
     for task in TASKS:
@@ -125,7 +127,12 @@ def navigation(active):
             links.append(
                 f'<a href="{task["id"]}.html" class="hover:text-blue-600">{task["title"]}</a>'
             )
+            
+    # Add the Documentation link to the end of the navigation bar
+    links.append('<a href="nomenclature.html" class="hover:text-blue-600">Documentation</a>')
+    
     return " | ".join(links)
+
 
 
 # --------------------------------------------------
