@@ -1410,6 +1410,12 @@ core_insights_html = """
             <p class="text-gray-700 text-sm leading-relaxed">The stark performance delta between Grok 4.20’s reasoning and non-reasoning variants provides a critical counterpoint to skeptics who argue that reasoning models aren't genuinely "thinking." While the non-reasoning Grok 4.20 languishes in the bottom 5, its reasoning counterpart secured a Top 5 finish across all the EF tasks. This massive gap demonstrates that at the frontier scale, the reasoning mechanism is not just superficial token generation. Instead, it actively amplifies cognitive control and strict state-tracking—proving that when paired with a sufficiently powerful base model, the "thinking" process directly and tangibly enhances Executive Function.</p>
         </div>
 
+	<div class="bg-teal-50 p-6 rounded-xl border border-teal-100">
+    <h4 class="text-lg font-bold text-gray-900 mb-2">6. Instruction Following</h4>
+    <p class="text-gray-700 text-sm leading-relaxed">In our benchmark, models were equipped with a highly detailed system prompt (akin to a skills.md document) that explicitly mapped out Executive Function strategies—such as strict state-tracking, constraint checking, and adaptive planning. Both frontier and reasoning architectures successfully utilized these pathways. However, in a parallel experiment using a simplified prompt devoid of this cognitive scaffolding, overall rule adherence and performance collapsed, with smaller models suffering the most severe EF degradation. This reveals that robust instruction following acts as a powerful external working memory. By offloading cognitive control and strategic analysis directly into the prompt structure, smaller models can punch well above their weight class, effectively simulating the executive capabilities of massive frontier models.</p>
+</div>
+
+
 
 
 
