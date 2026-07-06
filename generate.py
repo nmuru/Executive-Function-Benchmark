@@ -11,6 +11,7 @@ TASKS = [
         "id": "multi-turn",
         "title": "Multi-turn Wordle",
         "description": "Evaluating executive function and information gain across multi-turn gameplay.",
+        
     },
     {
         "id": "single-turn",
@@ -21,7 +22,7 @@ TASKS = [
         "id": "cognitive-flexibility",
         "title": "Cognitive Flexibility",
         "description": "Evaluating adaptive reasoning and cognitive flexibility.",
-    },
+    }, 
 ]
 
 DATA_ROOT = "data"
@@ -1000,6 +1001,8 @@ def build_efficiency_html(task_resources):
     <div class="bg-white rounded-lg shadow p-6 border mt-8 w-full">
         <h3 class="text-xl font-bold mb-2">Resource & Efficiency Metrics</h3>
         <p class="text-gray-600 mb-6 text-sm">Evaluating operational footprint. Sorted by a <strong>Combined Efficiency Score</strong> (33% Cost, 34% Speed, 33% Density).</p>
+
+
         
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
@@ -1400,9 +1403,16 @@ core_insights_html = """
         <div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
             <h4 class="text-lg font-bold text-gray-900 mb-2">4. The "Illusion of Thinking" (Token Inefficiency)</h4>
             <p class="text-gray-700 text-sm leading-relaxed">Our efficiency metrics expose a critical flaw in models designed to generate massive reasoning traces (e.g., DeepSeek-R1, Qwen-Thinking). While they output thousands of reasoning tokens to solve a turn, they frequently land in the "Over-thinkers" quadrant—burning massive compute without achieving proportional Information Gain. This proves that excessive verbosity and "thinking" tokens cannot compensate for a fundamental lack of Executive Function and rule retention.</p>
-
-
         </div>
+
+	<div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">5. Do Reasoning Models think?</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">The stark performance delta between Grok 4.20’s reasoning and non-reasoning variants provides a critical counterpoint to skeptics who argue that reasoning models aren't genuinely "thinking." While the non-reasoning Grok 4.20 languishes in the bottom 5, its reasoning counterpart secured a Top 5 finish across all the EF tasks. This massive gap demonstrates that at the frontier scale, the reasoning mechanism is not just superficial token generation. Instead, it actively amplifies cognitive control and strict state-tracking—proving that when paired with a sufficiently powerful base model, the "thinking" process directly and tangibly enhances Executive Function.</p>
+        </div>
+
+
+
+
     </div>
 </div>
 """

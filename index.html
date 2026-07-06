@@ -60,7 +60,7 @@ A benchmark suite for evaluating Executive Function capabilities of AI models us
 <div class="bg-white rounded-lg shadow p-6 border">
 <h2 class="text-xl font-bold mb-2">Multi-turn Wordle</h2>
 <p class="text-gray-600 mb-4">Evaluating executive function and information gain across multi-turn gameplay.</p>
-<p class="text-sm text-gray-500 mb-4">16 models evaluated</p>
+<p class="text-sm text-gray-500 mb-4">17 models evaluated</p>
 <a class="text-blue-600 font-semibold hover:underline"
 href="multi-turn.html">
 View Leaderboard →
@@ -71,7 +71,7 @@ View Leaderboard →
 <div class="bg-white rounded-lg shadow p-6 border">
 <h2 class="text-xl font-bold mb-2">Single-turn Wordle</h2>
 <p class="text-gray-600 mb-4">Evaluating executive function from a single Wordle decision.</p>
-<p class="text-sm text-gray-500 mb-4">13 models evaluated</p>
+<p class="text-sm text-gray-500 mb-4">15 models evaluated</p>
 <a class="text-blue-600 font-semibold hover:underline"
 href="single-turn.html">
 View Leaderboard →
@@ -82,7 +82,7 @@ View Leaderboard →
 <div class="bg-white rounded-lg shadow p-6 border">
 <h2 class="text-xl font-bold mb-2">Cognitive Flexibility</h2>
 <p class="text-gray-600 mb-4">Evaluating adaptive reasoning and cognitive flexibility.</p>
-<p class="text-sm text-gray-500 mb-4">15 models evaluated</p>
+<p class="text-sm text-gray-500 mb-4">17 models evaluated</p>
 <a class="text-blue-600 font-semibold hover:underline"
 href="cognitive-flexibility.html">
 View Leaderboard →
@@ -122,9 +122,16 @@ View Leaderboard →
         <div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
             <h4 class="text-lg font-bold text-gray-900 mb-2">4. The "Illusion of Thinking" (Token Inefficiency)</h4>
             <p class="text-gray-700 text-sm leading-relaxed">Our efficiency metrics expose a critical flaw in models designed to generate massive reasoning traces (e.g., DeepSeek-R1, Qwen-Thinking). While they output thousands of reasoning tokens to solve a turn, they frequently land in the "Over-thinkers" quadrant—burning massive compute without achieving proportional Information Gain. This proves that excessive verbosity and "thinking" tokens cannot compensate for a fundamental lack of Executive Function and rule retention.</p>
-
-
         </div>
+
+	<div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">5. Do Reasoning Models think?</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">The stark performance delta between Grok 4.20’s reasoning and non-reasoning variants provides a critical counterpoint to skeptics who argue that reasoning models aren't genuinely "thinking." While the non-reasoning Grok 4.20 languishes in the bottom 5, its reasoning counterpart secured a Top 5 finish across all the EF tasks. This massive gap demonstrates that at the frontier scale, the reasoning mechanism is not just superficial token generation. Instead, it actively amplifies cognitive control and strict state-tracking—proving that when paired with a sufficiently powerful base model, the "thinking" process directly and tangibly enhances Executive Function.</p>
+        </div>
+
+
+
+
     </div>
 </div>
 
@@ -301,7 +308,7 @@ View Leaderboard →
             ,
             {
                 label: 'Premium Brains (High Score, High Cost)',
-                data: [{x: 25.139699999999998, y: 0.7966666666666667, model: 'claude-opus-4-6-default'}, {x: 21.2267, y: 0.84, model: 'claude-sonnet-4-6-default'}, {x: 30.8265, y: 0.9066666666666666, model: 'gemini-3.1-pro-preview'}, {x: 5.1224, y: 0.7533333333333333, model: 'glm-5'}, {x: 16.9799, y: 0.9133333333333334, model: 'gpt-5.5-2026-04-23'}],
+                data: [{x: 25.139699999999998, y: 0.7966666666666667, model: 'claude-opus-4-6-default'}, {x: 21.2267, y: 0.84, model: 'claude-sonnet-4-6-default'}, {x: 30.8265, y: 0.9066666666666666, model: 'gemini-3.1-pro-preview'}, {x: 5.1224, y: 0.7533333333333333, model: 'glm-5'}, {x: 16.9799, y: 0.9133333333333334, model: 'gpt-5.5-2026-04-23'}, {x: 8.0599, y: 0.8866666666666667, model: 'grok-4.20-0309-reasoning'}],
                 backgroundColor: 'rgba(59, 130, 246, 1)',
                 borderColor: 'rgba(59, 130, 246, 1)',
                 pointRadius: 6,
@@ -310,7 +317,7 @@ View Leaderboard →
             ,
             {
                 label: 'Lightweight (Low Score, Low Cost)',
-                data: [{x: 0.035, y: -0.18, model: 'gemma-3-12b-it'}, {x: 0.0434, y: -0.17, model: 'gemma-3-4b-it'}, {x: 1.2854, y: 0.36333333333333334, model: 'gpt-5.4-mini-2026-03-17'}, {x: 0.1449, y: 0.04, model: 'gpt-5.4-nano-2026-03-17'}, {x: 0.7989999999999999, y: 0.52, model: 'qwen3-next-80b-a3b-instruct'}],
+                data: [{x: 0.035, y: -0.18, model: 'gemma-3-12b-it'}, {x: 0.0434, y: -0.17, model: 'gemma-3-4b-it'}, {x: 1.2854, y: 0.36333333333333334, model: 'gpt-5.4-mini-2026-03-17'}, {x: 0.1449, y: 0.04, model: 'gpt-5.4-nano-2026-03-17'}, {x: 2.0357, y: 0.37666666666666665, model: 'grok-4.20-0309-non-reasoning'}, {x: 0.7989999999999999, y: 0.52, model: 'qwen3-next-80b-a3b-instruct'}],
                 backgroundColor: 'rgba(156, 163, 175, 1)',
                 borderColor: 'rgba(156, 163, 175, 1)',
                 pointRadius: 6,
@@ -418,6 +425,14 @@ View Leaderboard →
         
             <tr class="hover:bg-gray-50">
                 <td class="py-3 px-4 border-b font-medium text-gray-700">5</td>
+                <td class="py-3 px-4 border-b font-semibold">grok-4.20-reasoning</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.154</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.154 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">6</td>
                 <td class="py-3 px-4 border-b font-semibold">claude-sonnet-4.6</td>
                 <td class="py-3 px-4 border-b">0.000</td>
                 <td class="py-3 px-4 border-b">0.173</td>
@@ -425,7 +440,7 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">6</td>
+                <td class="py-3 px-4 border-b font-medium text-gray-700">7</td>
                 <td class="py-3 px-4 border-b font-semibold">gemini-3-flash-preview</td>
                 <td class="py-3 px-4 border-b">0.000</td>
                 <td class="py-3 px-4 border-b">0.258</td>
@@ -433,7 +448,7 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">7</td>
+                <td class="py-3 px-4 border-b font-medium text-gray-700">8</td>
                 <td class="py-3 px-4 border-b font-semibold">qwen-3-next-80b-instruct</td>
                 <td class="py-3 px-4 border-b">0.000</td>
                 <td class="py-3 px-4 border-b">0.260</td>
@@ -441,7 +456,7 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">8</td>
+                <td class="py-3 px-4 border-b font-medium text-gray-700">9</td>
                 <td class="py-3 px-4 border-b font-semibold">gpt-5.4</td>
                 <td class="py-3 px-4 border-b">0.000</td>
                 <td class="py-3 px-4 border-b">0.365</td>
@@ -449,7 +464,7 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">9</td>
+                <td class="py-3 px-4 border-b font-medium text-gray-700">10</td>
                 <td class="py-3 px-4 border-b font-semibold">deepseek-r1</td>
                 <td class="py-3 px-4 border-b">0.000</td>
                 <td class="py-3 px-4 border-b">0.381</td>
@@ -457,7 +472,7 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">10</td>
+                <td class="py-3 px-4 border-b font-medium text-gray-700">11</td>
                 <td class="py-3 px-4 border-b font-semibold">glm-5</td>
                 <td class="py-3 px-4 border-b">0.000</td>
                 <td class="py-3 px-4 border-b">0.490</td>
@@ -465,7 +480,7 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">11</td>
+                <td class="py-3 px-4 border-b font-medium text-gray-700">12</td>
                 <td class="py-3 px-4 border-b font-semibold">deepseek-v3.2</td>
                 <td class="py-3 px-4 border-b">0.000</td>
                 <td class="py-3 px-4 border-b">0.872</td>
@@ -473,11 +488,19 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">12</td>
+                <td class="py-3 px-4 border-b font-medium text-gray-700">13</td>
                 <td class="py-3 px-4 border-b font-semibold">gpt-5.4-mini</td>
                 <td class="py-3 px-4 border-b">0.000</td>
                 <td class="py-3 px-4 border-b">1.731</td>
                 <td class="py-3 px-4 border-b text-red-600 font-bold">+1.731 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">14</td>
+                <td class="py-3 px-4 border-b font-semibold">grok-4.20-non-reasoning</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">2.923</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+2.923 (Severe Drift)</td>
             </tr>
         </tbody></table></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -511,20 +534,29 @@ View Leaderboard →
                 <td class="py-3 px-4 border-b text-blue-700">0.077</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.8255</td>
                 <td class="py-3 px-4 border-b text-red-700">1.173</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">87.6</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">88.3</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">2</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.1-pro-preview</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.041</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.9217</td>
-                <td class="py-3 px-4 border-b text-red-700">2.117</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">87.4</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-sonnet-4.6</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.173</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.8082</td>
+                <td class="py-3 px-4 border-b text-red-700">0.802</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">88.2</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">3</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.1-pro-preview</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.041</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.9217</td>
+                <td class="py-3 px-4 border-b text-red-700">2.117</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">87.7</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">4</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.5</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.9966</td>
@@ -533,25 +565,25 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">4</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-sonnet-4.6</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.173</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.8082</td>
-                <td class="py-3 px-4 border-b text-red-700">0.802</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">86.8</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">5</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-4-31b</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.149</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.9419</td>
                 <td class="py-3 px-4 border-b text-red-700">2.082</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">86.2</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">87.3</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">6</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">glm-5</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.490</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.7427</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">85.9</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">7</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.2-reasoning</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.9677</td>
@@ -560,7 +592,25 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">7</td>
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">8</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.4</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.365</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.6724</td>
+                <td class="py-3 px-4 border-b text-red-700">0.035</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">84.8</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">9</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.20-reasoning</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.154</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.9677</td>
+                <td class="py-3 px-4 border-b text-red-700">2.846</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">84.8</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">10</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-next-80b-thinking</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.5425</td>
@@ -569,43 +619,25 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">8</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">glm-5</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.490</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.7427</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">82.1</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">9</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.4</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.365</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.6724</td>
-                <td class="py-3 px-4 border-b text-red-700">0.035</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">82.0</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">10</td>
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">11</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3-flash-preview</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.258</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.7810</td>
                 <td class="py-3 px-4 border-b text-red-700">1.357</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">81.9</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">11</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">deepseek-v3.2</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.872</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.7495</td>
-                <td class="py-3 px-4 border-b text-red-700">1.560</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">68.1</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">83.9</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">12</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">deepseek-v3.2</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.872</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.7495</td>
+                <td class="py-3 px-4 border-b text-red-700">1.560</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">74.9</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">13</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.2-non-reasoning</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.4284</td>
@@ -614,7 +646,7 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">13</td>
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">14</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-4</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
@@ -623,39 +655,30 @@ View Leaderboard →
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">14</td>
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">15</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-next-80b-instruct</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.260</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
                 <td class="py-3 px-4 border-b text-red-700">0.000</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">61.7</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">15</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">deepseek-r1</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.381</td>
-                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
-                <td class="py-3 px-4 border-b text-red-700">0.000</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">59.3</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">63.7</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">16</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-235b-A22b-instruct</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.540</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">deepseek-r1</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.381</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
                 <td class="py-3 px-4 border-b text-red-700">0.000</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">56.3</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">62.3</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">17</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-3-12b</td>
-                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
-                <td class="py-3 px-4 border-b text-purple-700">-0.1818</td>
-                <td class="py-3 px-4 border-b text-red-700">2.975</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">47.5</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">qwen-3-235b-A22b-instruct</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.540</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">60.5</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
@@ -664,7 +687,7 @@ View Leaderboard →
                 <td class="py-3 px-4 border-b text-blue-700">1.731</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.3256</td>
                 <td class="py-3 px-4 border-b text-red-700">0.000</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">44.2</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">57.8</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
@@ -673,11 +696,29 @@ View Leaderboard →
                 <td class="py-3 px-4 border-b text-blue-700">1.481</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
                 <td class="py-3 px-4 border-b text-red-700">0.000</td>
-                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">38.1</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">49.8</td>
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">20</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-3-12b</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">-0.1818</td>
+                <td class="py-3 px-4 border-b text-red-700">2.975</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">47.5</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">21</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.20-non-reasoning</td>
+                <td class="py-3 px-4 border-b text-blue-700">2.923</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.4284</td>
+                <td class="py-3 px-4 border-b text-red-700">0.077</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">47.3</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">22</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-3-4b</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">-0.1693</td>
@@ -703,7 +744,7 @@ View Leaderboard →
             datasets: [
         {
             label: 'claude-opus-4.6',
-            data: [95.6, 82.8, 84.6],
+            data: [97.4, 82.8, 84.6],
             backgroundColor: 'rgba(59, 130, 246, 0.1)',
             borderColor: 'rgba(59, 130, 246, 1)',
             pointBackgroundColor: 'rgba(59, 130, 246, 1)',
@@ -712,8 +753,8 @@ View Leaderboard →
         }
         ,
         {
-            label: 'gemini-3.1-pro-preview',
-            data: [97.6, 92.5, 72.1],
+            label: 'claude-sonnet-4.6',
+            data: [94.1, 81.1, 89.4],
             backgroundColor: 'rgba(16, 185, 129, 0.1)',
             borderColor: 'rgba(16, 185, 129, 1)',
             pointBackgroundColor: 'rgba(16, 185, 129, 1)',
@@ -722,8 +763,8 @@ View Leaderboard →
         }
         ,
         {
-            label: 'gpt-5.5',
-            data: [100.0, 100.0, 62.2],
+            label: 'gemini-3.1-pro-preview',
+            data: [98.6, 92.5, 72.1],
             backgroundColor: 'rgba(245, 158, 11, 0.1)',
             borderColor: 'rgba(245, 158, 11, 1)',
             pointBackgroundColor: 'rgba(245, 158, 11, 1)',
@@ -732,8 +773,8 @@ View Leaderboard →
         }
         ,
         {
-            label: 'claude-sonnet-4.6',
-            data: [90.0, 81.1, 89.4],
+            label: 'gpt-5.5',
+            data: [100.0, 100.0, 62.2],
             backgroundColor: 'rgba(139, 92, 246, 0.1)',
             borderColor: 'rgba(139, 92, 246, 1)',
             pointBackgroundColor: 'rgba(139, 92, 246, 1)',
@@ -743,7 +784,7 @@ View Leaderboard →
         ,
         {
             label: 'gemma-4-31b',
-            data: [91.4, 94.5, 72.6],
+            data: [94.9, 94.5, 72.6],
             backgroundColor: 'rgba(239, 68, 68, 0.1)',
             borderColor: 'rgba(239, 68, 68, 1)',
             pointBackgroundColor: 'rgba(239, 68, 68, 1)',
@@ -795,7 +836,7 @@ View Leaderboard →
                     <span class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">Reasoning Masters</span>
                     <span class="text-xs text-blue-400 mb-2">High Win Rate, High Strategy</span>
                     <ul class="text-sm font-bold text-gray-900">
-    <li>gemini-3.1-pro-preview</li><li>gpt-5.5</li><li>claude-sonnet-4.6</li><li>claude-opus-4.6</li><li>gemma-4-31b</li><li>glm-5</li><li>gpt-5.4</li>
+    <li>gemini-3.1-pro-preview</li><li>gpt-5.5</li><li>claude-sonnet-4.6</li><li>grok-4.20-reasoning</li><li>claude-opus-4.6</li><li>gemma-4-31b</li><li>glm-5</li><li>gpt-5.4</li>
                     </ul>
                 </div>
 
@@ -803,7 +844,7 @@ View Leaderboard →
                     <span class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Struggling</span>
                     <span class="text-xs text-gray-400 mb-2">Low Win Rate, Low Strategy</span>
                     <ul class="text-sm font-medium text-gray-600">
-    <li>deepseek-v3.2</li><li>qwen-3-next-80b-instruct</li><li>qwen-3-235b-A22b-instruct</li><li>gpt-5.4-mini</li><li>gpt-5.4-nano</li><li>grok-4.2-reasoning</li><li>qwen-3-next-80b-thinking</li>
+    <li>deepseek-v3.2</li><li>qwen-3-next-80b-instruct</li><li>qwen-3-235b-A22b-instruct</li><li>gpt-5.4-mini</li><li>grok-4.20-non-reasoning</li><li>gpt-5.4-nano</li><li>qwen-3-next-80b-thinking</li>
                     </ul>
                 </div>
 
@@ -862,6 +903,20 @@ View Leaderboard →
                 <div class="flex items-center gap-3">
                     <span class="text-2xl">🛡️</span>
                     <div>
+                        <h4 class="font-bold text-lg leading-tight">grok-4.20-reasoning</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
                         <h4 class="font-bold text-lg leading-tight">claude-opus-4.6</h4>
                         <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
                     </div>
@@ -891,6 +946,20 @@ View Leaderboard →
                     <span class="text-2xl">🛡️</span>
                     <div>
                         <h4 class="font-bold text-lg leading-tight">gpt-5.4-mini</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">grok-4.20-non-reasoning</h4>
                         <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
                     </div>
                 </div>
@@ -1037,20 +1106,6 @@ View Leaderboard →
                 <div class="text-right">
                     <div class="text-2xl font-black">57.7<span class="text-lg text-gray-500 font-medium">%</span></div>
                     <div class="text-xs opacity-75 mt-1">API Errors: 42.3%</div>
-                </div>
-            </div>
-        
-            <div class="border rounded-lg p-4 flex items-center justify-between bg-red-50 border-red-200 text-red-800">
-                <div class="flex items-center gap-3">
-                    <span class="text-2xl">☠️</span>
-                    <div>
-                        <h4 class="font-bold text-lg leading-tight">grok-4.2-reasoning</h4>
-                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Penalty</span>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <div class="text-2xl font-black">0.0<span class="text-lg text-gray-500 font-medium">%</span></div>
-                    <div class="text-xs opacity-75 mt-1">API Errors: 100.0%</div>
                 </div>
             </div>
         

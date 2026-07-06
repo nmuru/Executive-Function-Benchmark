@@ -39,9 +39,3 @@ qwen3-next-80b-a3b-instruct,cognitive-flexibility,0.52,231871,291392,0.3845,1272
 qwen3-next-80b-a3b-thinking,single-turn,0.54,472802,708290,0.9209,5520.29
 qwen3-next-80b-a3b-thinking,multi-turn,0,379797,955463,1.2035,6945.35
 qwen3-next-80b-a3b-thinking,cognitive-flexibility,0.61,265020,1694374,2.073,9205.22
-grok-4.20-0309-reasoning,single-turn,0.66,334243,811999,2.1145,3089.95
-grok-4.20-0309-reasoning,multi-turn,1.03,1237074,718724,2.5295,2885.81
-grok-4.20-0309-reasoning,cognitive-flexibility,0.97,1211019,25176,3.4159,3183.32
-grok-4.20-0309-non-reasoning,single-turn,0.51,333843,59171,0.2292,325.34
-grok-4.20-0309-non-reasoning,multi-turn,0.19,915206,121851,0.9321,635.83
-grok-4.20-0309-non-reasoning,cognitive-flexibility,0.43,727007,58250,0.8744,250.66
