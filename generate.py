@@ -10,19 +10,18 @@ TASKS = [
     {
         "id": "multi-turn",
         "title": "Multi-turn Wordle",
-        "description": "Evaluating executive function and information gain across multi-turn gameplay.",
-        
+        "description": "Evaluating executive function and information gain across multi-turn gameplay. Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-multi-turn/2' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_multi_turn</a>."
     },
     {
         "id": "single-turn",
         "title": "Single-turn Wordle",
-        "description": "Evaluating executive function from a single Wordle decision.",
+        "description": "Evaluating executive function from a single Wordle decision. Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-single-turn-v2/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_single_turn_v2</a>."
     },
     {
         "id": "cognitive-flexibility",
         "title": "Cognitive Flexibility",
-        "description": "Evaluating adaptive reasoning and cognitive flexibility.",
-    }, 
+        "description": "Evaluating adaptive reasoning and cognitive flexibility. Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-cognitive-flexibility/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_cognitive_flexibility</a>."
+    },
 ]
 
 DATA_ROOT = "data"
@@ -130,7 +129,7 @@ def navigation(active):
             )
             
     # Add the Documentation link to the end of the navigation bar
-    links.append('<a href="nomenclature.html" class="hover:text-blue-600">Documentation</a>')
+    links.append('<a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a>')
     links.append('<a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a>')
     
     return " | ".join(links)
