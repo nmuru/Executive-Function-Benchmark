@@ -130,6 +130,7 @@ def navigation(active):
             
     # Add the Documentation link to the end of the navigation bar
     links.append('<a href="nomenclature.html" class="hover:text-blue-600">Documentation</a>')
+    links.append('<a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a>')
     
     return " | ".join(links)
 
