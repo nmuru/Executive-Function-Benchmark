@@ -20,7 +20,7 @@
 
 <nav class="mb-10 text-gray-700">
 
-<a href="index.html" class="hover:text-blue-600">Home</a> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <a href="single-turn.html" class="hover:text-blue-600">Single-turn Wordle</a> | <span class="font-bold text-blue-600">Cognitive Flexibility</span> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a>
+<a href="index.html" class="hover:text-blue-600">Home</a> | <a href="single-turn.html" class="hover:text-blue-600">Single-turn Wordle</a> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <span class="font-bold text-blue-600">Cognitive Flexibility</span> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a>
 
 </nav>
 
@@ -35,6 +35,22 @@ Cognitive Flexibility
 Evaluating adaptive reasoning and cognitive flexibility.  Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-cognitive-flexibility/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_cognitive_flexibility</a>.
 
 </p>
+
+
+<!-- Insights Placeholder -->
+
+    <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
+        <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+            <li><strong>Benchmark Validation:</strong> The Wordle framework successfully measures cognitive flexibility. By simply permitting rule exploration in the prompt, overall scores jumped from the 70% range to 85%. While violations increased alongside scores, it demonstrated the models actively exercising flexibility.</li>
+            <li><strong>The Power of Permission:</strong> The game mechanics and datasets remained identical to the multi-turn task. The performance leap was triggered by a single system prompt addition: telling the model it would be rewarded for deliberate, constraint-violating exploration moves.</li>
+            <li><strong>Lack of Spontaneous Flexibility:</strong> Models do not exhibit cognitive flexibility autonomously. Despite having the capability to make exploratory moves in standard multi-turn games, they refrained until explicitly permitted, whereas humans naturally employ exploration to win.</li>
+            <li><strong>Enterprise Takeaway:</strong> AI models are heavily biased toward strict rule adherence. For enterprise use cases requiring EF skills, developers must explicitly map out permissible flexibility boundaries in the system prompt (e.g., <code>skills.md</code>) rather than expecting models to adapt on their own.</li>
+            <li><strong>Open-Source Surprises:</strong> The open-source Gemma-4-31b outperformed the significantly more expensive Gemini 3 Preview in cognitive flexibility, warranting deeper study into Gemma's architecture and training patterns.</li>
+        </ul>
+    </div>
+    
+
 
 <!-- TOP TABLE: Cognitive Scores -->
 <div class="bg-white rounded-lg shadow border overflow-hidden">
@@ -418,6 +434,7 @@ Evaluating adaptive reasoning and cognitive flexibility.  Data Source: <a href='
         </div>
     </div>
     
+
 
 </div>
 

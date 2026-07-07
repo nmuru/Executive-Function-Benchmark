@@ -20,7 +20,7 @@
 
 <nav class="mb-10 text-gray-700">
 
-<a href="index.html" class="hover:text-blue-600">Home</a> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <span class="font-bold text-blue-600">Single-turn Wordle</span> | <a href="cognitive-flexibility.html" class="hover:text-blue-600">Cognitive Flexibility</a> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a>
+<a href="index.html" class="hover:text-blue-600">Home</a> | <span class="font-bold text-blue-600">Single-turn Wordle</span> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <a href="cognitive-flexibility.html" class="hover:text-blue-600">Cognitive Flexibility</a> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a>
 
 </nav>
 
@@ -35,6 +35,24 @@ Single-turn Wordle
 Evaluating executive function from a single Wordle decision. Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-single-turn-v2/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_single_turn_v2</a>.
 
 </p>
+
+
+<!-- Insights Placeholder -->
+
+    <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
+        <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+            <li><strong>Metric Shift:</strong> Because single-turn win rates are inherently low, Information Gain proves to be a far more granular and robust metric for ranking models than standard win rates.</li>
+            <li><strong>Model Divergence:</strong> Claude Sonnet outperforms Claude Opus, with a noticeably wider performance gap here than in multi-turn scenarios.</li>
+            <li><strong>The Reasoning Imperative:</strong> A stark performance gap between Grok-reasoning and Grok-non-reasoning provides concrete proof that reasoning models are essential for Executive Function (EF) skills.</li>
+            <li><strong>Token Limits & Errors:</strong> DeepSeek and Qwen suffered lower rankings, likely because their highly verbose reasoning traces exceeded token limits, driving up error rates.</li>
+            <li><strong>Information Gain Validated:</strong> Qwen3-8b-instruct achieved the same win rate as the top-ranking Gemini 3.1 Pro but placed 12th overall due to a lower Information Gain score, validating the metric's precision.</li>
+            <li><strong>Trace Verbosity vs. Efficiency:</strong> Top rankers utilized extensive reasoning traces to score higher. Conversely, GPT models used fewer reasoning tokens, scoring lower on EF but dominating in speed, cost, and information density.</li>
+            <li><strong>Cost Realities:</strong> Factoring in cost shuffles the leaderboard significantly; Grok-reasoning drops to the bottom five, while Gemma-4 uniquely retains top-tier status by balancing high scores with the lowest cost.</li>
+        </ul>
+    </div>
+    
+
 
 <!-- TOP TABLE: Cognitive Scores -->
 <div class="bg-white rounded-lg shadow border overflow-hidden">
@@ -418,6 +436,7 @@ Evaluating executive function from a single Wordle decision. Data Source: <a hre
         </div>
     </div>
     
+
 
 </div>
 

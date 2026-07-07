@@ -7,16 +7,19 @@ import glob
 # --------------------------------------------------
 
 TASKS = [
+
+	{
+        "id": "single-turn",
+        "title": "Single-turn Wordle",
+        "description": "Evaluating executive function from a single Wordle decision. Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-single-turn-v2/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_single_turn_v2</a>."
+    },
+
     {
         "id": "multi-turn",
         "title": "Multi-turn Wordle",
         "description": "Evaluating executive function and information gain across multi-turn gameplay. Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-multi-turn/2' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_multi_turn</a>."
     },
-    {
-        "id": "single-turn",
-        "title": "Single-turn Wordle",
-        "description": "Evaluating executive function from a single Wordle decision. Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-single-turn-v2/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_single_turn_v2</a>."
-    },
+    
     {
         "id": "cognitive-flexibility",
         "title": "Cognitive Flexibility",
@@ -24,6 +27,49 @@ TASKS = [
     },
 ]
 
+#####################
+TASK_INSIGHTS = {
+    "single-turn": """
+    <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
+        <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+            <li><strong>Metric Shift:</strong> Because single-turn win rates are inherently low, Information Gain proves to be a far more granular and robust metric for ranking models than standard win rates.</li>
+            <li><strong>Model Divergence:</strong> Claude Sonnet outperforms Claude Opus, with a noticeably wider performance gap here than in multi-turn scenarios.</li>
+            <li><strong>The Reasoning Imperative:</strong> A stark performance gap between Grok-reasoning and Grok-non-reasoning provides concrete proof that reasoning models are essential for Executive Function (EF) skills.</li>
+            <li><strong>Token Limits & Errors:</strong> DeepSeek and Qwen suffered lower rankings, likely because their highly verbose reasoning traces exceeded token limits, driving up error rates.</li>
+            <li><strong>Information Gain Validated:</strong> Qwen3-8b-instruct achieved the same win rate as the top-ranking Gemini 3.1 Pro but placed 12th overall due to a lower Information Gain score, validating the metric's precision.</li>
+            <li><strong>Trace Verbosity vs. Efficiency:</strong> Top rankers utilized extensive reasoning traces to score higher. Conversely, GPT models used fewer reasoning tokens, scoring lower on EF but dominating in speed, cost, and information density.</li>
+            <li><strong>Cost Realities:</strong> Factoring in cost shuffles the leaderboard significantly; Grok-reasoning drops to the bottom five, while Gemma-4 uniquely retains top-tier status by balancing high scores with the lowest cost.</li>
+        </ul>
+    </div>
+    """,
+    "multi-turn": """
+    <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
+        <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+            <li><strong>Win Rate vs. Info Gain:</strong> As games progress to the 6th turn, the task becomes easier and win rates naturally spike from 7-8% to 70-80%, reducing the relative importance of the Information Gain metric compared to single-turn evaluations.</li>
+            <li><strong>Frontier Dominance in State Tracking:</strong> The top five models remain largely consistent but reorder: GPT-5.5 takes second place and Claude Opus overtakes Gemma-4-31b. This shift occurs because multi-turn gameplay demands superior working memory and dynamic state tracking, giving larger frontier models an edge.</li>
+            <li><strong>Inhibitory Control:</strong> Rule violations scale proportionally with overall scores, demonstrating that high-performing models possess superior working memory management and inhibitory control.</li>
+            <li><strong>Mid-Weight Efficiency:</strong> Gemma-4 maintains strong performance across both modes, ranking second in cost, speed, and info density despite being the slowest model tested.</li>
+            <li><strong>Non-Reasoning Shortfalls:</strong> Grok non-reasoning falls far behind the pack, failing on both performance scores and cost efficiency.</li>
+        </ul>
+    </div>
+    """,
+    "cognitive-flexibility": """
+    <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
+        <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+            <li><strong>Benchmark Validation:</strong> The Wordle framework successfully measures cognitive flexibility. By simply permitting rule exploration in the prompt, overall scores jumped from the 70% range to 85%. While violations increased alongside scores, it demonstrated the models actively exercising flexibility.</li>
+            <li><strong>The Power of Permission:</strong> The game mechanics and datasets remained identical to the multi-turn task. The performance leap was triggered by a single system prompt addition: telling the model it would be rewarded for deliberate, constraint-violating exploration moves.</li>
+            <li><strong>Lack of Spontaneous Flexibility:</strong> Models do not exhibit cognitive flexibility autonomously. Despite having the capability to make exploratory moves in standard multi-turn games, they refrained until explicitly permitted, whereas humans naturally employ exploration to win.</li>
+            <li><strong>Enterprise Takeaway:</strong> AI models are heavily biased toward strict rule adherence. For enterprise use cases requiring EF skills, developers must explicitly map out permissible flexibility boundaries in the system prompt (e.g., <code>skills.md</code>) rather than expecting models to adapt on their own.</li>
+            <li><strong>Open-Source Surprises:</strong> The open-source Gemma-4-31b outperformed the significantly more expensive Gemini 3 Preview in cognitive flexibility, warranting deeper study into Gemma's architecture and training patterns.</li>
+        </ul>
+    </div>
+    """
+}
+
+########################
 DATA_ROOT = "data"
 TEMPLATE_DIR = "templates"
 
@@ -1274,12 +1320,14 @@ def build_efficiency_scatter_html(data):
 # Leaderboards
 # --------------------------------------------------
 
+# --------------------------------------------------
+# Leaderboards
+# --------------------------------------------------
+
 with open(LEADERBOARD_TEMPLATE, encoding="utf-8") as f:
     leaderboard_template = f.read()
 
 task_cards = ""
-
- 
 
 # Load all resource data globally before the loop
 resource_data = load_resource_metrics()
@@ -1303,19 +1351,25 @@ for task in TASKS:
     # 2. Build the resource HTML section
     resource_section_html = build_efficiency_html(task_resources)
 
-    # 3. Inject everything into the template
+    # 3. Retrieve the matching insights HTML block
+    task_insights_html = TASK_INSIGHTS.get(task["id"], "")
+
+    # 4. Inject everything into the template
     html = (
         leaderboard_template
         .replace(TITLE_PLACEHOLDER, task["title"])
         .replace(DESCRIPTION_PLACEHOLDER, task["description"])
         .replace(ROW_PLACEHOLDER, build_table(results))
         .replace(NAV_PLACEHOLDER, navigation(task["id"]))
-        .replace("{{RESOURCE_METRICS}}", resource_section_html) # NEW PLACEHOLDER
+        .replace("{{RESOURCE_METRICS}}", resource_section_html) 
+        .replace("{{TASK_INSIGHTS}}", task_insights_html) # NEW REPLACEMENT
     )
 
     output = f"{task['id']}.html"
     with open(output, "w", encoding="utf-8") as f:
         f.write(html) 
+
+    # ... (rest of the card loop remains the same)
 
     task_cards += f"""
 
