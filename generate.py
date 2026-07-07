@@ -20,7 +20,7 @@ TASKS = [
     {
         "id": "cognitive-flexibility",
         "title": "Cognitive Flexibility",
-        "description": "Evaluating adaptive reasoning and cognitive flexibility. Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-cognitive-flexibility/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_cognitive_flexibility</a>."
+        "description": "Evaluating adaptive reasoning and cognitive flexibility.  Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-cognitive-flexibility/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_cognitive_flexibility</a>."
     },
 ]
 
