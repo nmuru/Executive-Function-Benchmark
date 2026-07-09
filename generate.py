@@ -162,25 +162,41 @@ def build_table(results):
 
 
 
+ 
 def navigation(active):
-    links = ['<a href="index.html" class="hover:text-blue-600">Home</a>']
+    links = []
+    
+    # Home link
+    if active == "home":
+        links.append('<span class="font-bold text-blue-600">Home</span>')
+    else:
+        links.append('<a href="index.html" class="hover:text-blue-600">Home</a>')
+        
+    # Task links
     for task in TASKS:
         if task["id"] == active:
-            links.append(
-                f'<span class="font-bold text-blue-600">{task["title"]}</span>'
-            )
+            links.append(f'<span class="font-bold text-blue-600">{task["title"]}</span>')
         else:
-            links.append(
-                f'<a href="{task["id"]}.html" class="hover:text-blue-600">{task["title"]}</a>'
-            )
+            links.append(f'<a href="{task["id"]}.html" class="hover:text-blue-600">{task["title"]}</a>')
             
-    # Add the Documentation link to the end of the navigation bar
-    links.append('<a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a>')
-    links.append('<a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a>')
+    # Documentation links
+    if active == "nomenclature":
+        links.append('<span class="font-bold text-blue-600">Nomenclature</span>')
+    else:
+        links.append('<a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a>')
+        
+    if active == "system-prompt":
+        links.append('<span class="font-bold text-blue-600">System Prompt</span>')
+    else:
+        links.append('<a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a>')
+        
+    # New: Future Directions link
+    if active == "future-directions":
+        links.append('<span class="font-bold text-blue-600">Future Directions</span>')
+    else:
+        links.append('<a href="future-directions.html" class="hover:text-blue-600">Future Directions</a>')
     
     return " | ".join(links)
-
-
 
 # --------------------------------------------------
 # Insights Helpers
@@ -1313,6 +1329,13 @@ def build_efficiency_scatter_html(data):
     return html
 
 
+
+#####################################
+
+
+
+
+#################
 # ... (The rest of your Leaderboards section remains the same) ...
 
 
@@ -1514,3 +1537,105 @@ with open(HOME_OUTPUT, "w", encoding="utf-8") as f:
 print("Website generated successfully with the Executive Profiles!")
 
 
+
+
+# ==============================================================================
+# Generate Future Directions Page
+# ==============================================================================
+
+future_directions_content = """
+<div class="mb-12 bg-white rounded-lg shadow-sm border border-gray-200 p-8 mt-4">
+    <div class="flex items-center gap-3 mb-6">
+        <div class="bg-indigo-600 text-white p-2 rounded-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+            </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900">Future Roadmap & Strategic Scaling</h3>
+    </div>
+    <p class="text-gray-600 mb-8 text-lg leading-relaxed">
+        The Wordle framework offers versatile and unique possibilities for isolating and evaluating specific AI cognitive skills. The current benchmark evaluates Executive Function using the standard 5-letter format popularized by <em>The New York Times</em>. While this provides a strong foundation, the game environment can be expanded to create a far more rigorous sandbox for testing individual executive skills. Here are several potential expansions envisioned for future iterations of the benchmark:
+    </p>
+    
+    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-0.5 rounded">1</span>
+                Vocabulary Scaling and Lexical Constraints
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                The standard NYT Wordle game utilizes a curated list of approximately 2,300 answer words drawn from a pool of roughly 13,000 valid guesses. For frontier AI models, this restricted search space is relatively trivial to navigate. Our current benchmark intensifies this by utilizing an unrestricted Scrabble-compliant lexicon—encompassing all valid 5-letter words consisting of around 12,920 words, including colloquialisms, inflected forms, and esoteric terms. Future versions, however, could expand the grid itself. Transitioning to a <strong>6-letter Wordle</strong> expands the mathematical search space to around 23,140 valid English words (based on the international Collins Scrabble Words lexicon). This exponentially increases the cognitive load required to calculate Information Gain and filter potential candidates.
+            </p>
+        </div>
+        
+        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-0.5 rounded">2</span>
+                Dynamic Constraint Escalation
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                Currently, constraints remain relatively static throughout a turn. A future iteration could introduce shifting rule sets—making it significantly more difficult for the model to maintain state within its working memory. For example, introducing a constraint where a previously allowed letter suddenly becomes "forbidden" mid-game would aggressively test a model's ability to accurately overwrite established game states.
+            </p>
+        </div>
+        
+        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-0.5 rounded">3</span>
+                Fluid Game States and Dimensional Shifts
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                Another variant could introduce dynamic puzzle parameters during active gameplay. For instance, an adversarial setup could shift the target from a 5-letter word to a 6-letter word midway through a session. To succeed, the model would need to immediately pivot its strategy by taking historic constraints (e.g., previously eliminated letters and known positional matches) and applying them to an entirely new, expanded mathematical search space. This forces the execution of new planning protocols without resetting the context window—serving as an extreme stress test for both working memory and cognitive adaptability.
+            </p>
+        </div>
+        
+        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-orange-100 text-orange-800 text-xs font-bold px-2 py-0.5 rounded">4</span>
+                Isolating Inhibitory Control
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                It is possible to design specialized scenarios specifically targeted at isolating and measuring Inhibitory Control. The flexibility of the Wordle framework allows for the introduction of customized constraints that intentionally conflict with a model's natural optimization algorithms. By creating adversarial game states that force models to suppress ingrained heuristics or optimal mathematical pathways in favor of strict, arbitrary rule compliance, future iterations can rigorously evaluate executive inhibition without fundamentally altering the core mechanics of the benchmark.
+            </p>
+        </div>
+
+        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-0.5 rounded">5</span>
+                Autonomous Cognitive Flexibility
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                In current benchmark designs, Cognitive Flexibility is often aided by system prompts that explicitly outline strategic pathways. True cognitive flexibility, however, is autonomous. Future evaluations will feature adversarial game states designed to provoke strategic pivots <em>without</em> explicit instructions. The goal is to measure whether models can independently recognize when a heuristic is failing and invent a new strategy on the fly, demonstrating genuine adaptive reasoning.
+            </p>
+        </div>
+    </div>
+</div>
+"""
+
+# Assemble the final HTML file using standard boilerplate matching home.html layout
+# Assemble the final HTML file using standard boilerplate matching home.html layout
+future_directions_html = f"""<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Future Directions - Executive Function Benchmark</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-7xl mx-auto py-8 px-6">
+        <nav class="mb-10 text-gray-700">
+            {navigation("future-directions")}
+        </nav>
+        
+        <h1 class="text-5xl font-extrabold mb-4">Executive Function Benchmark</h1>
+        <p class="text-xl text-gray-600 mb-10">Future Research Horizons</p>
+        
+        {future_directions_content}
+    </div>
+</body>
+</html>"""
+
+with open("future-directions.html", "w", encoding="utf-8") as f:
+    f.write(future_directions_html)
+
+print("future-directions.html generated successfully!")
