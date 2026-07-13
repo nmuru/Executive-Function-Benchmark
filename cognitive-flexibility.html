@@ -32,7 +32,7 @@ Cognitive Flexibility
 
 <p class="text-lg text-gray-600 mb-8">
 
-Evaluating adaptive reasoning and cognitive flexibility.  Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-cognitive-flexibility/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_cognitive_flexibility</a>.
+Evaluating adaptive reasoning and cognitive flexibility.
 
 </p>
 
@@ -42,6 +42,10 @@ Evaluating adaptive reasoning and cognitive flexibility.  Data Source: <a href='
     <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
         <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
         <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-cognitive-flexibility/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_cognitive_flexibility</a></li>
+
+
             <li><strong>Benchmark Validation:</strong> The Wordle framework successfully measures cognitive flexibility. By simply permitting rule exploration in the prompt, overall scores jumped from the 70% range to 85%. While violations increased alongside scores, it demonstrated the models actively exercising flexibility.</li>
             <li><strong>The Power of Permission:</strong> The game mechanics and datasets remained identical to the multi-turn task. The performance leap was triggered by a single system prompt addition: telling the model it would be rewarded for deliberate, constraint-violating exploration moves.</li>
             <li><strong>Lack of Spontaneous Flexibility:</strong> Models do not exhibit cognitive flexibility autonomously. Despite having the capability to make exploratory moves in standard multi-turn games, they refrained until explicitly permitted, whereas humans naturally employ exploration to win.</li>

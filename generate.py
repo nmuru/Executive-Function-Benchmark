@@ -35,19 +35,19 @@ TASKS = [
 	{
         "id": "single-turn",
         "title": "Single-turn Wordle",
-        "description": "Evaluating executive function from a single Wordle decision. Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-single-turn-v2/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_single_turn_v2</a>."
+        "description": "Evaluating executive function from a single Wordle decision."
     },
 
     {
         "id": "multi-turn",
         "title": "Multi-turn Wordle",
-        "description": "Evaluating executive function and information gain across multi-turn gameplay. Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-multi-turn/2' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_multi_turn</a>."
+        "description": "Evaluating executive function and information gain across multi-turn gameplay."
     },
     
     {
         "id": "cognitive-flexibility",
         "title": "Cognitive Flexibility",
-        "description": "Evaluating adaptive reasoning and cognitive flexibility.  Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-cognitive-flexibility/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_cognitive_flexibility</a>."
+        "description": "Evaluating adaptive reasoning and cognitive flexibility."
     },
 ]
 
@@ -57,6 +57,10 @@ TASK_INSIGHTS = {
     <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
         <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
         <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-single-turn-v2/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_single_turn_v2</a></li>
+
+
             <li><strong>Metric Shift:</strong> Because single-turn win rates are inherently low, Information Gain proves to be a far more granular and robust metric for ranking models than standard win rates.</li>
             <li><strong>Model Divergence:</strong> Claude Sonnet outperforms Claude Opus, with a noticeably wider performance gap here than in multi-turn scenarios.</li>
             <li><strong>The Reasoning Imperative:</strong> A stark performance gap between Grok-reasoning and Grok-non-reasoning provides concrete proof that reasoning models are essential for Executive Function (EF) skills.</li>
@@ -70,7 +74,12 @@ TASK_INSIGHTS = {
     "multi-turn": """
     <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
         <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
+
+
         <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-multi-turn/2' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_multi_turn</a>.</li>
+
             <li><strong>Win Rate vs. Info Gain:</strong> As games progress to the 6th turn, the task becomes easier and win rates naturally spike from 7-8% to 70-80%, reducing the relative importance of the Information Gain metric compared to single-turn evaluations.</li>
             <li><strong>Frontier Dominance in State Tracking:</strong> The top five models remain largely consistent but reorder: GPT-5.5 takes second place and Claude Opus overtakes Gemma-4-31b. This shift occurs because multi-turn gameplay demands superior working memory and dynamic state tracking, giving larger frontier models an edge.</li>
             <li><strong>Inhibitory Control:</strong> Rule violations scale proportionally with overall scores, demonstrating that high-performing models possess superior working memory management and inhibitory control.</li>
@@ -83,6 +92,10 @@ TASK_INSIGHTS = {
     <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
         <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
         <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-cognitive-flexibility/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_cognitive_flexibility</a></li>
+
+
             <li><strong>Benchmark Validation:</strong> The Wordle framework successfully measures cognitive flexibility. By simply permitting rule exploration in the prompt, overall scores jumped from the 70% range to 85%. While violations increased alongside scores, it demonstrated the models actively exercising flexibility.</li>
             <li><strong>The Power of Permission:</strong> The game mechanics and datasets remained identical to the multi-turn task. The performance leap was triggered by a single system prompt addition: telling the model it would be rewarded for deliberate, constraint-violating exploration moves.</li>
             <li><strong>Lack of Spontaneous Flexibility:</strong> Models do not exhibit cognitive flexibility autonomously. Despite having the capability to make exploratory moves in standard multi-turn games, they refrained until explicitly permitted, whereas humans naturally employ exploration to win.</li>

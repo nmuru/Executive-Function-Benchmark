@@ -32,7 +32,7 @@ Multi-turn Wordle
 
 <p class="text-lg text-gray-600 mb-8">
 
-Evaluating executive function and information gain across multi-turn gameplay. Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-multi-turn/2' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_multi_turn</a>.
+Evaluating executive function and information gain across multi-turn gameplay.
 
 </p>
 
@@ -41,7 +41,12 @@ Evaluating executive function and information gain across multi-turn gameplay. D
 
     <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
         <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
+
+
         <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-multi-turn/2' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_multi_turn</a>.</li>
+
             <li><strong>Win Rate vs. Info Gain:</strong> As games progress to the 6th turn, the task becomes easier and win rates naturally spike from 7-8% to 70-80%, reducing the relative importance of the Information Gain metric compared to single-turn evaluations.</li>
             <li><strong>Frontier Dominance in State Tracking:</strong> The top five models remain largely consistent but reorder: GPT-5.5 takes second place and Claude Opus overtakes Gemma-4-31b. This shift occurs because multi-turn gameplay demands superior working memory and dynamic state tracking, giving larger frontier models an edge.</li>
             <li><strong>Inhibitory Control:</strong> Rule violations scale proportionally with overall scores, demonstrating that high-performing models possess superior working memory management and inhibitory control.</li>
