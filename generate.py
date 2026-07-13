@@ -2,6 +2,30 @@ import json
 import os
 import glob
 
+from datetime import datetime # ADD THIS IMPORT
+
+current_date = datetime.now().strftime("%B %d, %Y")
+
+FOOTER_HTML = f"""
+<div class="max-w-7xl mx-auto px-6">
+    <footer class="mt-8 border-t border-gray-200 pt-8 pb-10 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+        <div class="mb-4 md:mb-0 text-center md:text-left">
+            &copy; {datetime.now().year} N Murugesan. All rights reserved.
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-6 text-center md:text-right">
+            <span>Last updated: {current_date}</span>
+            <span>For questions or feedback, contact: <a href="mailto:nmurugs@gmail.com" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold">nmurugs@gmail.com</a></span>
+        </div>
+    </footer>
+</div>
+"""
+
+# ----------------------------------
+
+# --------------------------------------------------
+# Configuration
+# --------------------------------------------------
+
 # --------------------------------------------------
 # Configuration
 # --------------------------------------------------
@@ -1388,6 +1412,8 @@ for task in TASKS:
         .replace("{{TASK_INSIGHTS}}", task_insights_html) # NEW REPLACEMENT
     )
 
+    html = html.replace("</body>", FOOTER_HTML + "\n</body>")
+
     output = f"{task['id']}.html"
     with open(output, "w", encoding="utf-8") as f:
         f.write(html) 
@@ -1536,6 +1562,8 @@ home = (
     .replace(NAV_PLACEHOLDER, navigation("home"))
     .replace(COGNITIVE_DEGRADATION_PLACEHOLDER, combined_insights) 
 )
+
+home = home.replace("</body>", FOOTER_HTML + "\n</body>")
 
 with open(HOME_OUTPUT, "w", encoding="utf-8") as f:
     f.write(home)
