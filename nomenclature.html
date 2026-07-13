@@ -17,9 +17,70 @@
             <p class="text-lg text-gray-600 mt-4">A comprehensive guide to the psychological concepts, dashboard visualizations, and exact mathematical formulas used to evaluate AI models.</p>
         </header>
 
-        <section class="mb-12">
+
+
+<section class="mb-12">
             <div class="flex items-center gap-3 mb-4">
                 <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">1</span>
+                <h2 class="text-2xl font-bold text-gray-800">Scoring Mechanics & Maximum Scores</h2>
+            </div>
+
+
+ <div class="pl-11 grid grid-cols-1 gap-8">
+                
+                <div class="bg-gray-900 text-white rounded-xl p-6 shadow-md">
+                    <h3 class="text-xl font-bold border-b border-gray-700 pb-2 mb-4 text-blue-300">How Mechanics Drive the Score (Information Gain)</h3>
+                    <p class="text-gray-300 leading-relaxed text-sm">
+                        Instead of binary win/loss outcomes, this benchmark uses <strong>Shannon Entropy and Information Theory</strong>. Every guess a model makes is evaluated mathematically on its <strong>Information Gain (IG)</strong>—how effectively it narrows down the remaining possible word space. 
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-sm mt-3">
+                        A guess that eliminates 90% of the remaining search space scores much higher than a redundant guess, providing a continuous, high-fidelity metric of logical reasoning. Conversely, <strong>Rule Violations</strong> (e.g., using a known gray letter) directly penalize the score, seamlessly merging constraint satisfaction with probabilistic deduction.
+                    </p>
+                </div>
+
+
+            <div class="pl-11 text-gray-600 leading-relaxed space-y-4">
+                <p>
+                    The benchmark replaces binary win/loss metrics with a nuanced, continuous scoring system rooted in <strong>Information Theory</strong>. The total score for any turn or game is a composite of three metrics:
+                </p>
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 my-4">
+                    <ul class="space-y-4">
+                        <li>
+                            <strong class="text-blue-800 block text-lg">1. Information Gain (IG)</strong>
+                            <p class="text-sm mt-1">Calculates the Shannon Entropy reduction of the remaining word pool. A perfectly optimizing guess that maximally splits the remaining candidates yields an IG of <strong>1.0</strong>.</p>
+                        </li>
+                        <li>
+                            <strong class="text-blue-800 block text-lg">2. Success Bonus</strong>
+                            <p class="text-sm mt-1">A binary bonus of <strong>+1.0</strong> awarded exactly once when the model successfully identifies the final secret word.</p>
+                        </li>
+                        <li>
+                            <strong class="text-blue-800 block text-lg">3. Hallucination / Logic Penalty</strong>
+                            <p class="text-sm mt-1">If a model violates an established rule (e.g., guessing a word with a known 'gray' letter) and falsely claims it followed all constraints, a severe flat penalty of <strong>-0.3</strong> is applied.</p>
+                        </li>
+                    </ul>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">Theoretical vs. Attainable Maximums (2.0 Limits)</h3>
+                <p>
+                    Because the formula is <code class="bg-white border border-gray-300 text-gray-800 px-2 py-1 rounded text-sm font-mono shadow-sm">Information Gain + Success Bonus + Penalty</code>, the <strong>absolute theoretical maximum score for any benchmark task is 2.0</strong>. However, scoring approaches vary by task:
+                </p>
+                <ul class="list-disc pl-6 space-y-2 mt-2">
+                    <li><strong>Single-Turn Task:</strong> The score is evaluated on a single, isolated guess. While the theoretical limit is 2.0, in practice, a successful guess (earning the 1.0 Bonus) typically occurs when the remaining word pool is very small. Because Information Gain is tied to reducing mathematical uncertainty, a small starting pool yields a low Information Gain score. Therefore, a perfect 2.0 is functionally impossible, as it would require blindly guessing the exact secret word from a massive pool of initial candidates.</li>
+                    <li><strong>Multi-Turn Task:</strong> The final game score averages the Information Gain across all turns, adds the final Success Bonus, and subtracts any accrued penalties.</li>
+                    <li><strong>Cognitive Flexibility Task (The "Exploration Trade-off"):</strong> While the theoretical max remains 2.0, the dataset is engineered with adversarial "rabbit hole" puzzles. To escape these traps, models must output an Exploration Move (<code class="bg-white border border-gray-300 text-gray-800 px-2 py-1 rounded text-sm font-mono shadow-sm">,Y</code>). This move protects the model from the -0.3 penalty but <strong>forfeits the Information Gain (0.0)</strong> for that turn. Consequently, scores on this task rarely approach 2.0, as models strategically sacrifice immediate points to secure the win.</li>
+                </ul>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">2</span>
                 <h2 class="text-2xl font-bold text-gray-800">Data Source</h2>
             </div>
             <div class="pl-11">
@@ -35,7 +96,7 @@
 
         <section class="mb-12">
             <div class="flex items-center gap-3 mb-4">
-                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">2</span>
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">3</span>
                 <h2 class="text-2xl font-bold text-gray-800">What is Executive Function?</h2>
             </div>
             <div class="pl-11 text-gray-600 leading-relaxed space-y-4">
@@ -50,7 +111,7 @@
 
         <section class="mb-12">
             <div class="flex items-center gap-3 mb-4">
-                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">3</span>
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">4</span>
                 <h2 class="text-2xl font-bold text-gray-800">Why Wordle? Reasoning vs. Executive Function</h2>
             </div>
             <div class="pl-11 text-gray-600 leading-relaxed space-y-6">
@@ -88,7 +149,7 @@
 
         <section class="mb-12">
             <div class="flex items-center gap-3 mb-6">
-                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">4</span>
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">5</span>
                 <h2 class="text-2xl font-bold text-gray-800">The Core Psychological Pillars</h2>
             </div>
             <div class="pl-11 space-y-8">
@@ -121,7 +182,7 @@
 
         <section class="mb-12">
             <div class="flex items-center gap-3 mb-4">
-                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">5</span>
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">6</span>
                 <h2 class="text-2xl font-bold text-gray-800">Dashboard Visualizations & Panes</h2>
             </div>
             <div class="pl-11">
@@ -158,30 +219,24 @@
 
         <section class="mb-8">
             <div class="flex items-center gap-3 mb-6">
-                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">6</span>
-                <h2 class="text-2xl font-bold text-gray-800">Metrics, Scoring & Formulas</h2>
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">7</span>
+                <h2 class="text-2xl font-bold text-gray-800">Composite Score Based on Cognitive Pillars</h2>
             </div>
             
-            <div class="pl-11 grid grid-cols-1 gap-8">
-                
-                <div class="bg-gray-900 text-white rounded-xl p-6 shadow-md">
-                    <h3 class="text-xl font-bold border-b border-gray-700 pb-2 mb-4 text-blue-300">How Mechanics Drive the Score (Information Gain)</h3>
-                    <p class="text-gray-300 leading-relaxed text-sm">
-                        Instead of binary win/loss outcomes, this benchmark uses <strong>Shannon Entropy and Information Theory</strong>. Every guess a model makes is evaluated mathematically on its <strong>Information Gain (IG)</strong>—how effectively it narrows down the remaining possible word space. 
-                    </p>
-                    <p class="text-gray-300 leading-relaxed text-sm mt-3">
-                        A guess that eliminates 90% of the remaining search space scores much higher than a redundant guess, providing a continuous, high-fidelity metric of logical reasoning. Conversely, <strong>Rule Violations</strong> (e.g., using a known gray letter) directly penalize the score, seamlessly merging constraint satisfaction with probabilistic deduction.
-                    </p>
-                </div>
+           
 
                 <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
                     <h3 class="text-xl font-bold text-gray-900 border-b pb-2 mb-4">Core Cognitive Formulas</h3>
                     <ul class="space-y-5 text-gray-700">
-                        <li>
-                            <strong class="text-blue-700 block text-lg">Working Memory (Drift) Score</strong>
-                            Multi-turn violations act as a direct proxy for context drift over time. Lower is better.<br>
-                            <code class="mt-2 inline-block bg-white border border-gray-300 text-gray-800 p-2 rounded text-sm font-mono shadow-sm">Drift = Average Multi-Turn Violations (MT_Violations)</code>
+                        
+
+			<li>
+                            <strong class="text-blue-700 block text-lg">Working Memory (Drift / Stress Test) Score</strong>
+Multi-turn violations act as a direct proxy for context drift over time. Lower is better.<br>
+<code class="mt-2 inline-block bg-white border border-gray-300 text-gray-800 p-2 rounded text-sm font-mono shadow-sm">Drift = MT_Violations - ST_Violations</code>
+<p class="text-sm mt-2 text-gray-600"><em>Note:</em> Currently, Single-Turn (ST) violations are virtually zero across models due to strict instruction following in a constrained prompt. This effectively makes the MT violations themselves the baseline drift score. Future datasets and system prompts can be engineered to increase single-turn difficulty, providing a more dynamic baseline.</p>
                         </li>
+
                         <li>
                             <strong class="text-blue-700 block text-lg mt-4">Inhibitory Control Score</strong>
                             Measures the exact spike in rule-breaking behavior caused by the stress of shifting rules. Lower is better.<br>
