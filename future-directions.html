@@ -77,9 +77,38 @@
             </h4>
             <p class="text-gray-700 text-sm leading-relaxed">
                 In current benchmark designs, Cognitive Flexibility is often aided by system prompts that explicitly outline strategic pathways. True cognitive flexibility, however, is autonomous. Future evaluations will feature adversarial game states designed to provoke strategic pivots <em>without</em> explicit instructions. The goal is to measure whether models can independently recognize when a heuristic is failing and invent a new strategy on the fly, demonstrating genuine adaptive reasoning.
+            </p> </div>
+
+
+<div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-pink-100 text-pink-800 text-xs font-bold px-2 py-0.5 rounded">6</span>
+                GRPO Training and Target Baselines
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                We plan to utilize GRPO (Group Relative Policy Optimization) to train a compact model (e.g., ~8B parameters) specifically for this Wordle environment. Our working hypothesis is that while focused training may not improve generalized Executive Function, it will significantly boost task scores by hardcoding requisite reasoning circuits, such as the Information Gain optimization function. We anticipate that sub-10B models might still hit a cognitive "parameter wall" compared to massive frontier models (and while 20B-30B models show great promise, training them exceeds our current compute infrastructure). However, if successful in overcoming these capacity limits, this hyper-specialized small model will establish a highly optimized target benchmark—akin to a human expert baseline—setting a definitive ceiling for generalized frontier models to strive toward.
             </p>
         </div>
+
+
+<!-- Looking Forward Banner -->
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mt-8 rounded-r-lg shadow-sm">
+        <h4 class="text-lg font-bold text-yellow-900 mb-3 flex items-center gap-2">
+            🚀 Looking Forward: Benchmark Overfitting, Circuit Generation, and AGI
+        </h4>
+        <p class="text-gray-800 text-sm leading-relaxed mb-3">
+            The greatest architectural advantage of this Wordle benchmark is its inherent resistance to test set leakage and benchmark overfitting. Because the dataset of game states is dynamic and mathematically near-infinite, models cannot rely on standard fine-tuning or dataset memorization to game the leaderboard. To "overfit" and beat this benchmark, developers would have to fundamentally engineer specific, hardcoded reasoning circuits tailored entirely to solving this exact puzzle.
+        </p>
+        <p class="text-gray-800 text-sm leading-relaxed mb-3">
+            Currently, if a standard LLM possesses a reasoning circuit for a specific problem, it simply processes the inputs and outputs the solution—often using reasoning tokens for post-hoc explanation rather than true step-by-step deduction. Wordle game necessarily requires step-by-step reasoning as shown by better performance of reasoning models. The ultimate frontier for AGI is the capacity to build <strong>reasoning circuits on-the-fly during inference</strong>. Until models achieve this dynamic test-time circuit assembly, this benchmark remains a flawless, incorruptible proxy for measuring genuine Executive Function.
+        </p>
+        <p class="text-gray-800 text-sm leading-relaxed">
+            Because Executive Function operates as a higher-order cognitive controller—naturally orchestrating foundational LLM skills like logical reasoning, instruction following, mathematical optimization, and state-tracking—this benchmark will remain a critical and definitive standard for ranking AI models on their trajectory toward Artificial General Intelligence.
+        </p>
     </div>
+
+</div>
+         
 </div>
 
     </div>
