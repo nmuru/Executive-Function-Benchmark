@@ -58,7 +58,7 @@ TASK_INSIGHTS = {
         <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
         <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
 
-<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-single-turn-v2/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_6L_single_turn</a></li>
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/murugesann/wordle-benchmark-6letter-singleturn' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_6L_single_turn</a></li>
 
 
             <li><strong>Metric Shift:</strong> Because single-turn win rates are inherently low, Information Gain proves to be a far more granular and robust metric for ranking models than standard win rates.</li>
@@ -78,7 +78,7 @@ TASK_INSIGHTS = {
 
         <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
 
-<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-multi-turn/2' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_6Lwordle_multi_turn</a>.</li>
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-6lwordle-multi-turn' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_6Lwordle_multi_turn</a>.</li>
 
             <li><strong>Win Rate vs. Info Gain:</strong> As games progress to the 6th turn, the task becomes easier and win rates naturally spike from 7-8% to 70-80%, reducing the relative importance of the Information Gain metric compared to single-turn evaluations.</li>
             <li><strong>Frontier Dominance in State Tracking:</strong> The top five models remain largely consistent but reorder: GPT-5.5 takes second place and Claude Opus overtakes Gemma-4-31b. This shift occurs because multi-turn gameplay demands superior working memory and dynamic state tracking, giving larger frontier models an edge.</li>
@@ -93,7 +93,7 @@ TASK_INSIGHTS = {
         <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
         <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
 
-<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-cognitive-flexibility/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_6Lwordle_cognitive_flexibility</a></li>
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-6lwordle-cognitive-flexibility' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_6Lwordle_cognitive_flexibility</a></li>
 
 
             <li><strong>Benchmark Validation:</strong> The Wordle framework successfully measures cognitive flexibility. By simply permitting rule exploration in the prompt, overall scores jumped from the 70% range to 85%. While violations increased alongside scores, it demonstrated the models actively exercising flexibility.</li>
