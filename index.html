@@ -129,11 +129,15 @@
   <div class="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Notes</div>
   <h2 class="mt-1 text-2xl font-bold">Notes</h2>
   <div class="mt-5 bg-white border border-slate-200 rounded-2xl p-6 text-sm text-slate-600 leading-relaxed">
-    <p><sup>*</sup> The deterministic solver score is the maximum possible score when the Wordle game is solved by a Python program using the entire word list and search tools.</p>
-    <p class="mt-3">The Wordle game scores are scaled against the deterministic solver score. Thus, if a solver-normalized score is 85%, it represents a 15% gap relative to the maximum possible score.</p>
-    <p class="mt-3">The deterministic solver feature is applicable only to 6L Wordle and has not been performed for 5L Wordle.</p>
-    <p class="mt-3">For 5-letter Wordle, Single-Turn uses only <code>evaluate_wordle_single_turn_v2</code>, which covers 200 rows (200 API calls), while the 6-letter Single-Turn task covers 40 rows. The 5L task weights are 20% Single-Turn, 50% Multi-Turn and 30% Cognitive Flexibility. The 6L task weights are 10% Single-Turn, 50% Multi-Turn and 40% Cognitive Flexibility. The overall Wordle score is the equal-weight average of the resulting 5L and 6L weighted scores.</p>
-    <p class="mt-3">The front-page model set is discovered automatically from the current leaderboard CSVs. A model is included only when all required Wordle tasks are present in both the 5L and 6L files. Model versions are not substituted for one another, so Claude Opus 4.8 and Claude Opus 5 are treated as separate models.</p>
+    <ul class="list-disc pl-5 space-y-4">
+      <li><sup>*</sup> The deterministic solver score is the maximum possible score when the Wordle game is solved by a Python program using the entire word list and search tools.</li>
+      <li>Wordle game scores are scaled against the deterministic solver score. Thus, if a solver-normalized score is 85%, it represents a 15% gap relative to the maximum possible score.</li>
+      <li>The deterministic solver feature applies only to 6L Wordle and has not been performed for 5L Wordle.</li>
+      <li><strong>6L success-bonus tiering:</strong> Compared with 5-letter Wordle, the 6-letter benchmark uses a tiered success reward based on the turn in which the model identifies the correct secret word. Earlier success receives a higher reward, while success on later turns receives a progressively lower reward. A model that finds the correct word only on the sixth and final turn therefore receives the lowest success reward for a successful game.</li>
+      <li><strong>Single-Turn coverage and task weights:</strong> For 5-letter Wordle, Single-Turn uses only <code>evaluate_wordle_single_turn_v2</code>, which covers 200 rows (200 API calls), while the 6-letter Single-Turn task covers 40 rows. The 5L task weights are 20% Single-Turn, 50% Multi-Turn and 30% Cognitive Flexibility. The 6L task weights are 10% Single-Turn, 50% Multi-Turn and 40% Cognitive Flexibility.</li>
+      <li>The overall Wordle score is the equal-weight average of the resulting weighted 5L and 6L benchmark scores.</li>
+      <li>The front-page model set is discovered automatically from the current leaderboard CSVs. A model is included only when all required Wordle tasks are present in both the 5L and 6L files. Model versions are not substituted for one another, so Claude Opus 4.8 and Claude Opus 5 are treated as separate models.</li>
+    </ul>
   </div>
 </section>
 
