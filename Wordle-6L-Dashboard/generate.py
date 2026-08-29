@@ -207,7 +207,7 @@ def navigation(active):
     if active == "home":
         links.append('<span class="font-bold text-blue-600">Home</span>')
     else:
-        links.append('<a href="index.html" class="hover:text-blue-600">Home</a>')
+        links.append('<a href="../index.html" class="hover:text-blue-600">Home</a>')
         
     # Task links
     for task in TASKS:
