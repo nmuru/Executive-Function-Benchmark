@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle-Bench Nomenclature & Methodology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased p-6 md:p-12">
+
+    <div class="max-w-5xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg border border-gray-100">
+        <header class="mb-12 border-b pb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h1 class="text-4xl font-extrabold text-gray-900 leading-tight">Executive Function Benchmark<br><span class="text-2xl text-blue-600 font-semibold">Based on Wordle Mechanics</span></h1>
+                <a href="index.html" class="text-blue-600 hover:text-blue-800 font-bold transition-colors bg-blue-50 px-4 py-2 rounded-lg">&larr; Back to Dashboard</a>
+            </div>
+            <p class="text-lg text-gray-600 mt-4">A comprehensive guide to the psychological concepts, dashboard visualizations, and exact mathematical formulas used to evaluate AI models.</p>
+        </header>
+
+
+
+<section class="mb-12">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">1</span>
+                <h2 class="text-2xl font-bold text-gray-800">Scoring Mechanics & Maximum Scores</h2>
+            </div>
+
+
+ <div class="pl-11 grid grid-cols-1 gap-8">
+                
+                <div class="bg-gray-900 text-white rounded-xl p-6 shadow-md">
+                    <h3 class="text-xl font-bold border-b border-gray-700 pb-2 mb-4 text-blue-300">How Mechanics Drive the Score (Information Gain)</h3>
+                    <p class="text-gray-300 leading-relaxed text-sm">
+                        Instead of binary win/loss outcomes, this benchmark uses <strong>Shannon Entropy and Information Theory</strong>. Every guess a model makes is evaluated mathematically on its <strong>Information Gain (IG)</strong>—how effectively it narrows down the remaining possible word space. 
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-sm mt-3">
+                        A guess that eliminates 90% of the remaining search space scores much higher than a redundant guess, providing a continuous, high-fidelity metric of logical reasoning. Conversely, <strong>Rule Violations</strong> (e.g., using a known gray letter) directly penalize the score, seamlessly merging constraint satisfaction with probabilistic deduction.
+                    </p>
+                </div>
+
+
+            <div class="pl-11 text-gray-600 leading-relaxed space-y-4">
+                <p>
+                    The benchmark replaces binary win/loss metrics with a nuanced, continuous scoring system rooted in <strong>Information Theory</strong>. The total score for any turn or game is a composite of three metrics:
+                </p>
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 my-4">
+                    <ul class="space-y-4">
+                        <li>
+                            <strong class="text-blue-800 block text-lg">1. Information Gain (IG)</strong>
+                            <p class="text-sm mt-1">Calculates the Shannon Entropy reduction of the remaining word pool. A perfectly optimizing guess that maximally splits the remaining candidates yields an IG of <strong>1.0</strong>.</p>
+                        </li>
+                        <li>
+                            <strong class="text-blue-800 block text-lg">2. Success Bonus</strong>
+                            <p class="text-sm mt-1">A binary bonus of <strong>+1.0</strong> awarded exactly once when the model successfully identifies the final secret word.</p>
+                        </li>
+                        <li>
+                            <strong class="text-blue-800 block text-lg">3. Hallucination / Logic Penalty</strong>
+                            <p class="text-sm mt-1">If a model violates an established rule (e.g., guessing a word with a known 'gray' letter) and falsely claims it followed all constraints, a severe flat penalty of <strong>-0.3</strong> is applied.</p>
+                        </li>
+                    </ul>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">Theoretical vs. Attainable Maximums (2.0 Limits)</h3>
+                <p>
+                    Because the formula is <code class="bg-white border border-gray-300 text-gray-800 px-2 py-1 rounded text-sm font-mono shadow-sm">Information Gain + Success Bonus + Penalty</code>, the <strong>absolute theoretical maximum score for any benchmark task is 2.0</strong>. However, scoring approaches vary by task:
+                </p>
+                <ul class="list-disc pl-6 space-y-2 mt-2">
+                    <li><strong>Single-Turn Task:</strong> The score is evaluated on a single, isolated guess. While the theoretical limit is 2.0, in practice, a successful guess (earning the 1.0 Bonus) typically occurs when the remaining word pool is very small. Because Information Gain is tied to reducing mathematical uncertainty, a small starting pool yields a low Information Gain score. Therefore, a perfect 2.0 is functionally impossible, as it would require blindly guessing the exact secret word from a massive pool of initial candidates.</li>
+                    <li><strong>Multi-Turn Task:</strong> The final game score averages the Information Gain across all turns, adds the final Success Bonus, and subtracts any accrued penalties.</li>
+                    <li><strong>Cognitive Flexibility Task (The "Exploration Trade-off"):</strong> While the theoretical max remains 2.0, the dataset is engineered with adversarial "rabbit hole" puzzles. To escape these traps, models must output an Exploration Move (<code class="bg-white border border-gray-300 text-gray-800 px-2 py-1 rounded text-sm font-mono shadow-sm">,Y</code>). This move protects the model from the -0.3 penalty but <strong>forfeits the Information Gain (0.0)</strong> for that turn. Consequently, scores on this task rarely approach 2.0, as models strategically sacrifice immediate points to secure the win.</li>
+                </ul>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">2</span>
+                <h2 class="text-2xl font-bold text-gray-800">Data Source</h2>
+            </div>
+            <div class="pl-11">
+                <p class="text-gray-600 leading-relaxed">
+                    The dashboard utilizes AI performance data extracted from the rigorous Kaggle benchmarking environment. Frontier language models are evaluated against adversarial Wordle datasets and strictly scored based on information-theoretic metrics.
+                </p>
+                <div class="mt-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <p class="text-sm text-gray-600">For detailed task construction, datasets, and competition rules, refer to the official Kaggle track: <br>
+                    <a href="https://www.kaggle.com/benchmarks/murugesann/executivefunction-infogain-wordle-bench" target="_blank" class="text-blue-600 font-mono hover:underline">Wordle InfoGain Benchmark on Kaggle</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">3</span>
+                <h2 class="text-2xl font-bold text-gray-800">What is Executive Function?</h2>
+            </div>
+            <div class="pl-11 text-gray-600 leading-relaxed space-y-4">
+                <p>
+                    <strong>Executive Function (EF)</strong> is recognized as one of the critical AGI (Artificial General Intelligence) skills by institutions such as Google DeepMind. Derived directly from human cognitive psychology, Executive Function encompasses the higher-order processes necessary for the dynamic control of behavior.
+                </p>
+                <p>
+                    Rather than relying purely on pre-trained factual knowledge, EF dictates a model's ability to plan, focus attention, adapt to novel situations, and regulate outputs under pressure. It constitutes three core components: <strong>Working Memory, Cognitive Flexibility, and Inhibitory Control.</strong>
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">4</span>
+                <h2 class="text-2xl font-bold text-gray-800">Why Wordle? Reasoning vs. Executive Function</h2>
+            </div>
+            <div class="pl-11 text-gray-600 leading-relaxed space-y-6">
+                
+                <p>
+                    A common question is: <em>Why use a Wordle game instead of established benchmarks like BBH (BIG-bench Hard)?</em> 
+                </p>
+                <p>
+                    While traditional benchmarks like BBH are excellent at measuring static <strong>reasoning abilities</strong> (e.g., solving a logic puzzle in a single prompt), research shows that raw reasoning is not the same as Executive Function. EF is highly dynamic. It requires state-tracking, impulse suppression, and real-time adaptation—necessitating a completely separate benchmark framework. 
+                </p>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mt-4">
+                    <h3 class="text-xl font-bold text-gray-900 border-b border-blue-200 pb-4 mb-4">How Wordle Mechanics Perfectly Isolate EF Skills:</h3>
+                    <ul class="space-y-6 text-gray-700 text-sm">
+                        <li>
+                            <strong class="text-blue-800 text-base block mb-1">1. Single-Turn Working Memory (Reasoning vs. EF)</strong>
+                            This benchmark exposes the critical boundary between traditional reasoning and Executive Function. Even in a single-turn Wordle state, maintaining a long, strict list of constraints (e.g., specific letter positions and known dead letters) requires a highly resilient working memory. We have observed that models possessing exceptional reasoning logic (e.g., DeepSeek) or highly elaborate reasoning traces (e.g., Qwen) frequently fail the single-turn test. Their reasoning pathways become so complex that their working memory degrades mid-prompt, causing them to forget foundational constraints.
+                        </li>
+                        <li>
+                            <strong class="text-blue-800 text-base block mb-1">2. Multi-Context Working Memory</strong>
+                            Beyond single turns, Wordle requires maintaining a continuously expanding web of constraints. As a multi-turn game progresses, the model must simultaneously remember known green, yellow, and gray letters across an extended interaction. This state-tracking becomes exponentially more difficult with each turn, perfectly simulating context degradation and working memory strain.
+                        </li>
+                        <li>
+                            <strong class="text-blue-800 text-base block mb-1">3. Cognitive Flexibility</strong>
+                            Wordle is a strict constraint-satisfaction environment. By dynamically altering the rules mid-game (e.g., changing dictionary constraints or altering how feedback is interpreted), the game acts as a perfect sandbox to measure how quickly a model can abandon an old paradigm and adopt a new one.
+                        </li>
+                        <li>
+                            <strong class="text-blue-800 text-base block mb-1">4. Inhibitory Control</strong>
+                            LLMs are fundamentally predictive text engines that want to output high-frequency tokens. In Wordle, models face the immense temptation to guess a common, statistically likely word (e.g., "AUDIO") even when the letter 'A' is a known gray constraint. Suppressing that statistical impulse to calculate a valid word requires true inhibitory control.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">5</span>
+                <h2 class="text-2xl font-bold text-gray-800">The Core Psychological Pillars</h2>
+            </div>
+            <div class="pl-11 space-y-8">
+                
+                
+
+<div class="border-l-4 border-blue-500 pl-4">
+    <h3 class="text-xl font-bold text-gray-800 mb-2">Working Memory (Drift Resistance)</h3>
+    <p class="text-gray-600"><strong>What it is:</strong> The cognitive system responsible for temporarily holding and manipulating information. In LLMs, this translates to context retention over extended interactions. It is important to note that the Wordle game in its entirety perfectly captures a model's working memory capability, as merely playing the game successfully requires maintaining a continuous, complex state.</p>
+    <p class="text-gray-600 mt-2"><strong>How we measure it:</strong> While the overall game is already a holistic test of working memory, we try to quantify this specific component directly based on wordle game performance. We achieve this by defining an isolated <strong>proxy</strong> based on the game's outputs. By tracking multi-turn rule violations (e.g., forgetting a known "dead letter" on guess #4), we create a rigorous, mathematical proxy that explicitly measures context degradation and memory drift over time. The beauty of using the Wordle game as a benchmark is that it has tremendous potential for analyzing EF skills. By reconstructing datasets, changing scoring metrics, and evaluating different outputs, we can develop more complex and robust metrics to further isolate these critical AGI skills.</p>
+</div>
+
+
+
+
+
+                <div class="border-l-4 border-purple-500 pl-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Cognitive Flexibility</h3>
+                    <p class="text-gray-600"><strong>What it is:</strong> The mental ability to switch seamlessly between different concepts or adapt strategies when the environment suddenly changes.</p>
+                    <p class="text-gray-600 mt-2"><strong>How we measure it:</strong> Tested via the Cognitive Flexibility Task. Mid-evaluation, foundational rules (like dictionaries or logic constraints) are dynamically shifted. Flexible models adapt instantly to the new paradigm, while rigid models fail.</p>
+                </div>
+
+                <div class="border-l-4 border-green-500 pl-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Inhibitory Control</h3>
+                    <p class="text-gray-600"><strong>What it is:</strong> The ability to suppress impulsive, dominant responses in favor of deliberate, rule-aligned behavior, especially under stress.</p>
+                    <p class="text-gray-600 mt-2"><strong>How we measure it:</strong> Measured by observing the spike in rule violations when models transition from standard gameplay to the chaotic Cognitive Flexibility task. Emotionally/structurally stable models suppress the impulse to guess blindly and maintain composure.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">6</span>
+                <h2 class="text-2xl font-bold text-gray-800">Dashboard Visualizations & Panes</h2>
+            </div>
+            <div class="pl-11">
+                <p class="text-gray-600 mb-6">A guide to the specific components displayed on the benchmark dashboard, in order of appearance:</p>
+                
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-gray-900">Interactive Executive Function Synthesis (Bar Chart)</h4>
+                        <p class="text-gray-600 text-sm mt-1">An adjustable visualization that ranks models based on a weighted synthesis of the three cognitive pillars. Users can dynamically adjust the weights to see how different evaluation priorities reshape the leaderboard.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-gray-900">Cognitive Degradation: Working Memory Stress Test</h4>
+                        <p class="text-gray-600 text-sm mt-1">Tracks the rule violation rate between isolated single-turn states and continuous multi-turn states to highlight which models suffer from severe context drift over prolonged interactions. While some models achieve zero violations in simple states, future iterations of this benchmark will introduce higher-complexity adversarial constraints to establish an even more granular baseline for memory degradation.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-gray-900">Executive Function Pillars (Table)</h4>
+                        <p class="text-gray-600 text-sm mt-1">A raw tabular breakdown of the three core psychological traits. It isolates the specific scores for Drift, Flexibility, and Inhibition used to calculate the overall EF index.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-gray-900">Strategy vs. Capability Quadrant</h4>
+                        <p class="text-gray-600 text-sm mt-1">Maps a model's cognitive performance against its resource verbosity. Identifies models that are "strategically efficient" versus those that rely on brute-force token generation to achieve high scores.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-gray-900">Constraint Adherence & Rule Compliance</h4>
+                        <p class="text-gray-600 text-sm mt-1">Measures how strictly a model obeys the mathematical boundaries of the task. Tracks explicit logic violations, such as ignoring positional clues or reusing confirmed dead letters.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-gray-900">Resource & Efficiency Metrics (Found on Task Pages)</h4>
+                        <p class="text-gray-600 text-sm mt-1">Evaluates the operational footprint and hardware cost-effectiveness of the models, tracking financial cost, velocity (speed), and output conciseness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-blue-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center">7</span>
+                <h2 class="text-2xl font-bold text-gray-800">Composite Score Based on Cognitive Pillars</h2>
+            </div>
+            
+           
+
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 border-b pb-2 mb-4">Core Cognitive Formulas</h3>
+                    <ul class="space-y-5 text-gray-700">
+                        
+
+			<li>
+                            <strong class="text-blue-700 block text-lg">Working Memory (Drift / Stress Test) Score</strong>
+Multi-turn violations act as a direct proxy for context drift over time. Lower is better.<br>
+<code class="mt-2 inline-block bg-white border border-gray-300 text-gray-800 p-2 rounded text-sm font-mono shadow-sm">Drift = MT_Violations - ST_Violations</code>
+<p class="text-sm mt-2 text-gray-600"><em>Note:</em> Currently, Single-Turn (ST) violations are virtually zero across models due to strict instruction following in a constrained prompt. This effectively makes the MT violations themselves the baseline drift score. Future datasets and system prompts can be engineered to increase single-turn difficulty, providing a more dynamic baseline.</p>
+                        </li>
+
+                        <li>
+                            <strong class="text-blue-700 block text-lg mt-4">Inhibitory Control Score</strong>
+                            Measures the exact spike in rule-breaking behavior caused by the stress of shifting rules. Lower is better.<br>
+                            <code class="mt-2 inline-block bg-white border border-gray-300 text-gray-800 p-2 rounded text-sm font-mono shadow-sm">Inhibition Failure = MAX(0, CF_Violations - MT_Violations)</code>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 border-b pb-2 mb-4">Resource & Efficiency Formulas</h3>
+                    <ul class="space-y-5 text-gray-700">
+                        <li>
+                            <strong class="text-blue-700 block text-lg">Bang-for-Buck</strong>
+                            Measures cognitive output per dollar spent on API compute. Higher is better.<br>
+                            <code class="mt-2 inline-block bg-white border border-gray-300 text-gray-800 p-2 rounded text-sm font-mono">Score / Cost ($)</code>
+                        </li>
+                        <li>
+                            <strong class="text-blue-700 block text-lg mt-4">Velocity</strong>
+                            The speed of logical reasoning. How much positive score is generated per minute. Higher is better.<br>
+                            <code class="mt-2 inline-block bg-white border border-gray-300 text-gray-800 p-2 rounded text-sm font-mono">Score / Time (Minutes)</code>
+                        </li>
+                        <li>
+                            <strong class="text-blue-700 block text-lg mt-4">Information Density</strong>
+                            Evaluates how effectively a model uses its output tokens without rambling. Scaled for readability. Higher is better.<br>
+                            <code class="mt-2 inline-block bg-white border border-gray-300 text-gray-800 p-2 rounded text-sm font-mono">(Score / Output_Tokens) * 10,000</code>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-500 text-sm mt-12 border-t pt-6">
+            <p>Wordle-Bench &copy; 2026. Designed for comprehensive next-generation AI assessment.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

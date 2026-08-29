@@ -1,0 +1,6 @@
+claude-opus-5 - 0.653
+gemini-3.1-pro - 0.724
+gemini-3.6-flash - 0.647
+gemma-4-31b - 0.589
+gpt-5.6-sol - 0.673
+grok-4.2-reasoning - 0.584

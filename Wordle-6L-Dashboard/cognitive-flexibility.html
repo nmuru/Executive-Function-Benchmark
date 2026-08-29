@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Cognitive Flexibility</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body class="bg-gray-50">
+
+<div class="max-w-7xl mx-auto py-8 px-6">
+
+<nav class="mb-10 text-gray-700">
+
+<a href="index.html" class="hover:text-blue-600">Home</a> | <a href="single-turn.html" class="hover:text-blue-600">Single-turn Wordle</a> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <span class="font-bold text-blue-600">Cognitive Flexibility</span> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a> | <a href="future-directions.html" class="hover:text-blue-600">Future Directions</a>
+
+</nav>
+
+<h1 class="text-4xl font-extrabold mb-2">
+
+Cognitive Flexibility
+
+</h1>
+
+<p class="text-lg text-gray-600 mb-8">
+
+Evaluating adaptive reasoning and cognitive flexibility.
+
+</p>
+
+
+<!-- Insights Placeholder -->
+
+    <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
+        <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-cognitive-flexibility/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_6Lwordle_cognitive_flexibility</a></li>
+
+
+            <li><strong>Benchmark Validation:</strong> The Wordle framework successfully measures cognitive flexibility. By simply permitting rule exploration in the prompt, overall scores jumped from the 70% range to 85%. While violations increased alongside scores, it demonstrated the models actively exercising flexibility.</li>
+            <li><strong>The Power of Permission:</strong> The game mechanics and datasets remained identical to the multi-turn task. The performance leap was triggered by a single system prompt addition: telling the model it would be rewarded for deliberate, constraint-violating exploration moves.</li>
+            <li><strong>Lack of Spontaneous Flexibility:</strong> Models do not exhibit cognitive flexibility autonomously. Despite having the capability to make exploratory moves in standard multi-turn games, they refrained until explicitly permitted, whereas humans naturally employ exploration to win.</li>
+            <li><strong>Enterprise Takeaway:</strong> AI models are heavily biased toward strict rule adherence. For enterprise use cases requiring EF skills, developers must explicitly map out permissible flexibility boundaries in the system prompt (e.g., <code>skills.md</code>) rather than expecting models to adapt on their own.</li>
+            <li><strong>Open-Source Surprises:</strong> The open-source Gemma-4-31b outperformed the significantly more expensive Gemini 3 Preview in cognitive flexibility, warranting deeper study into Gemma's architecture and training patterns.</li>
+        </ul>
+    </div>
+    
+
+
+<!-- TOP TABLE: Cognitive Scores -->
+<div class="bg-white rounded-lg shadow border overflow-hidden">
+
+<table class="w-full text-left">
+
+<thead>
+
+<tr class="bg-gray-100 uppercase text-xs">
+
+<th class="py-4 px-6">Rank</th>
+
+<th class="py-4 px-6">Model</th>
+
+<th class="py-4 px-6">Overall Score</th>
+
+<th class="py-4 px-6">Win Rate</th>
+
+<th class="py-4 px-6">Avg Violations</th>
+
+<th class="py-4 px-6">API Error Rate</th>
+
+<th class="py-4 px-6">Penalty</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-yellow-600 font-bold text-lg">1</td>
+<td class="py-4 px-6 border-b font-semibold">gemini-3.1-pro-preview</td>
+<td class="py-4 px-6 border-b font-mono">0.3650</td>
+<td class="py-4 px-6 border-b">79.5%</td>
+<td class="py-4 px-6 border-b text-red-600 font-semibold">1.154</td>
+<td class="py-4 px-6 border-b">2.5%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-gray-500 font-bold text-lg">2</td>
+<td class="py-4 px-6 border-b font-semibold">gpt-5.6-sol</td>
+<td class="py-4 px-6 border-b font-mono">0.3638</td>
+<td class="py-4 px-6 border-b">80.0%</td>
+<td class="py-4 px-6 border-b text-red-600 font-semibold">1.700</td>
+<td class="py-4 px-6 border-b">0.0%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-yellow-800 font-bold text-lg">3</td>
+<td class="py-4 px-6 border-b font-semibold">gemini-3.6-flash</td>
+<td class="py-4 px-6 border-b font-mono">0.3492</td>
+<td class="py-4 px-6 border-b">78.9%</td>
+<td class="py-4 px-6 border-b text-red-600 font-semibold">1.342</td>
+<td class="py-4 px-6 border-b">5.0%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-gray-700">4</td>
+<td class="py-4 px-6 border-b font-semibold">claude-opus-5</td>
+<td class="py-4 px-6 border-b font-mono">0.3457</td>
+<td class="py-4 px-6 border-b">70.0%</td>
+<td class="py-4 px-6 border-b text-red-600 font-semibold">0.950</td>
+<td class="py-4 px-6 border-b">0.0%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-gray-700">5</td>
+<td class="py-4 px-6 border-b font-semibold">gemini-4-31b</td>
+<td class="py-4 px-6 border-b font-mono">0.3383</td>
+<td class="py-4 px-6 border-b">71.1%</td>
+<td class="py-4 px-6 border-b text-red-600 font-semibold">1.211</td>
+<td class="py-4 px-6 border-b">5.0%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-gray-700">6</td>
+<td class="py-4 px-6 border-b font-semibold">grok-4.2-reasoning</td>
+<td class="py-4 px-6 border-b font-mono">0.3363</td>
+<td class="py-4 px-6 border-b">79.5%</td>
+<td class="py-4 px-6 border-b text-red-600 font-semibold">1.974</td>
+<td class="py-4 px-6 border-b">2.5%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- BOTTOM TABLE: Resource Metrics -->
+<!-- Placed inside the max-w-7xl container to perfectly align with the top table -->
+
+
+
+</div>
+
+
+<div class="max-w-7xl mx-auto px-6">
+    <footer class="mt-8 border-t border-gray-200 pt-8 pb-10 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+        <div class="mb-4 md:mb-0 text-center md:text-left">
+            &copy; 2026 N Murugesan. All rights reserved.
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-6 text-center md:text-right">
+            <span>Last updated: August 29, 2026</span>
+            <span>For questions or feedback, contact: <a href="mailto:nmurugs@gmail.com" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold">nmurugs@gmail.com</a></span>
+        </div>
+    </footer>
+</div>
+
+</body>
+
+</html>

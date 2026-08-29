@@ -1,0 +1,9 @@
+{
+  "overall_benchmark_score": 0.779298100842503,
+  "raw_overall_score": 0.6566414593194494,
+  "reference_solver_score": 0.8426062614672757,
+  "average_info_gain": 0.5816414593194494,
+  "win_rate": 0.075,
+  "format_adherence_rate": 0.95,
+  "item_count": 40
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Multi-turn Wordle</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body class="bg-gray-50">
+
+<div class="max-w-7xl mx-auto py-8 px-6">
+
+<nav class="mb-10 text-gray-700">
+
+<a href="index.html" class="hover:text-blue-600">Home</a> | <a href="single-turn.html" class="hover:text-blue-600">Single-turn Wordle</a> | <span class="font-bold text-blue-600">Multi-turn Wordle</span> | <a href="cognitive-flexibility.html" class="hover:text-blue-600">Cognitive Flexibility</a> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a> | <a href="future-directions.html" class="hover:text-blue-600">Future Directions</a>
+
+</nav>
+
+<h1 class="text-4xl font-extrabold mb-2">
+
+Multi-turn Wordle
+
+</h1>
+
+<p class="text-lg text-gray-600 mb-8">
+
+Evaluating executive function and information gain across multi-turn gameplay.
+
+</p>
+
+
+<!-- Insights Placeholder -->
+
+    <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
+        <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
+
+
+        <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-multi-turn/2' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_6Lwordle_multi_turn</a>.</li>
+
+            <li><strong>Win Rate vs. Info Gain:</strong> As games progress to the 6th turn, the task becomes easier and win rates naturally spike from 7-8% to 70-80%, reducing the relative importance of the Information Gain metric compared to single-turn evaluations.</li>
+            <li><strong>Frontier Dominance in State Tracking:</strong> The top five models remain largely consistent but reorder: GPT-5.5 takes second place and Claude Opus overtakes Gemma-4-31b. This shift occurs because multi-turn gameplay demands superior working memory and dynamic state tracking, giving larger frontier models an edge.</li>
+            <li><strong>Inhibitory Control:</strong> Rule violations scale proportionally with overall scores, demonstrating that high-performing models possess superior working memory management and inhibitory control.</li>
+            <li><strong>Mid-Weight Efficiency:</strong> Gemma-4 maintains strong performance across both modes, ranking second in cost, speed, and info density despite being the slowest model tested.</li>
+            <li><strong>Non-Reasoning Shortfalls:</strong> Grok non-reasoning falls far behind the pack, failing on both performance scores and cost efficiency.</li>
+        </ul>
+    </div>
+    
+
+
+<!-- TOP TABLE: Cognitive Scores -->
+<div class="bg-white rounded-lg shadow border overflow-hidden">
+
+<table class="w-full text-left">
+
+<thead>
+
+<tr class="bg-gray-100 uppercase text-xs">
+
+<th class="py-4 px-6">Rank</th>
+
+<th class="py-4 px-6">Model</th>
+
+<th class="py-4 px-6">Overall Score</th>
+
+<th class="py-4 px-6">Win Rate</th>
+
+<th class="py-4 px-6">Avg Violations</th>
+
+<th class="py-4 px-6">API Error Rate</th>
+
+<th class="py-4 px-6">Penalty</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-yellow-600 font-bold text-lg">1</td>
+<td class="py-4 px-6 border-b font-semibold">gemini-3.1-pro-preview</td>
+<td class="py-4 px-6 border-b font-mono">0.7240</td>
+<td class="py-4 px-6 border-b">69.6%</td>
+<td class="py-4 px-6 border-b text-green-600">0.000</td>
+<td class="py-4 px-6 border-b">11.5%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-gray-500 font-bold text-lg">2</td>
+<td class="py-4 px-6 border-b font-semibold">gpt-5.6-sol</td>
+<td class="py-4 px-6 border-b font-mono">0.6730</td>
+<td class="py-4 px-6 border-b">57.7%</td>
+<td class="py-4 px-6 border-b text-red-600 font-semibold">0.019</td>
+<td class="py-4 px-6 border-b">0.0%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-yellow-800 font-bold text-lg">3</td>
+<td class="py-4 px-6 border-b font-semibold">claude-opus-5</td>
+<td class="py-4 px-6 border-b font-mono">0.6530</td>
+<td class="py-4 px-6 border-b">73.1%</td>
+<td class="py-4 px-6 border-b text-red-600 font-semibold">0.577</td>
+<td class="py-4 px-6 border-b">0.0%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-gray-700">4</td>
+<td class="py-4 px-6 border-b font-semibold">gemini-3.6-flash</td>
+<td class="py-4 px-6 border-b font-mono">0.6470</td>
+<td class="py-4 px-6 border-b">62.7%</td>
+<td class="py-4 px-6 border-b text-red-600 font-semibold">0.059</td>
+<td class="py-4 px-6 border-b">1.9%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-gray-700">5</td>
+<td class="py-4 px-6 border-b font-semibold">gemma-4-31b</td>
+<td class="py-4 px-6 border-b font-mono">0.5890</td>
+<td class="py-4 px-6 border-b">54.3%</td>
+<td class="py-4 px-6 border-b text-red-600 font-semibold">0.109</td>
+<td class="py-4 px-6 border-b">11.5%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+<tr class="hover:bg-gray-50">
+<td class="py-4 px-6 border-b text-gray-700">6</td>
+<td class="py-4 px-6 border-b font-semibold">grok-4.2-reasoning</td>
+<td class="py-4 px-6 border-b font-mono">0.5840</td>
+<td class="py-4 px-6 border-b">65.4%</td>
+<td class="py-4 px-6 border-b text-red-600 font-semibold">0.365</td>
+<td class="py-4 px-6 border-b">0.0%</td>
+<td class="py-4 px-6 border-b text-center">-</td>
+</tr>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- BOTTOM TABLE: Resource Metrics -->
+<!-- Placed inside the max-w-7xl container to perfectly align with the top table -->
+
+
+
+</div>
+
+
+<div class="max-w-7xl mx-auto px-6">
+    <footer class="mt-8 border-t border-gray-200 pt-8 pb-10 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+        <div class="mb-4 md:mb-0 text-center md:text-left">
+            &copy; 2026 N Murugesan. All rights reserved.
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-6 text-center md:text-right">
+            <span>Last updated: August 29, 2026</span>
+            <span>For questions or feedback, contact: <a href="mailto:nmurugs@gmail.com" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold">nmurugs@gmail.com</a></span>
+        </div>
+    </footer>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{
+  "overall_benchmark_score": 0.653,
+  "raw_overall_score": 1.053408393242866,
+  "reference_solver_score": 1.4618880772554035,
+  "normalized_overall_score": 0.7205807405041358,
+  "average_info_gain": 0.40340839324286587,
+  "win_rate": 0.7307692307692307,
+  "avg_violations_per_game": 0.5769230769230769,
+  "api_error_rate": 0.0,
+  "penalty_applied": false,
+  "item_count": 52
+}

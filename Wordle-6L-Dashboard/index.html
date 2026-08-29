@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-29FT63K497"></script>
+	<script>
+ 	window.dataLayer = window.dataLayer || [];
+  	function gtag(){dataLayer.push(arguments);}
+  	gtag('js', new Date());
+
+  	gtag('config', 'G-29FT63K497');
+	</script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Executive Function Benchmark</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+</head>
+
+
+<body class="bg-gray-50">
+
+<div class="max-w-7xl mx-auto py-8 px-6">
+
+<nav class="mb-10 text-gray-700">
+
+<span class="font-bold text-blue-600">Home</span> | <a href="single-turn.html" class="hover:text-blue-600">Single-turn Wordle</a> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <a href="cognitive-flexibility.html" class="hover:text-blue-600">Cognitive Flexibility</a> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a> | <a href="future-directions.html" class="hover:text-blue-600">Future Directions</a>
+
+</nav>
+
+<h1 class="text-5xl font-extrabold mb-4">
+
+Executive Function Benchmark for AI Models
+
+</h1>
+
+<p class="text-xl text-gray-600 mb-10">
+
+A benchmark suite for evaluating Executive Function capabilities of AI models using Wordle game and Information Gain optimization
+
+</p>
+
+<div class="bg-blue-50 border border-blue-200 text-blue-800 text-sm px-4 py-3 rounded-lg mb-10 inline-block shadow-sm">
+    <strong>📊 Data Source:</strong> All metrics are extracted from standardized benchmark notebook runs on the 
+    <a href="https://www.kaggle.com/benchmarks/murugesann/executivefunction-infogain-wordle-bench" target="_blank" class="underline font-semibold hover:text-blue-900">
+        Kaggle Benchmarks Platform
+    </a>.
+</div>
+
+
+<div class="grid md:grid-cols-3 gap-6">
+
+
+
+<div class="bg-white rounded-lg shadow p-6 border">
+<h2 class="text-xl font-bold mb-2">Single-turn Wordle</h2>
+<p class="text-gray-600 mb-4">Evaluating executive function from a single Wordle decision.</p>
+<p class="text-sm text-gray-500 mb-4">8 models evaluated</p>
+<a class="text-blue-600 font-semibold hover:underline"
+href="single-turn.html">
+View Leaderboard →
+</a>
+</div>
+
+
+<div class="bg-white rounded-lg shadow p-6 border">
+<h2 class="text-xl font-bold mb-2">Multi-turn Wordle</h2>
+<p class="text-gray-600 mb-4">Evaluating executive function and information gain across multi-turn gameplay.</p>
+<p class="text-sm text-gray-500 mb-4">6 models evaluated</p>
+<a class="text-blue-600 font-semibold hover:underline"
+href="multi-turn.html">
+View Leaderboard →
+</a>
+</div>
+
+
+<div class="bg-white rounded-lg shadow p-6 border">
+<h2 class="text-xl font-bold mb-2">Cognitive Flexibility</h2>
+<p class="text-gray-600 mb-4">Evaluating adaptive reasoning and cognitive flexibility.</p>
+<p class="text-sm text-gray-500 mb-4">6 models evaluated</p>
+<a class="text-blue-600 font-semibold hover:underline"
+href="cognitive-flexibility.html">
+View Leaderboard →
+</a>
+</div>
+
+</div>
+
+<div class="mt-16">
+    <h2 class="text-3xl font-bold mb-6">Cross-Task Insights</h2>
+    
+<div class="mb-12 bg-white rounded-lg shadow-sm border border-gray-200 p-8 mt-4">
+    <div class="flex items-center gap-3 mb-6">
+        <div class="bg-blue-600 text-white p-2 rounded-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900">Core Insights: Wordle is a perfect benchmark for measuring EF capability of frontier AI models</h3>
+    </div>
+    <p class="text-gray-600 mb-6 text-lg">The mechanics of the Wordle game—requiring strict state-tracking, rule adherence, and dynamic adaptation—make it an exceptional sandbox for measuring Executive Function (EF). The benchmark results yield several fundamental insights into the current landscape of AI capabilities:</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">1. Reasoning ≠ Executive Function</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">While traditional benchmarks measure static logic, EF requires dynamic cognitive control. Dedicated reasoning models that excel on standard logic tests (e.g., DeepSeek, Qwen) unexpectedly struggle here, failing to crack the Top 5. This divergence proves that EF—specifically maintaining context and suppressing errors under constraints—is a distinct, higher-tier capability than pure reasoning.</p>
+        </div>
+        
+        <div class="bg-purple-50 p-6 rounded-xl border border-purple-100">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">2. The Frontier Advantage</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">Top honors across the EF pillars are dominated by massive frontier models (e.g., GPT-5.5, Claude 4.6 Opus). Their superior performance likely stems from highly resilient working memory capacities, allowing them to track complex states and adapt seamlessly to mid-task rule changes. The exact architectural features enabling this remain a vital area for research.</p>
+        </div>
+        
+        <div class="bg-green-50 p-6 rounded-xl border border-green-100">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">3. The Viability of Mid-Weight Models</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">Parameter count isn't the sole dictator of EF capability. The strong placements of mid-weight architectures like Gemma-4-31b demonstrate that highly efficient design and targeted alignment can yield strong executive control. Further evaluation of similar lightweight models is needed to definitively map EF scaling laws.</p>
+        </div>
+        
+        <div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">4. The "Illusion of Thinking" (Token Inefficiency)</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">Our efficiency metrics expose a critical flaw in models designed to generate massive reasoning traces (e.g., DeepSeek-R1, Qwen-Thinking). While they output thousands of reasoning tokens to solve a turn, they frequently land in the "Over-thinkers" quadrant—burning massive compute without achieving proportional Information Gain. This proves that excessive verbosity and "thinking" tokens cannot compensate for a fundamental lack of Executive Function and rule retention.</p>
+        </div>
+
+	<div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">5. Do Reasoning Models think?</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">The stark performance delta between Grok 4.20’s reasoning and non-reasoning variants provides a critical counterpoint to skeptics who argue that reasoning models aren't genuinely "thinking." While the non-reasoning Grok 4.20 languishes in the bottom 5, its reasoning counterpart secured a Top 5 finish across all the EF tasks. This massive gap demonstrates that at the frontier scale, the reasoning mechanism is not just superficial token generation. Instead, it actively amplifies cognitive control and strict state-tracking—proving that when paired with a sufficiently powerful base model, the "thinking" process directly and tangibly enhances Executive Function.</p>
+        </div>
+
+	<div class="bg-teal-50 p-6 rounded-xl border border-teal-100">
+    <h4 class="text-lg font-bold text-gray-900 mb-2">6. Instruction Following</h4>
+    <p class="text-gray-700 text-sm leading-relaxed">In our benchmark, models were equipped with a highly detailed system prompt (akin to a skills.md document) that explicitly mapped out Executive Function strategies—such as strict state-tracking, constraint checking, and adaptive planning. Both frontier and reasoning architectures successfully utilized these pathways. However, in a parallel experiment using a simplified prompt devoid of this cognitive scaffolding, overall rule adherence and performance collapsed, with smaller models suffering the most severe EF degradation. This reveals that robust instruction following acts as a powerful external working memory. By offloading cognitive control and strategic analysis directly into the prompt structure, smaller models can punch well above their weight class, effectively simulating the executive capabilities of massive frontier models.</p>
+</div>
+
+
+<div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100 md:col-span-2">
+            <h4 class="text-lg font-bold text-gray-900 mb-2">7. Deconstructing EF: The Composite Score Matrix</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+
+While Wordle game performance itself serves as a perfect proxy for the EF skills of AI models, it can be helpful to identify the performance of each model under the individual core components of EF skills, namely: working memory, inhibitory control, and cognitive flexibility. We tried to isolate the performance of each model under each of these components, using the result outputs of individual Kaggle task runs. We then created a composite score-based ranking by giving equal weights to each component. This gave us a different ranking of the models for EF skills. The order of ranking is not very much different from the main benchmark, but the change in the ranking order provide some critical insights for analysis. This divergence likely stems from our equal-weighting methodology; in actual dynamic gameplay, cognitive demands constantly shift, rarely relying on a perfectly equal mathematical balance of all three EF components at any given moment.</p>
+        </div>     
+
+
+
+</div>
+</div>
+
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-2xl font-bold mb-2">Aggregate Executive Function Performance</h3>
+        <p class="text-gray-600 mb-4 text-sm">Adjust the weights to see how different evaluation priorities affect the leaderboard.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 p-4 bg-gray-50 rounded-lg border">
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Single-Turn Weight: <span id="stWeightVal" class="text-blue-600">20%</span></label>
+                <input type="range" id="stWeight" min="0" max="100" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">30%</span></label>
+                <input type="range" id="mtWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">50%</span></label>
+                <input type="range" id="cfWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+        </div>
+        <p id="weightWarning" class="text-red-500 text-sm font-bold hidden mb-4">Weights must sum to 100%!</p>
+
+        <div class="relative w-full" style="height: 400px;">
+            <canvas id="combinedChart"></canvas>
+        </div>
+    </div>
+    
+    <script>
+    window.addEventListener('load', function() {
+        // Raw Data from Python
+        const rawData = {
+            models: ["gemini-3.1-pro-preview", "gpt-5.6-sol", "claude-opus-5-default", "gemini-3.6-flash", "gemma-4-31b-it", "grok-4.20-0309-reasoning"],
+            singleTurn: [0.85, 0.78, 0.85, 0.84, 0.85, 0.77],
+            multiTurn: [0.72, 0.67, 0.65, 0.65, 0.59, 0.65],
+            cognitiveFlex: [0.72, 0.67, 0.65, 0.65, 0.59, 0.34]
+        };
+
+        let myChart = null;
+
+        function updateChart() {
+            // Get current slider values
+            const wST = parseInt(document.getElementById('stWeight').value);
+            const wMT = parseInt(document.getElementById('mtWeight').value);
+            const wCF = parseInt(document.getElementById('cfWeight').value);
+
+            // Update text labels
+            document.getElementById('stWeightVal').innerText = wST + '%';
+            document.getElementById('mtWeightVal').innerText = wMT + '%';
+            document.getElementById('cfWeightVal').innerText = wCF + '%';
+
+            const totalWeight = wST + wMT + wCF;
+            const warningEl = document.getElementById('weightWarning');
+
+            if (totalWeight !== 100) {
+                warningEl.classList.remove('hidden');
+                warningEl.innerText = `Weights currently sum to ${totalWeight}%. They must equal 100%.`;
+                return; // Stop updating chart if weights are invalid
+            } else {
+                warningEl.classList.add('hidden');
+            }
+
+            // Calculate new combined scores
+            let calculatedScores = [];
+            for (let i = 0; i < rawData.models.length; i++) {
+                const score = (rawData.singleTurn[i] * (wST / 100)) + 
+                              (rawData.multiTurn[i] * (wMT / 100)) + 
+                              (rawData.cognitiveFlex[i] * (wCF / 100));
+                
+                calculatedScores.push({
+                    model: rawData.models[i],
+                    score: score
+                });
+            }
+
+            // Sort descending by new score
+            calculatedScores.sort((a, b) => b.score - a.score);
+
+            const sortedLabels = calculatedScores.map(item => item.model);
+            const sortedData = calculatedScores.map(item => item.score);
+
+            // Render or Update Chart
+            const ctx = document.getElementById('combinedChart').getContext('2d');
+            
+            if (myChart) {
+                myChart.data.labels = sortedLabels;
+                myChart.data.datasets[0].data = sortedData;
+                myChart.update();
+            } else {
+                myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: sortedLabels,
+                        datasets: [{
+                            label: 'Weighted Aggregate Score',
+                            data: sortedData,
+                            backgroundColor: 'rgba(59, 130, 246, 0.8)'
+                        }]
+                    },
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+            }
+        }
+
+        // Attach event listeners to sliders
+        document.getElementById('stWeight').addEventListener('input', updateChart);
+        document.getElementById('mtWeight').addEventListener('input', updateChart);
+        document.getElementById('cfWeight').addEventListener('input', updateChart);
+
+        // Initial render
+        updateChart();
+    });
+    </script>
+    
+    <div class="bg-white rounded-lg shadow p-6 border mb-8">
+        <h3 class="text-xl font-bold mb-2">Cognitive Degradation Index (Working Memory Stress Test)</h3>
+        <p class="text-gray-600 mb-6 text-sm">Measures how much a model's rule adherence degrades when transitioning from a single decision to multi-turn gameplay. A lower score indicates better context stability.</p>
+        
+        <table class="w-full text-left">
+            <thead>
+                <tr class="bg-gray-50 uppercase text-xs text-gray-500">
+                    <th class="py-3 px-4 border-b">Rank</th>
+                    <th class="py-3 px-4 border-b">Model</th>
+                    <th class="py-3 px-4 border-b">Single-Turn Violations</th>
+                    <th class="py-3 px-4 border-b">Multi-Turn Violations</th>
+                    <th class="py-3 px-4 border-b">Degradation Score</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">1</td>
+                <td class="py-3 px-4 border-b font-semibold">gemini-3.1-pro-preview</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b text-green-600 font-bold">0.000 (Stable)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">2</td>
+                <td class="py-3 px-4 border-b font-semibold">gpt-5.6-sol</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.019</td>
+                <td class="py-3 px-4 border-b text-yellow-600 font-bold">+0.019 (Slight Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">3</td>
+                <td class="py-3 px-4 border-b font-semibold">gemini-3.6-flash</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.059</td>
+                <td class="py-3 px-4 border-b text-yellow-600 font-bold">+0.059 (Slight Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">4</td>
+                <td class="py-3 px-4 border-b font-semibold">grok-4.2-reasoning</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.365</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.365 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">5</td>
+                <td class="py-3 px-4 border-b font-semibold">claude-opus-5</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.577</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.577 (Severe Drift)</td>
+            </tr>
+        </tbody></table></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-2xl font-bold mb-2">The 3 Pillars of Executive Function</h3>
+        <p class="text-gray-600 mb-6">Mapping benchmark outcomes directly to cognitive science pillars.</p>
+	<p class="text-xs text-gray-500 mb-6">
+    <span class="font-bold">Working Memory:</span> MT Violations &minus; ST Violations &nbsp;|&nbsp; 
+    <span class="font-bold">Cognitive Flex:</span> Task 3 Score &nbsp;|&nbsp; 
+    <span class="font-bold">Inhibitory Control:</span> Task 3 Violations &minus; MT Violations
+	</p>
+
+        <div class="overflow-x-auto mb-10">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 uppercase text-xs text-gray-600 font-semibold tracking-wider">
+                        <tr class="bg-gray-100 uppercase text-xs text-gray-600 font-semibold tracking-wider">
+                        <th class="py-3 px-4 border-b">Rank</th>
+                        <th class="py-3 px-4 border-b">Model</th>
+                        <th class="py-3 px-4 border-b">Working Memory (Drift)</th>
+                        <th class="py-3 px-4 border-b">Cognitive Flexibility</th>
+                        <th class="py-3 px-4 border-b">Inhibitory Control</th>
+                        <th class="py-3 px-4 border-b bg-blue-50 text-blue-900 rounded-tr-lg">Overall EF Score (0-100)</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">1</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.1-pro-preview</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.3650</td>
+                <td class="py-3 px-4 border-b text-red-700">1.154</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">77.1</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">2</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-4-31b</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.3383</td>
+                <td class="py-3 px-4 border-b text-red-700">1.211</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">73.5</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">3</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.6-flash</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.059</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.3492</td>
+                <td class="py-3 px-4 border-b text-red-700">1.283</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">69.7</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">4</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-opus-4.8</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">66.7</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">5</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-sonnet-4.6</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.000</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">66.7</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">6</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.6-sol</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.019</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.3638</td>
+                <td class="py-3 px-4 border-b text-red-700">1.681</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">65.4</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">7</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-4-31b</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.109</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">60.4</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">8</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-opus-5</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.577</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.3457</td>
+                <td class="py-3 px-4 border-b text-red-700">0.373</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">57.5</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">9</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.2-reasoning</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.365</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.3363</td>
+                <td class="py-3 px-4 border-b text-red-700">1.609</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">44.4</td>
+            </tr>
+        </tbody></table></div>
+        <div class="bg-gray-50 p-6 rounded-lg border">
+	
+            <h4 class="font-bold text-xl mb-2 text-center text-gray-800">Top 5 Models: Cognitive Profile Map</h4>
+            <p class="text-center text-sm text-gray-500 mb-6">Scores normalized 0-100 (where 100 represents cohort state-of-the-art).</p>
+            <div class="w-full max-w-3xl mx-auto relative h-[400px]">
+                <canvas id="pillarsChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+    
+    new Chart(document.getElementById('pillarsChart'), {
+        type: 'radar',
+        data: {
+            labels: ['Working Memory (Stability)', 'Cognitive Flexibility', 'Inhibitory Control'],
+            datasets: [
+        {
+            label: 'gemini-3.1-pro-preview',
+            data: [100.0, 100.0, 31.4],
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            borderColor: 'rgba(59, 130, 246, 1)',
+            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'gemini-4-31b',
+            data: [100.0, 92.7, 28.0],
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            borderColor: 'rgba(16, 185, 129, 1)',
+            pointBackgroundColor: 'rgba(16, 185, 129, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'gemini-3.6-flash',
+            data: [89.8, 95.7, 23.6],
+            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            borderColor: 'rgba(245, 158, 11, 1)',
+            pointBackgroundColor: 'rgba(245, 158, 11, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'claude-opus-4.8',
+            data: [100.0, 0.0, 100.0],
+            backgroundColor: 'rgba(139, 92, 246, 0.1)',
+            borderColor: 'rgba(139, 92, 246, 1)',
+            pointBackgroundColor: 'rgba(139, 92, 246, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ,
+        {
+            label: 'claude-sonnet-4.6',
+            data: [100.0, 0.0, 100.0],
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            borderColor: 'rgba(239, 68, 68, 1)',
+            pointBackgroundColor: 'rgba(239, 68, 68, 1)',
+            borderWidth: 2,
+            tension: 0.1
+        }
+        ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: { display: true, color: 'rgba(0,0,0,0.1)' },
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    pointLabels: { font: { size: 14, weight: 'bold' }, color: '#374151' },
+                    ticks: { display: false }
+                }
+            },
+            plugins: {
+                legend: { position: 'bottom', labels: { padding: 20, font: { size: 12, weight: 'bold' } } },
+                tooltip: { backgroundColor: 'rgba(0,0,0,0.8)', padding: 12 }
+            }
+        }
+    });
+    </script>
+    
+    <div class="bg-white rounded-lg shadow p-6 border mb-8">
+        <h3 class="text-xl font-bold mb-2">Strategy vs. Brute-Force Matrix (Multi-Turn)</h3>
+        <p class="text-gray-600 mb-6 text-sm">Compares a model's ability to win against its Information Gain strategy. Placed relative to the cohort median.</p>
+        
+        <div class="flex items-center gap-4">
+            
+            <div class="flex flex-col justify-between items-center h-[528px] text-xs font-bold text-gray-400 uppercase tracking-wide py-4 select-none" style="writing-mode: vertical-rl; transform: rotate(180deg);">
+                <span>&larr; Win Rate &rarr;</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 flex-1">
+                <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-64 flex flex-col relative">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Lucky Guessers</span>
+                    <span class="text-xs text-gray-400 mb-2">High Win Rate, Low Strategy</span>
+                    <ul class="text-sm font-semibold text-blue-700">
+    <li>grok-4.2-reasoning</li>
+                    </ul>
+                </div>
+                
+                <div class="border-2 border-blue-200 bg-blue-50 p-4 rounded-lg h-64 flex flex-col relative">
+                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">Reasoning Masters</span>
+                    <span class="text-xs text-blue-400 mb-2">High Win Rate, High Strategy</span>
+                    <ul class="text-sm font-bold text-gray-900">
+    <li>gemini-3.1-pro-preview</li><li>claude-opus-5</li>
+                    </ul>
+                </div>
+
+                <div class="border-2 border-dashed border-gray-200 bg-gray-50 p-4 rounded-lg h-64 flex flex-col relative opacity-75">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Struggling</span>
+                    <span class="text-xs text-gray-400 mb-2">Low Win Rate, Low Strategy</span>
+                    <ul class="text-sm font-medium text-gray-600">
+    <li>gemini-3.6-flash</li><li>gemma-4-31b</li>
+                    </ul>
+                </div>
+
+                <div class="border-2 border-dashed border-gray-300 bg-gray-50 p-4 rounded-lg h-64 flex flex-col relative">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Over-thinkers</span>
+                    <span class="text-xs text-gray-400 mb-2">Low Win Rate, High Strategy</span>
+                    <ul class="text-sm font-medium text-purple-700">
+    <li>gpt-5.6-sol</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex justify-between text-xs font-bold text-gray-400 mt-4 pl-10 pr-2 uppercase tracking-wide">
+            <span>&larr; Lower Info Gain</span>
+            <span>Strategy Score (Overall Benchmark)</span>
+            <span>Higher Info Gain &rarr;</span>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-xl font-bold mb-2">Deployment Safety & Compliance</h3>
+        <p class="text-gray-600 mb-6 text-sm">Ranks models based on format adherence and API stability. Models that trigger the >20% error penalty are placed in the Penalty category.</p>
+        
+        <div class="grid md:grid-cols-2 gap-4">
+    
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gpt-5.6-sol</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">claude-opus-5</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">grok-4.2-reasoning</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-blue-50 border-blue-200 text-blue-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">✅</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gemini-3.6-flash</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Stable</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">98.1<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 1.9%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-yellow-50 border-yellow-200 text-yellow-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">⚠️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gemini-3.1-pro-preview</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Fragile</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">88.5<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 11.5%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-yellow-50 border-yellow-200 text-yellow-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">⚠️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gemma-4-31b</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Fragile</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">88.5<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 11.5%</div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    
+</div>
+
+</div>
+
+</div>
+
+
+<div class="max-w-7xl mx-auto px-6">
+    <footer class="mt-8 border-t border-gray-200 pt-8 pb-10 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+        <div class="mb-4 md:mb-0 text-center md:text-left">
+            &copy; 2026 N Murugesan. All rights reserved.
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-6 text-center md:text-right">
+            <span>Last updated: August 29, 2026</span>
+            <span>For questions or feedback, contact: <a href="mailto:nmurugs@gmail.com" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold">nmurugs@gmail.com</a></span>
+        </div>
+    </footer>
+</div>
+
+</body>
+
+</html>

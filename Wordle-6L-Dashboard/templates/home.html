@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-29FT63K497"></script>
+	<script>
+ 	window.dataLayer = window.dataLayer || [];
+  	function gtag(){dataLayer.push(arguments);}
+  	gtag('js', new Date());
+
+  	gtag('config', 'G-29FT63K497');
+	</script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Executive Function Benchmark</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+</head>
+
+
+<body class="bg-gray-50">
+
+<div class="max-w-7xl mx-auto py-8 px-6">
+
+<nav class="mb-10 text-gray-700">
+
+{{NAVIGATION}}
+
+</nav>
+
+<h1 class="text-5xl font-extrabold mb-4">
+
+Executive Function Benchmark for AI Models
+
+</h1>
+
+<p class="text-xl text-gray-600 mb-10">
+
+A benchmark suite for evaluating Executive Function capabilities of AI models using Wordle game and Information Gain optimization
+
+</p>
+
+<div class="bg-blue-50 border border-blue-200 text-blue-800 text-sm px-4 py-3 rounded-lg mb-10 inline-block shadow-sm">
+    <strong>📊 Data Source:</strong> All metrics are extracted from standardized benchmark notebook runs on the 
+    <a href="https://www.kaggle.com/benchmarks/murugesann/executivefunction-infogain-wordle-bench" target="_blank" class="underline font-semibold hover:text-blue-900">
+        Kaggle Benchmarks Platform
+    </a>.
+</div>
+
+
+<div class="grid md:grid-cols-3 gap-6">
+
+{{TASK_CARDS}}
+</div>
+
+<div class="mt-16">
+    <h2 class="text-3xl font-bold mb-6">Cross-Task Insights</h2>
+    {{COGNITIVE_DEGRADATION}}
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

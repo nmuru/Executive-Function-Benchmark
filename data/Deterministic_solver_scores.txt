@@ -1,0 +1,7 @@
+Deterministic Solver scores
+
+Dataset Seed - 43
+
+5-Letter Wordle - 1.461888077255
+
+6-Letter Wordle - 1.461888077255

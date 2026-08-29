@@ -1,0 +1,23 @@
+claude-opus-5-default
+0.72
+845134 input tokens · 355833 output tokens · $13.1215 · 4960.47s
+
+gemma-4-31b-it
+0.62
+580398 input tokens · 696730 output tokens · $0.4985 · 19528.69s
+
+gemini-3.1-pro-preview
+0.77
+468880 input tokens · 924052 output tokens · $12.0117 · 6529.08s
+
+grok-4.20-0309-reasoning
+0.65
+1131299 input tokens · 934693 output tokens · $3.0978 · 7106.72s
+
+gpt-5.6-sol
+0.67
+540648 input tokens · 65063 output tokens · $3.3285 · 1396.38s
+
+gemini-3.6-flash
+0.68
+538851 input tokens · 306124 output tokens · $3.0603 · 1570.56s

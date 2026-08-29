@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Future Directions - Executive Function Benchmark</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-7xl mx-auto py-8 px-6">
+        <nav class="mb-10 text-gray-700">
+            <a href="index.html" class="hover:text-blue-600">Home</a> | <a href="single-turn.html" class="hover:text-blue-600">Single-turn Wordle</a> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <a href="cognitive-flexibility.html" class="hover:text-blue-600">Cognitive Flexibility</a> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a> | <span class="font-bold text-blue-600">Future Directions</span>
+        </nav>
+        
+        <h1 class="text-5xl font-extrabold mb-4">Executive Function Benchmark</h1>
+        <p class="text-xl text-gray-600 mb-10">Future Research Horizons</p>
+        
+        
+<div class="mb-12 bg-white rounded-lg shadow-sm border border-gray-200 p-8 mt-4">
+    <div class="flex items-center gap-3 mb-6">
+        <div class="bg-indigo-600 text-white p-2 rounded-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+            </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900">Future Roadmap & Strategic Scaling</h3>
+    </div>
+    <p class="text-gray-600 mb-8 text-lg leading-relaxed">
+        The Wordle framework offers versatile and unique possibilities for isolating and evaluating specific AI cognitive skills. The current benchmark evaluates Executive Function using the standard 5-letter format popularized by <em>The New York Times</em>. While this provides a strong foundation, the game environment can be expanded to create a far more rigorous sandbox for testing individual executive skills. Here are several potential expansions envisioned for future iterations of the benchmark:
+    </p>
+    
+    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-0.5 rounded">1</span>
+                Vocabulary Scaling and Lexical Constraints
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                The standard NYT Wordle game utilizes a curated list of approximately 2,300 answer words drawn from a pool of roughly 13,000 valid guesses. For frontier AI models, this restricted search space is relatively trivial to navigate. Our current benchmark intensifies this by utilizing an unrestricted Scrabble-compliant lexicon—encompassing all valid 5-letter words consisting of around 12,920 words, including colloquialisms, inflected forms, and esoteric terms. Future versions, however, could expand the grid itself. Transitioning to a <strong>6-letter Wordle</strong> expands the mathematical search space to around 23,140 valid English words (based on the international Collins Scrabble Words lexicon). This exponentially increases the cognitive load required to calculate Information Gain and filter potential candidates.
+            </p>
+        </div>
+        
+        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-0.5 rounded">2</span>
+                Dynamic Constraint Escalation
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                Currently, constraints remain relatively static throughout a turn. A future iteration could introduce shifting rule sets—making it significantly more difficult for the model to maintain state within its working memory. For example, introducing a constraint where a previously allowed letter suddenly becomes "forbidden" mid-game would aggressively test a model's ability to accurately overwrite established game states.
+            </p>
+        </div>
+        
+        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-0.5 rounded">3</span>
+                Fluid Game States and Dimensional Shifts
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                Another variant could introduce dynamic puzzle parameters during active gameplay. For instance, an adversarial setup could shift the target from a 5-letter word to a 6-letter word midway through a session. To succeed, the model would need to immediately pivot its strategy by taking historic constraints (e.g., previously eliminated letters and known positional matches) and applying them to an entirely new, expanded mathematical search space. This forces the execution of new planning protocols without resetting the context window—serving as an extreme stress test for both working memory and cognitive adaptability.
+            </p>
+        </div>
+        
+        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-orange-100 text-orange-800 text-xs font-bold px-2 py-0.5 rounded">4</span>
+                Isolating Inhibitory Control
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                It is possible to design specialized scenarios specifically targeted at isolating and measuring Inhibitory Control. The flexibility of the Wordle framework allows for the introduction of customized constraints that intentionally conflict with a model's natural optimization algorithms. By creating adversarial game states that force models to suppress ingrained heuristics or optimal mathematical pathways in favor of strict, arbitrary rule compliance, future iterations can rigorously evaluate executive inhibition without fundamentally altering the core mechanics of the benchmark.
+            </p>
+        </div>
+
+        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-0.5 rounded">5</span>
+                Autonomous Cognitive Flexibility
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                In current benchmark designs, Cognitive Flexibility is often aided by system prompts that explicitly outline strategic pathways. True cognitive flexibility, however, is autonomous. Future evaluations will feature adversarial game states designed to provoke strategic pivots <em>without</em> explicit instructions. The goal is to measure whether models can independently recognize when a heuristic is failing and invent a new strategy on the fly, demonstrating genuine adaptive reasoning.
+            </p> </div>
+
+
+<div class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:shadow-sm transition-shadow">
+            <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span class="bg-pink-100 text-pink-800 text-xs font-bold px-2 py-0.5 rounded">6</span>
+                GRPO Training and Target Baselines
+            </h4>
+            <p class="text-gray-700 text-sm leading-relaxed">
+                We plan to utilize GRPO (Group Relative Policy Optimization) to train a compact model (e.g., ~8B parameters) specifically for this Wordle environment. Our working hypothesis is that while focused training may not improve generalized Executive Function, it will significantly boost task scores by hardcoding requisite reasoning circuits, such as the Information Gain optimization function. We anticipate that sub-10B models might still hit a cognitive "parameter wall" compared to massive frontier models (and while 20B-30B models show great promise, training them exceeds our current compute infrastructure). However, if successful in overcoming these capacity limits, this hyper-specialized small model will establish a highly optimized target benchmark—akin to a human expert baseline—setting a definitive ceiling for generalized frontier models to strive toward.
+            </p>
+        </div>
+
+
+<!-- Looking Forward Banner -->
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mt-8 rounded-r-lg shadow-sm">
+        <h4 class="text-lg font-bold text-yellow-900 mb-3 flex items-center gap-2">
+            🚀 Looking Forward: Benchmark Overfitting, Circuit Generation, and AGI
+        </h4>
+        <p class="text-gray-800 text-sm leading-relaxed mb-3">
+            The greatest architectural advantage of this Wordle benchmark is its inherent resistance to test set leakage and benchmark overfitting. Because the dataset of game states is dynamic and mathematically near-infinite, models cannot rely on standard fine-tuning or dataset memorization to game the leaderboard. To "overfit" and beat this benchmark, developers would have to fundamentally engineer specific, hardcoded reasoning circuits tailored entirely to solving this exact puzzle.
+        </p>
+        <p class="text-gray-800 text-sm leading-relaxed mb-3">
+            Currently, if a standard LLM possesses a reasoning circuit for a specific problem, it simply processes the inputs and outputs the solution—often using reasoning tokens for post-hoc explanation rather than true step-by-step deduction. Wordle game necessarily requires step-by-step reasoning as shown by better performance of reasoning models. The ultimate frontier for AGI is the capacity to build <strong>reasoning circuits on-the-fly during inference</strong>. Until models achieve this dynamic test-time circuit assembly, this benchmark remains a flawless, incorruptible proxy for measuring genuine Executive Function.
+        </p>
+        <p class="text-gray-800 text-sm leading-relaxed">
+            Because Executive Function operates as a higher-order cognitive controller—naturally orchestrating foundational LLM skills like logical reasoning, instruction following, mathematical optimization, and state-tracking—this benchmark will remain a critical and definitive standard for ranking AI models on their trajectory toward Artificial General Intelligence.
+        </p>
+    </div>
+
+</div>
+         
+</div>
+
+    </div>
+</body>
+</html>

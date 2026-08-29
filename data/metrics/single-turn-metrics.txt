@@ -1,0 +1,32 @@
+claude-opus-5-default
+0.85
+86896 input tokens · 88626 output tokens · $2.6501 · 1268.98s
+
+grok-4.20-0309-reasoning
+0.77
+68204 input tokens · 236303 output tokens · $0.6142 · 895.28s
+
+claude-sonnet-4-6-default
+0.75
+60826 input tokens · 74848 output tokens · $1.3052 · 1009.88s
+
+gpt-5.6-sol
+0.78
+69448 input tokens · 22800 output tokens · $1.0312 · 621.01s
+
+gemma-4-31b-it
+0.85
+57769 input tokens · 210182 output tokens · $0.1348 · 5863.54s
+
+gemini-3.1-pro-preview
+0.85
+57689 input tokens · 365956 output tokens · $4.5069 · 2551.09s
+
+gemini-3.6-flash
+0.84
+57689 input tokens · 104581 output tokens · $0.8709 · 576.90s
+
+claude-opus-4-8-default
+0.78
+86896 input tokens · 25653 output tokens · $1.0758 · 380.06s
+
