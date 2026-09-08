@@ -1,0 +1,9 @@
+Benchmark,Model,Contestant,Contestant_Type,Config,Harness,Agent,Task_Name,Task_Version,Display_Type,Evaluation_Date,Numerical_Result,Upper_Confidence_Limit,Lower_Confidence_Limit,Boolean_Result
+murugesann/executivefunction-infogain-wordle-bench,gemini-3.6-flash,gemini-3.6-flash,model,,,,evaluate_wordle_multi_turn,2,percentages,"2026-09-08",0.44257834102778854,,,
+murugesann/executivefunction-infogain-wordle-bench,gemini-3.8-flash,gemini-3.8-flash,model,,,,evaluate_wordle_multi_turn,2,percentages,"2026-09-08",0.4596795134013507,,,
+murugesann/executivefunction-infogain-wordle-bench,gemini-3.1-pro-preview,gemini-3.1-pro-preview,model,,,,evaluate_wordle_multi_turn,2,percentages,"2026-09-08",0.4952499519383599,,,
+murugesann/executivefunction-infogain-wordle-bench,grok-4.20-0309-reasoning,grok-4.20-0309-reasoning,model,,,,evaluate_wordle_multi_turn,2,percentages,"2026-09-08",0.39948338664641186,,,
+murugesann/executivefunction-infogain-wordle-bench,gemma-4-31b-it,gemma-4-31b-it,model,,,,evaluate_wordle_multi_turn,2,percentages,"2026-09-08",0.4029036211211243,,,
+murugesann/executivefunction-infogain-wordle-bench,gpt-5.6-sol,gpt-5.6-sol,model,,,,evaluate_wordle_multi_turn,2,percentages,"2026-09-08",0.46036356029629316,,,
+murugesann/executivefunction-infogain-wordle-bench,claude-opus-5-default,claude-opus-5-default,model,,,,evaluate_wordle_multi_turn,2,percentages,"2026-09-08",0.44668262239744344,,,
+murugesann/executivefunction-infogain-wordle-bench,gpt-5.6-terra,gpt-5.6-terra,model,,,,evaluate_wordle_multi_turn,2,percentages,"2026-09-08",0.3344989316268757,,,
