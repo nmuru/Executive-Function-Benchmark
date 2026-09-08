@@ -1,7 +1,6 @@
 import json
 import os
 import glob
-import statistics
 
 from datetime import datetime # ADD THIS IMPORT
 
@@ -33,6 +32,12 @@ FOOTER_HTML = f"""
 
 TASKS = [
 
+	{
+        "id": "single-turn",
+        "title": "Single-turn Wordle",
+        "description": "Evaluating executive function from a single Wordle decision."
+    },
+
     {
         "id": "multi-turn",
         "title": "Multi-turn Wordle",
@@ -44,16 +49,28 @@ TASKS = [
         "title": "Cognitive Flexibility",
         "description": "Evaluating adaptive reasoning and cognitive flexibility."
     },
-
-    {
-        "id": "single-turn-larger",
-        "title": "Single-turn Wordle",
-        "description": "Evaluating executive function from a larger single-turn Wordle benchmark."
-    },
 ]
 
 #####################
 TASK_INSIGHTS = {
+    "single-turn": """
+    <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
+        <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-single-turn-v2/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_single_turn_v2</a></li>
+
+
+            <li><strong>Metric Shift:</strong> Because single-turn win rates are inherently low, Information Gain proves to be a far more granular and robust metric for ranking models than standard win rates.</li>
+            <li><strong>Model Divergence:</strong> Claude Sonnet outperforms Claude Opus, with a noticeably wider performance gap here than in multi-turn scenarios.</li>
+            <li><strong>The Reasoning Imperative:</strong> A stark performance gap between Grok-reasoning and Grok-non-reasoning provides concrete proof that reasoning models are essential for Executive Function (EF) skills.</li>
+            <li><strong>Token Limits & Errors:</strong> DeepSeek and Qwen suffered lower rankings, likely because their highly verbose reasoning traces exceeded token limits, driving up error rates.</li>
+            <li><strong>Information Gain Validated:</strong> Qwen3-8b-instruct achieved the same win rate as the top-ranking Gemini 3.1 Pro but placed 12th overall due to a lower Information Gain score, validating the metric's precision.</li>
+            <li><strong>Trace Verbosity vs. Efficiency:</strong> Top rankers utilized extensive reasoning traces to score higher. Conversely, GPT models used fewer reasoning tokens, scoring lower on EF but dominating in speed, cost, and information density.</li>
+            <li><strong>Cost Realities:</strong> Factoring in cost shuffles the leaderboard significantly; Grok-reasoning drops to the bottom five, while Gemma-4 uniquely retains top-tier status by balancing high scores with the lowest cost.</li>
+        </ul>
+    </div>
+    """,
     "multi-turn": """
     <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
         <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
@@ -61,7 +78,7 @@ TASK_INSIGHTS = {
 
         <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
 
-<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-6lwordle-multi-turn' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_6Lwordle_multi_turn</a>.</li>
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-multi-turn/2' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_multi_turn</a>.</li>
 
             <li><strong>Win Rate vs. Info Gain:</strong> As games progress to the 6th turn, the task becomes easier and win rates naturally spike from 7-8% to 70-80%, reducing the relative importance of the Information Gain metric compared to single-turn evaluations.</li>
             <li><strong>Frontier Dominance in State Tracking:</strong> The top five models remain largely consistent but reorder: GPT-5.5 takes second place and Claude Opus overtakes Gemma-4-31b. This shift occurs because multi-turn gameplay demands superior working memory and dynamic state tracking, giving larger frontier models an edge.</li>
@@ -76,7 +93,7 @@ TASK_INSIGHTS = {
         <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
         <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
 
-<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-6lwordle-cognitive-flexibility' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_6Lwordle_cognitive_flexibility</a></li>
+<li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-cognitive-flexibility/1' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_cognitive_flexibility</a></li>
 
 
             <li><strong>Benchmark Validation:</strong> The Wordle framework successfully measures cognitive flexibility. By simply permitting rule exploration in the prompt, overall scores jumped from the 70% range to 85%. While violations increased alongside scores, it demonstrated the models actively exercising flexibility.</li>
@@ -86,50 +103,17 @@ TASK_INSIGHTS = {
             <li><strong>Open-Source Surprises:</strong> The open-source Gemma-4-31b outperformed the significantly more expensive Gemini 3 Preview in cognitive flexibility, warranting deeper study into Gemma's architecture and training patterns.</li>
         </ul>
     </div>
-    """,
-    "single-turn-larger": """
-    <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 mt-8">
-        <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
-        <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
-
-            <li>Data Source: <a href='https://www.kaggle.com/benchmarks/murugesann/wordle-benchmark-6letter-singleturn' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_6L_single_turn_larger</a>.</li>
-            <li><strong>Metric Shift:</strong> Because single-turn win rates are inherently low, Information Gain proves to be a far more granular and robust metric for ranking models than standard win rates.</li>
-            <li><strong>Model Divergence:</strong> Claude Sonnet outperforms Claude Opus, with a noticeably wider performance gap here than in multi-turn scenarios.</li>
-            <li><strong>The Reasoning Imperative:</strong> A stark performance gap between Grok-reasoning and Grok-non-reasoning provides concrete proof that reasoning models are essential for Executive Function (EF) skills.</li>
-            <li><strong>Token Limits &amp; Errors:</strong> DeepSeek and Qwen suffered lower rankings, likely because their highly verbose reasoning traces exceeded token limits, driving up error rates.</li>
-            <li><strong>Information Gain Validated:</strong> Qwen3-8b-instruct achieved the same win rate as the top-ranking Gemini 3.1 Pro but placed 12th overall due to a lower Information Gain score, validating the metric's precision.</li>
-            <li><strong>Trace Verbosity vs. Efficiency:</strong> Top rankers utilized extensive reasoning traces to score higher. Conversely, GPT models used fewer reasoning tokens, scoring lower on EF but dominating in speed, cost, and information density.</li>
-            <li><strong>Cost Realities:</strong> Factoring in cost shuffles the leaderboard significantly; Grok-reasoning drops to the bottom five, while Gemma-4 uniquely retains top-tier status by balancing high scores with the lowest cost.</li>
-        </ul>
-    </div>
     """
 }
 
 ########################
-# Resolve dashboard paths from this script's directory.
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_ROOT = os.path.join(BASE_DIR, "data")
-TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
+DATA_ROOT = "data"
+TEMPLATE_DIR = "templates"
 
 HOME_TEMPLATE = os.path.join(TEMPLATE_DIR, "home.html")
 LEADERBOARD_TEMPLATE = os.path.join(TEMPLATE_DIR, "leaderboard.html")
 
-HOME_OUTPUT = os.path.join(BASE_DIR, "index.html")
-
-# HTML/task IDs are not guaranteed to match physical data-directory names.
-DATA_DIRS = {
-    "multi-turn": "Multi-turn",
-    "cognitive-flexibility": "Cognitive-Flexibility",
-    "single-turn-larger": "single-turn-larger",
-}
-
-def get_task_data_folder(task_id):
-    folder = os.path.join(DATA_ROOT, DATA_DIRS.get(task_id, task_id))
-    if not os.path.isdir(folder):
-        raise FileNotFoundError(
-            f"Data folder for task '{task_id}' was not found: {folder}"
-        )
-    return folder
+HOME_OUTPUT = "index.html"
 
 ROW_PLACEHOLDER = "{{TABLE_ROWS}}"
 TITLE_PLACEHOLDER = "{{TITLE}}"
@@ -143,36 +127,31 @@ COGNITIVE_DEGRADATION_PLACEHOLDER = "{{COGNITIVE_DEGRADATION}}"
 # Helpers
 # --------------------------------------------------
 
-
 def load_json_results(folder):
     results = []
     json_files = sorted(glob.glob(os.path.join(folder, "*.json")))
-
-    print(f"Reading JSON data: {folder}")
-    print(f"  JSON files found: {len(json_files)}")
 
     for file in json_files:
         try:
             with open(file, "r", encoding="utf-8") as f:
                 data = json.load(f)
-
+            
+            # --- THE FIX: Normalize the score key across all tasks ---
+            # If the JSON uses 'overall_score', map it to 'overall_benchmark_score'
             if "overall_score" in data and "overall_benchmark_score" not in data:
                 data["overall_benchmark_score"] = data["overall_score"]
-
+                
             data["model_name"] = os.path.splitext(os.path.basename(file))[0]
             results.append(data)
-
         except Exception as e:
-            print(f"  Skipping {file}: {e}")
+            print(f"Skipping {file}: {e}")
 
+    # Now the sort will work perfectly for both naming conventions!
     results.sort(
         key=lambda x: x.get("overall_benchmark_score", 0),
         reverse=True,
     )
-
-    print(f"  JSON records loaded: {len(results)}")
     return results
-
 
 def build_table(results):
     html = ""
@@ -261,9 +240,9 @@ def navigation(active):
 # --------------------------------------------------
 
 def calculate_cognitive_degradation():
-    """Calculates the difference in rule violations between multi-turn and single-turn-larger."""
-    single_turn_data = load_json_results(get_task_data_folder("single-turn-larger"))
-    multi_turn_data = load_json_results(get_task_data_folder("multi-turn"))
+    """Calculates the difference in rule violations between multi-turn and single-turn."""
+    single_turn_data = load_json_results(os.path.join(DATA_ROOT, "single-turn"))
+    multi_turn_data = load_json_results(os.path.join(DATA_ROOT, "multi-turn"))
 
     st_dict = {m["model_name"]: m.get("avg_violations_per_game", 0) for m in single_turn_data}
     mt_dict = {m["model_name"]: m.get("avg_violations_per_game", 0) for m in multi_turn_data}
@@ -303,7 +282,7 @@ def build_degradation_html(results):
                 <tr class="bg-gray-50 uppercase text-xs text-gray-500">
                     <th class="py-3 px-4 border-b">Rank</th>
                     <th class="py-3 px-4 border-b">Model</th>
-                    <th class="py-3 px-4 border-b">Single-Turn Larger Violations</th>
+                    <th class="py-3 px-4 border-b">Single-Turn Violations</th>
                     <th class="py-3 px-4 border-b">Multi-Turn Violations</th>
                     <th class="py-3 px-4 border-b">Degradation Score</th>
                 </tr>
@@ -348,7 +327,7 @@ def build_degradation_html(results):
 def calculate_strategy_quadrant():
     """Maps models into quadrants based on Win Rate and Info Gain Score."""
     # We use multi-turn as it's the best indicator of sustained strategy
-    mt_data = load_json_results(get_task_data_folder("multi-turn"))
+    mt_data = load_json_results(os.path.join(DATA_ROOT, "multi-turn"))
     
     if not mt_data:
         return []
@@ -357,8 +336,8 @@ def calculate_strategy_quadrant():
     scores = [m.get("overall_benchmark_score", 0) for m in mt_data]
     win_rates = [m.get("win_rate", 0) for m in mt_data]
     
-    median_score = statistics.median(scores) if scores else 0
-    median_win_rate = statistics.median(win_rates) if win_rates else 0
+    median_score = sorted(scores)[len(scores)//2] if scores else 0
+    median_win_rate = sorted(win_rates)[len(win_rates)//2] if win_rates else 0
 
     quadrants = {
         "masters": [],      # High Win, High Score
@@ -390,12 +369,12 @@ def build_strategy_html(quadrants):
     html = """
     <div class="bg-white rounded-lg shadow p-6 border mb-8">
         <h3 class="text-xl font-bold mb-2">Strategy vs. Brute-Force Matrix (Multi-Turn)</h3>
-        <p class="text-gray-600 mb-6 text-sm">Compares Multi-Turn win rate against benchmark strategy performance. Models are positioned relative to the cohort median.</p>
+        <p class="text-gray-600 mb-6 text-sm">Compares a model's ability to win against its Information Gain strategy. Placed relative to the cohort median.</p>
         
         <div class="flex items-center gap-4">
             
             <div class="flex flex-col justify-between items-center h-[528px] text-xs font-bold text-gray-400 uppercase tracking-wide py-4 select-none" style="writing-mode: vertical-rl; transform: rotate(180deg);">
-                <span>&uarr; Win Rate &darr;</span>
+                <span>&larr; Win Rate &rarr;</span>
             </div>
 
             <div class="grid grid-cols-2 gap-4 flex-1">
@@ -446,9 +425,9 @@ def build_strategy_html(quadrants):
         </div>
         
         <div class="flex justify-between text-xs font-bold text-gray-400 mt-4 pl-10 pr-2 uppercase tracking-wide">
-            <span>&larr; Lower Strategy Score</span>
+            <span>&larr; Lower Info Gain</span>
             <span>Strategy Score (Overall Benchmark)</span>
-            <span>Higher Strategy Score &rarr;</span>
+            <span>Higher Info Gain &rarr;</span>
         </div>
     </div>
     """
@@ -460,7 +439,7 @@ def build_strategy_html(quadrants):
 
 def calculate_compliance_score():
     """Calculates a Reliability Score and assigns a Deployment Tier."""
-    mt_data = load_json_results(get_task_data_folder("multi-turn"))
+    mt_data = load_json_results(os.path.join(DATA_ROOT, "multi-turn"))
     
     compliance_results = []
     
@@ -554,7 +533,7 @@ def build_compliance_html(results):
 
 def calculate_executive_profiles(top_n=5):
     """Normalizes scores and returns the Top N models for radar charts."""
-    tasks = ["single-turn-larger", "multi-turn", "cognitive-flexibility"]
+    tasks = ["single-turn", "multi-turn", "cognitive-flexibility"]
     model_scores = {}
     task_maxes = {t: 0.0001 for t in tasks} # Prevent division by zero
     
@@ -566,7 +545,7 @@ def calculate_executive_profiles(top_n=5):
             score = model.get("overall_benchmark_score", 0)
             
             if name not in model_scores:
-                model_scores[name] = {"single-turn-larger": 0, "multi-turn": 0, "cognitive-flexibility": 0}
+                model_scores[name] = {"single-turn": 0, "multi-turn": 0, "cognitive-flexibility": 0}
             
             model_scores[name][task] = score
             if score > task_maxes[task]:
@@ -576,7 +555,7 @@ def calculate_executive_profiles(top_n=5):
     normalized_profiles = {}
     for name, scores in model_scores.items():
         normalized_profiles[name] = {
-            "single-turn-larger": round((scores["single-turn-larger"] / task_maxes["single-turn-larger"]) * 100, 1),
+            "single-turn": round((scores["single-turn"] / task_maxes["single-turn"]) * 100, 1),
             "multi-turn": round((scores["multi-turn"] / task_maxes["multi-turn"]) * 100, 1),
             "cognitive-flexibility": round((scores["cognitive-flexibility"] / task_maxes["cognitive-flexibility"]) * 100, 1)
         }
@@ -630,7 +609,7 @@ def build_executive_profile_html(profiles):
                 labels: ['Single-Turn', 'Multi-Turn', 'Cognitive Flex'],
                 datasets: [{{
                     label: 'Normalized Score',
-                    data: [{scores['single-turn-larger']}, {scores['multi-turn']}, {scores['cognitive-flexibility']}],
+                    data: [{scores['single-turn']}, {scores['multi-turn']}, {scores['cognitive-flexibility']}],
                     backgroundColor: 'rgba(59, 130, 246, 0.2)',
                     borderColor: 'rgba(59, 130, 246, 1)',
                     pointBackgroundColor: 'rgba(59, 130, 246, 1)',
@@ -665,9 +644,9 @@ def build_executive_profile_html(profiles):
 
 def calculate_cognitive_pillars():
     """Maps JSON data to the 3 pillars of Executive Function and normalizes for charting."""
-    st_data = load_json_results(get_task_data_folder("single-turn-larger"))
-    mt_data = load_json_results(get_task_data_folder("multi-turn"))
-    cf_data = load_json_results(get_task_data_folder("cognitive-flexibility"))
+    st_data = load_json_results(os.path.join(DATA_ROOT, "single-turn"))
+    mt_data = load_json_results(os.path.join(DATA_ROOT, "multi-turn"))
+    cf_data = load_json_results(os.path.join(DATA_ROOT, "cognitive-flexibility"))
 
     # Create lookups
     st_dict = {m["model_name"]: m.get("avg_violations_per_game", 0) for m in st_data}
@@ -690,7 +669,7 @@ def calculate_cognitive_pillars():
         cf_v = cf_viol_dict.get(model, 0)
         cf_score = cf_dict.get(model, 0)
 
-        # Working Memory proxy (Multi-turn violations minus Single-turn Larger)
+        # Working Memory proxy (Multi-turn violations minus Single-turn)
         degradation = max(0, mt_v - st_v) 
         
         # Inhibitory Control proxy (Spike in violations during CF task vs MT task)
@@ -848,13 +827,13 @@ def get_weighted_scores():
 
     # 1. Load the CSV you downloaded from Kaggle
 
-    df = pd.read_csv(os.path.join(DATA_ROOT, 'murugesann_wordle-benchmark_leaderboard.csv'))
+    df = pd.read_csv('data/murugesann_executivefunction-infogain-wordle-bench_leaderboard.csv')
     
     # 2. Filter for your 3 specific tasks
     relevant_tasks = [
-        'evaluate_wordle_6L_single_turn_larger', 
-        'evaluate_6Lwordle_multi_turn', # Update if your CSV name is exactly 'evaluate_6Lwordle_multi_turn'
-        'evaluate_6Lwordle_cognitive_flexibility'
+        'evaluate_wordle_single_turn_v2', 
+        'evaluate_wordle_multi_turn', # Update if your CSV name is exactly 'evaluate_wordle_multi_turn'
+        'evaluate_cognitive_flexibility'
     ]
     df_filtered = df[df['Task_Name'].isin(relevant_tasks)]
     
@@ -865,15 +844,15 @@ def get_weighted_scores():
     grouped_filled = grouped.fillna(0)
     
     weights = {
-        'evaluate_wordle_6L_single_turn_larger': 0.10,
-        'evaluate_6Lwordle_multi_turn': 0.50,
-        'evaluate_6Lwordle_cognitive_flexibility': 0.40
+        'evaluate_wordle_single_turn_v2': 0.20,
+        'evaluate_wordle_multi_turn': 0.30,
+        'evaluate_cognitive_flexibility': 0.50
     }
     
     grouped_filled['Combined_Score'] = (
-        grouped_filled['evaluate_wordle_6L_single_turn_larger'] * weights['evaluate_wordle_6L_single_turn_larger'] +
-        grouped_filled['evaluate_6Lwordle_multi_turn'] * weights['evaluate_6Lwordle_multi_turn'] +
-        grouped_filled['evaluate_6Lwordle_cognitive_flexibility'] * weights['evaluate_6Lwordle_cognitive_flexibility']
+        grouped_filled['evaluate_wordle_single_turn_v2'] * weights['evaluate_wordle_single_turn_v2'] +
+        grouped_filled['evaluate_wordle_multi_turn'] * weights['evaluate_wordle_multi_turn'] +
+        grouped_filled['evaluate_cognitive_flexibility'] * weights['evaluate_cognitive_flexibility']
     )
     
     return grouped_filled.sort_values(by='Combined_Score', ascending=False)
@@ -884,9 +863,9 @@ def build_combined_bar_chart_html(combined_df):
     models = combined_df.index.tolist()
     
     # Extract the raw scores for each task per model
-    st_scores = combined_df['evaluate_wordle_6L_single_turn_larger'].tolist()
-    mt_scores = combined_df['evaluate_6Lwordle_multi_turn'].tolist()
-    cf_scores = combined_df['evaluate_6Lwordle_cognitive_flexibility'].tolist()
+    st_scores = combined_df['evaluate_wordle_single_turn_v2'].tolist()
+    mt_scores = combined_df['evaluate_wordle_multi_turn'].tolist()
+    cf_scores = combined_df['evaluate_cognitive_flexibility'].tolist()
 
     html = """
     <div class="bg-white rounded-lg shadow p-6 border mb-12">
@@ -895,16 +874,16 @@ def build_combined_bar_chart_html(combined_df):
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 p-4 bg-gray-50 rounded-lg border">
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Single-Turn Larger Weight: <span id="stWeightVal" class="text-blue-600">20%</span></label>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Single-Turn Weight: <span id="stWeightVal" class="text-blue-600">20%</span></label>
                 <input type="range" id="stWeight" min="0" max="100" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">50%</span></label>
-                <input type="range" id="mtWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">30%</span></label>
+                <input type="range" id="mtWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">30%</span></label>
-                <input type="range" id="cfWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">50%</span></label>
+                <input type="range" id="cfWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
         </div>
         <p id="weightWarning" class="text-red-500 text-sm font-bold hidden mb-4">Weights must sum to 100%!</p>
@@ -1012,7 +991,7 @@ def build_combined_bar_chart_html(combined_df):
 import pandas as pd
 import math
 
-def load_resource_metrics(csv_path=os.path.join(DATA_ROOT, "resource_metrics.csv")):
+def load_resource_metrics(csv_path="data/resource_metrics.csv"):
     """Loads resource data from CSV independently of JSON data."""
     resources = {}
     if os.path.exists(csv_path):
@@ -1177,75 +1156,56 @@ import pandas as pd
 import os
 
 def get_resource_insights_data():
-    """Reads resource_metrics.csv and compares only models with all 3 benchmark tasks."""
+    """Reads and aggregates resource and score data from resource_metrics.csv across ALL tasks."""
     merged = []
-    csv_path = os.path.join(DATA_ROOT, "resource_metrics.csv")
-
+    csv_path = "data/resource_metrics.csv" # Ensure this matches your file location
+    
     if not os.path.exists(csv_path):
         print(f"Warning: Could not find {csv_path}!")
         return merged
-
+        
     try:
         df = pd.read_csv(csv_path)
     except Exception as e:
         print(f"Error reading CSV: {e}")
         return merged
-
-    # Only use the three 6L benchmark tasks.
-    required_tasks = {
-        "single-turn-larger",
-        "multi-turn",
-        "cognitive-flexibility",
-    }
-
-    df = df.dropna(subset=["model_name", "task_id"])
-    df = df[df["task_id"].isin(required_tasks)].copy()
-
-    # Ignore models that do not have resource data for all 3 tasks.
-    task_counts = df.groupby("model_name")["task_id"].nunique()
-    complete_models = task_counts[task_counts == len(required_tasks)].index
-    df = df[df["model_name"].isin(complete_models)].copy()
-
-    if df.empty:
-        print("Warning: No models have complete resource data for all 3 tasks.")
-        return merged
-
-    # Aggregate duplicate runs within each model/task, if any.
-    task_level = df.groupby(["model_name", "task_id"], as_index=False).agg({
-        "score": "mean",
-        "cost_usd": "sum",
-        "time_seconds": "sum",
-        "output_tokens": "sum"
-    })
-
-    # Aggregate each complete model across all three tasks.
-    # Scores are equally averaged; resource usage is summed.
-    agg_df = task_level.groupby("model_name").agg({
-        "score": "mean",
-        "cost_usd": "sum",
-        "time_seconds": "sum",
-        "output_tokens": "sum"
+        
+    # Clean the data: replace any empty cells with 0 to prevent math errors
+    df = df.fillna(0)
+        
+    # Aggregate the data across all tasks (Single, Multi, and Cognitive)
+    # Average the score, but SUM the costs, time, and tokens!
+    agg_df = df.groupby('model_name').agg({
+        'score': 'mean',
+        'cost_usd': 'sum',
+        'time_seconds': 'sum',
+        'output_tokens': 'sum'
     }).reset_index()
-
+    
     for _, row in agg_df.iterrows():
-        model = str(row["model_name"])
-        cost = float(row["cost_usd"])
-        time_s = float(row["time_seconds"])
-        tokens = float(row["output_tokens"])
-        score = float(row["score"])
-
+        model = str(row['model_name'])
+        cost = float(row['cost_usd'])
+        time_s = float(row['time_seconds'])
+        tokens = float(row['output_tokens'])
+        score = float(row['score'])
+        
         merged.append({
             "model_name": model,
             "score": score,
             "cost": cost,
             "time_mins": time_s / 60.0,
             "tokens": tokens,
+            # Safe math to prevent DivisionByZero crashes
             "score_per_dollar": score / cost if cost > 0 else 0,
             "score_per_min": score / (time_s / 60.0) if time_s > 0 else 0,
             "score_per_10k_tokens": (score / tokens) * 10000 if tokens > 0 else 0
         })
-
+        
     return merged
+
+
+
+
 
 def build_efficiency_kpis_html(data):
     if not data:
@@ -1429,22 +1389,12 @@ with open(LEADERBOARD_TEMPLATE, encoding="utf-8") as f:
 
 task_cards = ""
 
-# Load all resource data globally before the loop.
-# CSV data is enrichment only; leaderboard rows come from JSON.
-print(f"Dashboard base directory: {BASE_DIR}")
-print(f"Dashboard data directory: {DATA_ROOT}")
-for _task_id, _folder_name in DATA_DIRS.items():
-    print(f"  {_task_id} -> {os.path.join(DATA_ROOT, _folder_name)}")
-
+# Load all resource data globally before the loop
 resource_data = load_resource_metrics()
 
 for task in TASKS:
-    folder = get_task_data_folder(task["id"])
+    folder = os.path.join(DATA_ROOT, task["id"])
     results = load_json_results(folder)
-    print(f"Generating {task['id']}.html from {folder}: {len(results)} JSON records")
-
-    if not results:
-        print(f"WARNING: No JSON result files found for task '{task['id']}' in '{folder}'")
     
     # 1. Merge resource data into the JSON results
     task_resources = resource_data.get(task["id"], {})
@@ -1477,7 +1427,7 @@ for task in TASKS:
 
     html = html.replace("</body>", FOOTER_HTML + "\n</body>")
 
-    output = os.path.join(BASE_DIR, f"{task['id']}.html")
+    output = f"{task['id']}.html"
     with open(output, "w", encoding="utf-8") as f:
         f.write(html) 
 

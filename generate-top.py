@@ -46,6 +46,21 @@ TEMPLATE_HTML = r"""<!DOCTYPE html>
   <div class="mt-6 h-1 w-16 rounded-full bg-blue-600"></div>
 </header>
 
+<section class="mt-10">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <a href="Wordle-5L-Dashboard/index.html" class="group rounded-2xl border-2 border-blue-200 bg-white p-7 shadow-md hover:shadow-lg hover:border-blue-400 transition">
+      <div class="text-xs font-bold uppercase tracking-[0.16em] text-blue-600">5-Letter Wordle</div>
+      <div class="mt-2 text-2xl font-bold text-slate-900">Explore the 5L Benchmark →</div>
+      <p class="mt-2 text-sm text-slate-600">View the full 5-letter Wordle benchmark dashboard, task results, and model rankings.</p>
+    </a>
+    <a href="Wordle-6L-Dashboard/index.html" class="group rounded-2xl border-2 border-blue-200 bg-white p-7 shadow-md hover:shadow-lg hover:border-blue-400 transition">
+      <div class="text-xs font-bold uppercase tracking-[0.16em] text-blue-600">6-Letter Wordle</div>
+      <div class="mt-2 text-2xl font-bold text-slate-900">Explore the 6L Benchmark →</div>
+      <p class="mt-2 text-sm text-slate-600">View the full 6-letter Wordle benchmark dashboard, task results, and model rankings.</p>
+    </a>
+  </div>
+</section>
+
 <section class="mt-12">
   <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
     <div>
@@ -118,23 +133,12 @@ TEMPLATE_HTML = r"""<!DOCTYPE html>
   <h2 class="mt-1 text-2xl font-bold">Notes</h2>
   <div class="mt-5 bg-white border border-slate-200 rounded-2xl p-6 text-sm text-slate-600 leading-relaxed">
     <ul class="list-disc pl-5 space-y-4">
-
-	<li>At present, GPT-5.6-Sol is not available for benchmarking in kaggle. Similarly, Grok 4.6 could not be benchmarked. </li> 
-
       <li><sup>*</sup> The deterministic solver score is the maximum possible score when the Wordle game is solved by a Python program using the entire word list and search tools.</li>
-
-      <li>The deterministic solver feature applies only to 6L Wordle and has not been performed for 5L Wordle.</li>
-
       <li>Wordle game scores are scaled against the deterministic solver score. Thus, if a solver-normalized score is 85%, it represents a 15% gap relative to the maximum possible score.</li>
-
+      <li>The deterministic solver feature applies only to 6L Wordle and has not been performed for 5L Wordle.</li>
       <li><strong>6L success-bonus tiering:</strong> Compared with 5-letter Wordle, the 6-letter benchmark uses a tiered success reward based on the turn in which the model identifies the correct secret word. Earlier success receives a higher reward, while success on later turns receives a progressively lower reward. A model that finds the correct word only on the sixth and final turn therefore receives the lowest success reward for a successful game.</li>
-
-      <li>The current Multi-turn kaggle notebook (unlike cognitive flexibility task) does not do success bonus calculation based on turn in which model succeeds. We have now extracted data from multi turn kaggle task benchmark scores and then manually recalculated and scaled it to reference deterministic solver score. Hence, the scores for Multi-turn in this dashboard will not match with scores available against the benchmark in kaggle. Since scores are normalized with deterministic solver score, the scores are now expressed in terms of percentages. </li> 
-
       <li><strong>Single-Turn coverage and task weights:</strong> For 5-letter Wordle, Single-Turn uses only <code>evaluate_wordle_single_turn_v2</code>, which covers 200 rows (200 API calls), while the 6-letter Single-Turn task covers 40 rows. The 5L task weights are 20% Single-Turn, 50% Multi-Turn and 30% Cognitive Flexibility. The 6L task weights are 10% Single-Turn, 50% Multi-Turn and 40% Cognitive Flexibility.</li>
-
       <li>The overall Wordle score is the equal-weight average of the resulting weighted 5L and 6L benchmark scores.</li>
-
       <li>The front-page model set is discovered automatically from the current leaderboard CSVs. A model is included only when all required Wordle tasks are present in both the 5L and 6L files. Model versions are not substituted for one another, so Claude Opus 4.8 and Claude Opus 5 are treated as separate models.</li>
     </ul>
   </div>

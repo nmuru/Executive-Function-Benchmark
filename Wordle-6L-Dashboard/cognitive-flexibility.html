@@ -20,7 +20,7 @@
 
 <nav class="mb-10 text-gray-700">
 
-<a href="../index.html" class="hover:text-blue-600">Home</a> | <a href="single-turn.html" class="hover:text-blue-600">Single-turn Wordle</a> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <span class="font-bold text-blue-600">Cognitive Flexibility</span> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a> | <a href="future-directions.html" class="hover:text-blue-600">Future Directions</a>
+<a href="../index.html" class="hover:text-blue-600">Home</a> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <span class="font-bold text-blue-600">Cognitive Flexibility</span> | <a href="single-turn-larger.html" class="hover:text-blue-600">Single-turn Wordle</a> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a> | <a href="future-directions.html" class="hover:text-blue-600">Future Directions</a>
 
 </nav>
 
@@ -156,6 +156,121 @@ Evaluating adaptive reasoning and cognitive flexibility.
 <!-- BOTTOM TABLE: Resource Metrics -->
 <!-- Placed inside the max-w-7xl container to perfectly align with the top table -->
 
+    <div class="bg-white rounded-lg shadow p-6 border mt-8 w-full">
+        <h3 class="text-xl font-bold mb-2">Resource & Efficiency Metrics</h3>
+        <p class="text-gray-600 mb-6 text-sm">Evaluating operational footprint. Sorted by a <strong>Combined Efficiency Score</strong> (33% Cost, 34% Speed, 33% Density).</p>
+
+
+        
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-50 uppercase text-xs text-gray-500 font-semibold tracking-wider">
+                        <th class="py-3 px-4 border-b">Rank</th>
+                        <th class="py-3 px-4 border-b">Model</th>
+                        <th class="py-3 px-4 border-b text-indigo-700">Combined Score</th>
+                        <th class="py-3 px-4 border-b">Cost ($)</th>
+                        <th class="py-3 px-4 border-b">Bang-for-Buck</th>
+                        <th class="py-3 px-4 border-b">Time (Mins)</th>
+                        <th class="py-3 px-4 border-b">Velocity</th>
+                        <th class="py-3 px-4 border-b">Info Density</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-yellow-600 font-bold text-lg">1</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-800">gpt-5.6-terra</td>
+                <td class="py-3 px-4 border-b font-black text-indigo-600">74.1 <span class="text-xs font-normal text-gray-400">/ 100</span></td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$1.2958</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.247</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">10.5m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0305</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.073</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-500 font-bold text-lg">2</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-800">gpt-5.6-sol</td>
+                <td class="py-3 px-4 border-b font-black text-indigo-600">49.5 <span class="text-xs font-normal text-gray-400">/ 100</span></td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$2.7119</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.133</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">26.7m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0135</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.068</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-yellow-800 font-bold text-lg">3</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-800">gemma-4-31b-it</td>
+                <td class="py-3 px-4 border-b font-black text-indigo-600">39.2 <span class="text-xs font-normal text-gray-400">/ 100</span></td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$0.2942</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">1.156</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">175.7m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0019</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.009</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-semibold">4</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-800">gemini-3.6-flash</td>
+                <td class="py-3 px-4 border-b font-black text-indigo-600">31.4 <span class="text-xs font-normal text-gray-400">/ 100</span></td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$2.3546</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.149</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">18.9m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0185</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.015</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-semibold">5</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-800">gemini-3.8-flash</td>
+                <td class="py-3 px-4 border-b font-black text-indigo-600">30.9 <span class="text-xs font-normal text-gray-400">/ 100</span></td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$1.4806</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.236</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">20.8m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0168</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.012</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-semibold">6</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-800">claude-opus-5-default</td>
+                <td class="py-3 px-4 border-b font-black text-indigo-600">24.0 <span class="text-xs font-normal text-gray-400">/ 100</span></td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$7.7075</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.045</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">33.7m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0104</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.025</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-semibold">7</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-800">grok-4.20-0309-reasoning</td>
+                <td class="py-3 px-4 border-b font-black text-indigo-600">22.0 <span class="text-xs font-normal text-gray-400">/ 100</span></td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$1.5993</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.213</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">30.4m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0112</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.008</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-semibold">8</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-800">gemini-3.1-pro-preview</td>
+                <td class="py-3 px-4 border-b font-black text-indigo-600">7.2 <span class="text-xs font-normal text-gray-400">/ 100</span></td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">$10.8433</td>
+                <td class="py-3 px-4 border-b font-bold text-green-600">0.034</td>
+                <td class="py-3 px-4 border-b font-mono text-gray-600">98.1m</td>
+                <td class="py-3 px-4 border-b font-bold text-blue-600">0.0038</td>
+                <td class="py-3 px-4 border-b font-bold text-purple-600">0.004</td>
+            </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
 
 
 </div>

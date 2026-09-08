@@ -1,0 +1,23 @@
+deepseek-r1-0528
+1.05
+81756 input tokens · 243196 output tokens · $1.4236 · 1485.70s
+
+
+gemini-3.8-flash
+0.86
+599673 input tokens · 257069 output tokens · $1.4138 · 954.86s
+
+
+gpt-5.6-terra
+0.72
+636379 input tokens · 34055 output tokens · $1.2692 · 554.94s
+
+
+claude-opus-5-default
+0.87
+886865 input tokens · 122558 output tokens · $6.2305 · 1839.91s
+
+
+gemini-3.6-flash
+0.93
+509450 input tokens · 185318 output tokens · $2.0415 · 850.67s

@@ -29,7 +29,7 @@
 
 <nav class="mb-10 text-gray-700">
 
-<span class="font-bold text-blue-600">Home</span> | <a href="single-turn.html" class="hover:text-blue-600">Single-turn Wordle</a> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <a href="cognitive-flexibility.html" class="hover:text-blue-600">Cognitive Flexibility</a> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a> | <a href="future-directions.html" class="hover:text-blue-600">Future Directions</a>
+<span class="font-bold text-blue-600">Home</span> | <a href="multi-turn.html" class="hover:text-blue-600">Multi-turn Wordle</a> | <a href="cognitive-flexibility.html" class="hover:text-blue-600">Cognitive Flexibility</a> | <a href="single-turn-larger.html" class="hover:text-blue-600">Single-turn Wordle</a> | <a href="nomenclature.html" class="hover:text-blue-600">Nomenclature</a> | <a href="system-prompt.html" class="hover:text-blue-600">System Prompt</a> | <a href="future-directions.html" class="hover:text-blue-600">Future Directions</a>
 
 </nav>
 
@@ -58,17 +58,6 @@ A benchmark suite for evaluating Executive Function capabilities of AI models us
 
 
 <div class="bg-white rounded-lg shadow p-6 border">
-<h2 class="text-xl font-bold mb-2">Single-turn Wordle</h2>
-<p class="text-gray-600 mb-4">Evaluating executive function from a single Wordle decision.</p>
-<p class="text-sm text-gray-500 mb-4">8 models evaluated</p>
-<a class="text-blue-600 font-semibold hover:underline"
-href="single-turn.html">
-View Leaderboard →
-</a>
-</div>
-
-
-<div class="bg-white rounded-lg shadow p-6 border">
 <h2 class="text-xl font-bold mb-2">Multi-turn Wordle</h2>
 <p class="text-gray-600 mb-4">Evaluating executive function and information gain across multi-turn gameplay.</p>
 <p class="text-sm text-gray-500 mb-4">8 models evaluated</p>
@@ -85,6 +74,17 @@ View Leaderboard →
 <p class="text-sm text-gray-500 mb-4">6 models evaluated</p>
 <a class="text-blue-600 font-semibold hover:underline"
 href="cognitive-flexibility.html">
+View Leaderboard →
+</a>
+</div>
+
+
+<div class="bg-white rounded-lg shadow p-6 border">
+<h2 class="text-xl font-bold mb-2">Single-turn Wordle</h2>
+<p class="text-gray-600 mb-4">Evaluating executive function from a larger single-turn Wordle benchmark.</p>
+<p class="text-sm text-gray-500 mb-4">8 models evaluated</p>
+<a class="text-blue-600 font-semibold hover:underline"
+href="single-turn-larger.html">
 View Leaderboard →
 </a>
 </div>
@@ -147,22 +147,50 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
 </div>
 </div>
 
+    <div class="mb-12">
+        <h3 class="text-2xl font-bold mb-4">Operational Excellence Highlights</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+            
+            <div class="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-6 shadow-sm">
+                <div class="text-green-800 text-xs font-bold uppercase tracking-wider mb-1">Most Economical Genius</div>
+                <div class="text-gray-600 text-sm mb-4">Highest Score per Dollar</div>
+                <div class="text-2xl font-black text-gray-900 mb-1">gemma-4-31b-it</div>
+                <div class="text-green-700 font-semibold">0.650 <span class="text-sm font-normal text-green-600">points/$</span></div>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 shadow-sm">
+                <div class="text-blue-800 text-xs font-bold uppercase tracking-wider mb-1">Fastest Decision Maker</div>
+                <div class="text-gray-600 text-sm mb-4">Highest Score per Minute</div>
+                <div class="text-2xl font-black text-gray-900 mb-1">gpt-5.6-terra</div>
+                <div class="text-blue-700 font-semibold">0.013 <span class="text-sm font-normal text-blue-600">points/min</span></div>
+            </div>
+
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-6 shadow-sm">
+                <div class="text-purple-800 text-xs font-bold uppercase tracking-wider mb-1">Most Concise Thinker</div>
+                <div class="text-gray-600 text-sm mb-4">Highest Score per 10k Tokens</div>
+                <div class="text-2xl font-black text-gray-900 mb-1">gpt-5.6-sol</div>
+                <div class="text-purple-700 font-semibold">0.043 <span class="text-sm font-normal text-purple-600">points/10k</span></div>
+            </div>
+
+        </div>
+    </div>
+    
     <div class="bg-white rounded-lg shadow p-6 border mb-12">
         <h3 class="text-2xl font-bold mb-2">Aggregate Executive Function Performance</h3>
         <p class="text-gray-600 mb-4 text-sm">Adjust the weights to see how different evaluation priorities affect the leaderboard.</p>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 p-4 bg-gray-50 rounded-lg border">
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Single-Turn Weight: <span id="stWeightVal" class="text-blue-600">20%</span></label>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Single-Turn Larger Weight: <span id="stWeightVal" class="text-blue-600">20%</span></label>
                 <input type="range" id="stWeight" min="0" max="100" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">30%</span></label>
-                <input type="range" id="mtWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">50%</span></label>
+                <input type="range" id="mtWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">50%</span></label>
-                <input type="range" id="cfWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">30%</span></label>
+                <input type="range" id="cfWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
         </div>
         <p id="weightWarning" class="text-red-500 text-sm font-bold hidden mb-4">Weights must sum to 100%!</p>
@@ -176,10 +204,10 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
     window.addEventListener('load', function() {
         // Raw Data from Python
         const rawData = {
-            models: ["gemini-3.1-pro-preview", "gpt-5.6-sol", "gemini-3.8-flash", "claude-opus-5-default", "gemini-3.6-flash", "gemma-4-31b-it", "grok-4.20-0309-reasoning", "gpt-5.6-terra", "gemini-3-flash-preview", "glm-5", "deepseek-v3.1", "gpt-5.5-2026-04-23", "grok-4.6"],
-            singleTurn: [0.845929803, 0.782031236, 0.807569789, 0.850924399, 0.837571467, 0.845943133, 0.774047094, 0.764370132, 0.804205089, 0.803748375, 0.0, 0.0, 0.0],
-            multiTurn: [0.495249952, 0.46036356, 0.459679513, 0.446682622, 0.442578341, 0.402903621, 0.399483387, 0.334498932, 0.0, 0.0, 0.0, 0.0, 0.0],
-            cognitiveFlex: [0.365045094, 0.363804984, 0.348124995, 0.345693595, 0.349174602, 0.338257386, 0.336325827, 0.321962484, 0.283430039, 0.0, 0.0, 0.0, 0.0]
+            models: ["gemini-3.1-pro-preview", "gemini-3.8-flash", "claude-opus-5-default", "gemma-4-31b-it", "grok-4.20-0309-reasoning", "gpt-5.6-sol", "gpt-5.6-terra", "gemini-3.6-flash", "gemini-3-flash-preview", "glm-5", "deepseek-v3.1", "gpt-5.5-2026-04-23", "grok-4.6"],
+            singleTurn: [0.816377437, 0.870033963, 0.849126776, 0.803067365, 0.827149285, 0.0, 0.782586392, 0.0, 0.846141878, 0.786122813, 0.0, 0.0, 0.0],
+            multiTurn: [0.495249952, 0.459679513, 0.446682622, 0.402903621, 0.399483387, 0.46036356, 0.334498932, 0.442578341, 0.0, 0.0, 0.0, 0.0, 0.0],
+            cognitiveFlex: [0.365045094, 0.348124995, 0.345693595, 0.338257386, 0.336325827, 0.363804984, 0.321962484, 0.349174602, 0.283430039, 0.0, 0.0, 0.0, 0.0]
         };
 
         let myChart = null;
@@ -262,6 +290,103 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
     });
     </script>
     
+    <div class="bg-white rounded-lg shadow p-6 border mb-12">
+        <h3 class="text-2xl font-bold mb-2">Efficiency Quadrant: Brains vs. Wallet</h3>
+        <p class="text-gray-600 mb-6 text-sm">Evaluating Multi-Turn cognitive performance against API cost. The ideal model sits in the top-left (Value Champions).</p>
+        
+        <div class="w-full relative h-[900px]">
+            <canvas id="scatterChart"></canvas>
+        </div>
+    </div>
+    
+  
+    
+    <script>
+    // Register the plugin
+    Chart.register(ChartDataLabels);
+    
+    new Chart(document.getElementById('scatterChart'), {
+        type: 'scatter',
+        data: {
+            datasets: [
+            {
+                label: 'Value Champions (High Score, Low Cost)',
+                data: [{x: 6.2858, y: 0.6233333333333334, model: 'gemini-3.6-flash'}],
+                backgroundColor: 'rgba(16, 185, 129, 1)',
+                borderColor: 'rgba(16, 185, 129, 1)',
+                pointRadius: 6,
+                pointHoverRadius: 8
+            }
+            ,
+            {
+                label: 'Premium Brains (High Score, High Cost)',
+                data: [{x: 23.4791, y: 0.64, model: 'claude-opus-5-default'}, {x: 27.3619, y: 0.6633333333333333, model: 'gemini-3.1-pro-preview'}, {x: 7.205299999999999, y: 0.65, model: 'gemini-3.8-flash'}],
+                backgroundColor: 'rgba(59, 130, 246, 1)',
+                borderColor: 'rgba(59, 130, 246, 1)',
+                pointRadius: 6,
+                pointHoverRadius: 8
+            }
+            ,
+            {
+                label: 'Lightweight (Low Score, Low Cost)',
+                data: [{x: 0.9275, y: 0.6033333333333334, model: 'gemma-4-31b-it'}, {x: 4.637, y: 0.54, model: 'gpt-5.6-terra'}, {x: 5.3113, y: 0.5866666666666668, model: 'grok-4.20-0309-reasoning'}],
+                backgroundColor: 'rgba(156, 163, 175, 1)',
+                borderColor: 'rgba(156, 163, 175, 1)',
+                pointRadius: 6,
+                pointHoverRadius: 8
+            }
+            ,
+            {
+                label: 'Overpriced (Low Score, High Cost)',
+                data: [{x: 7.0716, y: 0.6033333333333334, model: 'gpt-5.6-sol'}],
+                backgroundColor: 'rgba(239, 68, 68, 1)',
+                borderColor: 'rgba(239, 68, 68, 1)',
+                pointRadius: 6,
+                pointHoverRadius: 8
+            }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+                padding: { top: 20, right: 30 } // Give labels room to breathe
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Total API Cost ($)', font: { weight: 'bold' } },
+                    grid: { color: (ctx) => ctx.tick.value === 6.6787 ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.05)' }
+                },
+                y: {
+                    title: { display: true, text: 'Overall Executive Score', font: { weight: 'bold' } },
+                    grid: { color: (ctx) => ctx.tick.value === 0.6133333333333334 ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.05)' }
+                }
+            },
+            plugins: {
+                legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
+                // Configure the permanent labels
+                datalabels: {
+                    align: 'top',
+                    offset: 6,
+                    color: '#4B5563', // Tailwind gray-600
+                    font: { size: 10, weight: 'bold' },
+                    formatter: function(value, context) {
+                        return value.model;
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let item = context.raw;
+                            return item.model + ': Score ' + item.y.toFixed(3) + ' | Cost $' + item.x.toFixed(2);
+                        }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+    
     <div class="bg-white rounded-lg shadow p-6 border mb-8">
         <h3 class="text-xl font-bold mb-2">Cognitive Degradation Index (Working Memory Stress Test)</h3>
         <p class="text-gray-600 mb-6 text-sm">Measures how much a model's rule adherence degrades when transitioning from a single decision to multi-turn gameplay. A lower score indicates better context stability.</p>
@@ -271,7 +396,7 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
                 <tr class="bg-gray-50 uppercase text-xs text-gray-500">
                     <th class="py-3 px-4 border-b">Rank</th>
                     <th class="py-3 px-4 border-b">Model</th>
-                    <th class="py-3 px-4 border-b">Single-Turn Violations</th>
+                    <th class="py-3 px-4 border-b">Single-Turn Larger Violations</th>
                     <th class="py-3 px-4 border-b">Multi-Turn Violations</th>
                     <th class="py-3 px-4 border-b">Degradation Score</th>
                 </tr>
@@ -288,22 +413,30 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
         
             <tr class="hover:bg-gray-50">
                 <td class="py-3 px-4 border-b font-medium text-gray-700">2</td>
-                <td class="py-3 px-4 border-b font-semibold">gpt-5.6-sol</td>
-                <td class="py-3 px-4 border-b">0.000</td>
-                <td class="py-3 px-4 border-b">0.019</td>
-                <td class="py-3 px-4 border-b text-yellow-600 font-bold">+0.019 (Slight Drift)</td>
-            </tr>
-        
-            <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">3</td>
-                <td class="py-3 px-4 border-b font-semibold">gemini-3.6-flash</td>
+                <td class="py-3 px-4 border-b font-semibold">gemini-3.8-flash</td>
                 <td class="py-3 px-4 border-b">0.000</td>
                 <td class="py-3 px-4 border-b">0.059</td>
                 <td class="py-3 px-4 border-b text-yellow-600 font-bold">+0.059 (Slight Drift)</td>
             </tr>
         
             <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">3</td>
+                <td class="py-3 px-4 border-b font-semibold">gemma-4-31b</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.109</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.109 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
                 <td class="py-3 px-4 border-b font-medium text-gray-700">4</td>
+                <td class="py-3 px-4 border-b font-semibold">gpt-5.6-terra</td>
+                <td class="py-3 px-4 border-b">0.000</td>
+                <td class="py-3 px-4 border-b">0.173</td>
+                <td class="py-3 px-4 border-b text-red-600 font-bold">+0.173 (Severe Drift)</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b font-medium text-gray-700">5</td>
                 <td class="py-3 px-4 border-b font-semibold">grok-4.2-reasoning</td>
                 <td class="py-3 px-4 border-b">0.000</td>
                 <td class="py-3 px-4 border-b">0.365</td>
@@ -311,7 +444,7 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
             </tr>
         
             <tr class="hover:bg-gray-50">
-                <td class="py-3 px-4 border-b font-medium text-gray-700">5</td>
+                <td class="py-3 px-4 border-b font-medium text-gray-700">6</td>
                 <td class="py-3 px-4 border-b font-semibold">claude-opus-5</td>
                 <td class="py-3 px-4 border-b">0.000</td>
                 <td class="py-3 px-4 border-b">0.577</td>
@@ -372,7 +505,7 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">4</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-sonnet-4.6</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">glm-5</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
                 <td class="py-3 px-4 border-b text-red-700">0.000</td>
@@ -381,7 +514,7 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">5</td>
-                <td class="py-3 px-4 border-b font-bold text-gray-900">claude-opus-4.8</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3-flash-preview</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.000</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
                 <td class="py-3 px-4 border-b text-red-700">0.000</td>
@@ -489,7 +622,7 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
         }
         ,
         {
-            label: 'claude-sonnet-4.6',
+            label: 'glm-5',
             data: [100.0, 0.0, 100.0],
             backgroundColor: 'rgba(139, 92, 246, 0.1)',
             borderColor: 'rgba(139, 92, 246, 1)',
@@ -499,7 +632,7 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
         }
         ,
         {
-            label: 'claude-opus-4.8',
+            label: 'gemini-3-flash-preview',
             data: [100.0, 0.0, 100.0],
             backgroundColor: 'rgba(239, 68, 68, 0.1)',
             borderColor: 'rgba(239, 68, 68, 1)',
@@ -531,12 +664,12 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
     
     <div class="bg-white rounded-lg shadow p-6 border mb-8">
         <h3 class="text-xl font-bold mb-2">Strategy vs. Brute-Force Matrix (Multi-Turn)</h3>
-        <p class="text-gray-600 mb-6 text-sm">Compares a model's ability to win against its Information Gain strategy. Placed relative to the cohort median.</p>
+        <p class="text-gray-600 mb-6 text-sm">Compares Multi-Turn win rate against benchmark strategy performance. Models are positioned relative to the cohort median.</p>
         
         <div class="flex items-center gap-4">
             
             <div class="flex flex-col justify-between items-center h-[528px] text-xs font-bold text-gray-400 uppercase tracking-wide py-4 select-none" style="writing-mode: vertical-rl; transform: rotate(180deg);">
-                <span>&larr; Win Rate &rarr;</span>
+                <span>&uarr; Win Rate &darr;</span>
             </div>
 
             <div class="grid grid-cols-2 gap-4 flex-1">
@@ -575,9 +708,9 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
         </div>
         
         <div class="flex justify-between text-xs font-bold text-gray-400 mt-4 pl-10 pr-2 uppercase tracking-wide">
-            <span>&larr; Lower Info Gain</span>
+            <span>&larr; Lower Strategy Score</span>
             <span>Strategy Score (Overall Benchmark)</span>
-            <span>Higher Info Gain &rarr;</span>
+            <span>Higher Strategy Score &rarr;</span>
         </div>
     </div>
     

@@ -336,8 +336,8 @@ def calculate_strategy_quadrant():
     scores = [m.get("overall_benchmark_score", 0) for m in mt_data]
     win_rates = [m.get("win_rate", 0) for m in mt_data]
     
-    median_score = sorted(scores)[len(scores)//2] if scores else 0
-    median_win_rate = sorted(win_rates)[len(win_rates)//2] if win_rates else 0
+    median_score = statistics.median(scores) if scores else 0
+    median_win_rate = statistics.median(win_rates) if win_rates else 0
 
     quadrants = {
         "masters": [],      # High Win, High Score
@@ -369,12 +369,12 @@ def build_strategy_html(quadrants):
     html = """
     <div class="bg-white rounded-lg shadow p-6 border mb-8">
         <h3 class="text-xl font-bold mb-2">Strategy vs. Brute-Force Matrix (Multi-Turn)</h3>
-        <p class="text-gray-600 mb-6 text-sm">Compares a model's ability to win against its Information Gain strategy. Placed relative to the cohort median.</p>
+        <p class="text-gray-600 mb-6 text-sm">Compares Multi-Turn win rate against benchmark strategy performance. Models are positioned relative to the cohort median.</p>
         
         <div class="flex items-center gap-4">
             
             <div class="flex flex-col justify-between items-center h-[528px] text-xs font-bold text-gray-400 uppercase tracking-wide py-4 select-none" style="writing-mode: vertical-rl; transform: rotate(180deg);">
-                <span>&larr; Win Rate &rarr;</span>
+                <span>&uarr; Win Rate &darr;</span>
             </div>
 
             <div class="grid grid-cols-2 gap-4 flex-1">
@@ -425,9 +425,9 @@ def build_strategy_html(quadrants):
         </div>
         
         <div class="flex justify-between text-xs font-bold text-gray-400 mt-4 pl-10 pr-2 uppercase tracking-wide">
-            <span>&larr; Lower Info Gain</span>
+            <span>&larr; Lower Strategy Score</span>
             <span>Strategy Score (Overall Benchmark)</span>
-            <span>Higher Info Gain &rarr;</span>
+            <span>Higher Strategy Score &rarr;</span>
         </div>
     </div>
     """
@@ -827,7 +827,7 @@ def get_weighted_scores():
 
     # 1. Load the CSV you downloaded from Kaggle
 
-    df = pd.read_csv('wordle-bench_leaderboard.csv')
+    df = pd.read_csv('data/murugesann_executivefunction-infogain-wordle-bench_leaderboard.csv')
     
     # 2. Filter for your 3 specific tasks
     relevant_tasks = [
@@ -878,12 +878,12 @@ def build_combined_bar_chart_html(combined_df):
                 <input type="range" id="stWeight" min="0" max="100" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">30%</span></label>
-                <input type="range" id="mtWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">50%</span></label>
+                <input type="range" id="mtWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">50%</span></label>
-                <input type="range" id="cfWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">30%</span></label>
+                <input type="range" id="cfWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
         </div>
         <p id="weightWarning" class="text-red-500 text-sm font-bold hidden mb-4">Weights must sum to 100%!</p>
@@ -1156,56 +1156,75 @@ import pandas as pd
 import os
 
 def get_resource_insights_data():
-    """Reads and aggregates resource and score data from resource_metrics.csv across ALL tasks."""
+    """Reads resource_metrics.csv and compares only models with all 3 benchmark tasks."""
     merged = []
-    csv_path = "data/resource_metrics.csv" # Ensure this matches your file location
-    
+    csv_path = "data/resource_metrics.csv"
+
     if not os.path.exists(csv_path):
         print(f"Warning: Could not find {csv_path}!")
         return merged
-        
+
     try:
         df = pd.read_csv(csv_path)
     except Exception as e:
         print(f"Error reading CSV: {e}")
         return merged
-        
-    # Clean the data: replace any empty cells with 0 to prevent math errors
-    df = df.fillna(0)
-        
-    # Aggregate the data across all tasks (Single, Multi, and Cognitive)
-    # Average the score, but SUM the costs, time, and tokens!
-    agg_df = df.groupby('model_name').agg({
-        'score': 'mean',
-        'cost_usd': 'sum',
-        'time_seconds': 'sum',
-        'output_tokens': 'sum'
+
+    # Only use the three 5L benchmark tasks.
+    required_tasks = {
+        "single-turn",
+        "multi-turn",
+        "cognitive-flexibility",
+    }
+
+    df = df.dropna(subset=["model_name", "task_id"])
+    df = df[df["task_id"].isin(required_tasks)].copy()
+
+    # Ignore models that do not have resource data for all 3 tasks.
+    task_counts = df.groupby("model_name")["task_id"].nunique()
+    complete_models = task_counts[task_counts == len(required_tasks)].index
+    df = df[df["model_name"].isin(complete_models)].copy()
+
+    if df.empty:
+        print("Warning: No models have complete resource data for all 3 tasks.")
+        return merged
+
+    # Aggregate duplicate runs within each model/task, if any.
+    task_level = df.groupby(["model_name", "task_id"], as_index=False).agg({
+        "score": "mean",
+        "cost_usd": "sum",
+        "time_seconds": "sum",
+        "output_tokens": "sum"
+    })
+
+    # Aggregate each complete model across all three tasks.
+    # Scores are equally averaged; resource usage is summed.
+    agg_df = task_level.groupby("model_name").agg({
+        "score": "mean",
+        "cost_usd": "sum",
+        "time_seconds": "sum",
+        "output_tokens": "sum"
     }).reset_index()
-    
+
     for _, row in agg_df.iterrows():
-        model = str(row['model_name'])
-        cost = float(row['cost_usd'])
-        time_s = float(row['time_seconds'])
-        tokens = float(row['output_tokens'])
-        score = float(row['score'])
-        
+        model = str(row["model_name"])
+        cost = float(row["cost_usd"])
+        time_s = float(row["time_seconds"])
+        tokens = float(row["output_tokens"])
+        score = float(row["score"])
+
         merged.append({
             "model_name": model,
             "score": score,
             "cost": cost,
             "time_mins": time_s / 60.0,
             "tokens": tokens,
-            # Safe math to prevent DivisionByZero crashes
             "score_per_dollar": score / cost if cost > 0 else 0,
             "score_per_min": score / (time_s / 60.0) if time_s > 0 else 0,
             "score_per_10k_tokens": (score / tokens) * 10000 if tokens > 0 else 0
         })
-        
+
     return merged
-
-
-
-
 
 def build_efficiency_kpis_html(data):
     if not data:

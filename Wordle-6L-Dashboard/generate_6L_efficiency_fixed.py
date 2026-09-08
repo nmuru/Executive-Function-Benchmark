@@ -1,7 +1,6 @@
 import json
 import os
 import glob
-import statistics
 
 from datetime import datetime # ADD THIS IMPORT
 
@@ -357,8 +356,8 @@ def calculate_strategy_quadrant():
     scores = [m.get("overall_benchmark_score", 0) for m in mt_data]
     win_rates = [m.get("win_rate", 0) for m in mt_data]
     
-    median_score = statistics.median(scores) if scores else 0
-    median_win_rate = statistics.median(win_rates) if win_rates else 0
+    median_score = sorted(scores)[len(scores)//2] if scores else 0
+    median_win_rate = sorted(win_rates)[len(win_rates)//2] if win_rates else 0
 
     quadrants = {
         "masters": [],      # High Win, High Score
@@ -390,12 +389,12 @@ def build_strategy_html(quadrants):
     html = """
     <div class="bg-white rounded-lg shadow p-6 border mb-8">
         <h3 class="text-xl font-bold mb-2">Strategy vs. Brute-Force Matrix (Multi-Turn)</h3>
-        <p class="text-gray-600 mb-6 text-sm">Compares Multi-Turn win rate against benchmark strategy performance. Models are positioned relative to the cohort median.</p>
+        <p class="text-gray-600 mb-6 text-sm">Compares a model's ability to win against its Information Gain strategy. Placed relative to the cohort median.</p>
         
         <div class="flex items-center gap-4">
             
             <div class="flex flex-col justify-between items-center h-[528px] text-xs font-bold text-gray-400 uppercase tracking-wide py-4 select-none" style="writing-mode: vertical-rl; transform: rotate(180deg);">
-                <span>&uarr; Win Rate &darr;</span>
+                <span>&larr; Win Rate &rarr;</span>
             </div>
 
             <div class="grid grid-cols-2 gap-4 flex-1">
@@ -446,9 +445,9 @@ def build_strategy_html(quadrants):
         </div>
         
         <div class="flex justify-between text-xs font-bold text-gray-400 mt-4 pl-10 pr-2 uppercase tracking-wide">
-            <span>&larr; Lower Strategy Score</span>
+            <span>&larr; Lower Info Gain</span>
             <span>Strategy Score (Overall Benchmark)</span>
-            <span>Higher Strategy Score &rarr;</span>
+            <span>Higher Info Gain &rarr;</span>
         </div>
     </div>
     """
@@ -899,12 +898,12 @@ def build_combined_bar_chart_html(combined_df):
                 <input type="range" id="stWeight" min="0" max="100" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">50%</span></label>
-                <input type="range" id="mtWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                <label class="block text-sm font-bold text-gray-700 mb-1">Multi-Turn Weight: <span id="mtWeightVal" class="text-blue-600">30%</span></label>
+                <input type="range" id="mtWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">30%</span></label>
-                <input type="range" id="cfWeight" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                <label class="block text-sm font-bold text-gray-700 mb-1">Cognitive Flex Weight: <span id="cfWeightVal" class="text-blue-600">50%</span></label>
+                <input type="range" id="cfWeight" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
             </div>
         </div>
         <p id="weightWarning" class="text-red-500 text-sm font-bold hidden mb-4">Weights must sum to 100%!</p>

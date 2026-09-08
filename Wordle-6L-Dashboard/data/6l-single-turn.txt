@@ -1,0 +1,16 @@
+gemini-3.8-flash
+0.81
+57769 input tokens · 191331 output tokens · $0.7608 · 686.41s
+
+
+gpt-5.6-terra
+0.76
+69448 input tokens · 14826 output tokens · $0.3960 · 219.82s
+
+claude-opus-5-default
+0.85
+86896 input tokens · 88626 output tokens · $2.6501 · 1268.98s
+
+gemini-3.6-flash
+0.84
+57689 input tokens · 104581 output tokens · $0.8709 · 576.90s

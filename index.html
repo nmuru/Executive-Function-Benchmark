@@ -30,7 +30,7 @@
       <h2 class="mt-1 text-2xl font-bold">Combined 5L + 6L Ranking</h2>
       <p class="mt-2 text-slate-600 max-w-3xl">The ranking below is calculated from models with complete required task results in both the 5L and 6L Wordle leaderboard files. The two benchmark scores are combined into a single Overall Score.</p>
     </div>
-    <span class="inline-flex self-start rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">2 models</span>
+    <span class="inline-flex self-start rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">6 models</span>
   </div>
 
   <div class="mt-6 bg-white border border-slate-200 rounded-2xl shadow-sm table-wrap">
@@ -44,10 +44,10 @@
 <tr class="bg-blue-50">
   <td class="px-5 py-4">—</td>
   <td class="px-5 py-4 font-bold">Deterministic Solver (Max Possible)<sup>*</sup></td>
-  <td class="px-5 py-4 text-right score">1.46</td>
+  <td class="px-5 py-4 text-right score">1.0000</td>
   <td class="px-5 py-4 text-right">Nil</td>
-  <td class="px-5 py-4 text-right">1.46</td>
-  <td class="px-5 py-4 text-right">Nil</td>
+  <td class="px-5 py-4 text-right">1.0000</td>
+  <td class="px-5 py-4 text-right">1.0000</td>
 </tr>
 
 
@@ -56,22 +56,70 @@
   <td class="px-5 py-4 font-bold">
     Gemini 3.1 Pro Preview
   </td>
-  <td class="px-5 py-4 text-right score">0.85</td>
-  <td class="px-5 py-4 text-right">0.76</td>
-  <td class="px-5 py-4 text-right">0.92</td>
-  <td class="px-5 py-4 text-right">0.82</td>
+  <td class="px-5 py-4 text-right score">0.7321</td>
+  <td class="px-5 py-4 text-right">0.7407</td>
+  <td class="px-5 py-4 text-right">0.7818</td>
+  <td class="px-5 py-4 text-right">0.6434</td>
 </tr>
 
 
 <tr class="">
   <td class="px-5 py-4">2</td>
   <td class="px-5 py-4 font-semibold">
+    Gemini 3.8 Flash
+  </td>
+  <td class="px-5 py-4 text-right score">0.7305</td>
+  <td class="px-5 py-4 text-right">0.7651</td>
+  <td class="px-5 py-4 text-right">0.7913</td>
+  <td class="px-5 py-4 text-right">0.6060</td>
+</tr>
+
+
+<tr class="">
+  <td class="px-5 py-4">3</td>
+  <td class="px-5 py-4 font-semibold">
+    Grok 4.20 Reasoning
+  </td>
+  <td class="px-5 py-4 text-right score">0.7010</td>
+  <td class="px-5 py-4 text-right">0.7417</td>
+  <td class="px-5 py-4 text-right">0.7142</td>
+  <td class="px-5 py-4 text-right">0.6520</td>
+</tr>
+
+
+<tr class="">
+  <td class="px-5 py-4">4</td>
+  <td class="px-5 py-4 font-semibold">
     Gemma 4 31B
   </td>
-  <td class="px-5 py-4 text-right score">0.77</td>
-  <td class="px-5 py-4 text-right">0.75</td>
-  <td class="px-5 py-4 text-right">0.80</td>
-  <td class="px-5 py-4 text-right">0.77</td>
+  <td class="px-5 py-4 text-right score">0.6899</td>
+  <td class="px-5 py-4 text-right">0.7233</td>
+  <td class="px-5 py-4 text-right">0.7064</td>
+  <td class="px-5 py-4 text-right">0.6401</td>
+</tr>
+
+
+<tr class="">
+  <td class="px-5 py-4">5</td>
+  <td class="px-5 py-4 font-semibold">
+    Claude Opus 5
+  </td>
+  <td class="px-5 py-4 text-right score">0.6816</td>
+  <td class="px-5 py-4 text-right">0.7508</td>
+  <td class="px-5 py-4 text-right">0.6986</td>
+  <td class="px-5 py-4 text-right">0.6070</td>
+</tr>
+
+
+<tr class="">
+  <td class="px-5 py-4">6</td>
+  <td class="px-5 py-4 font-semibold">
+    GPT-5.6 Terra
+  </td>
+  <td class="px-5 py-4 text-right score">0.6235</td>
+  <td class="px-5 py-4 text-right">0.6983</td>
+  <td class="px-5 py-4 text-right">0.6542</td>
+  <td class="px-5 py-4 text-right">0.5223</td>
 </tr>
 </tbody>
     </table>
@@ -112,9 +160,13 @@
     </tr>
   </thead>
   <tbody>
-<tr class="bg-blue-50"><td class="py-3 px-4 border-b font-bold">Deterministic Solver (Max Possible)<sup>*</sup></td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">1.4619</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">—</td><td class="py-3 px-3 border-b text-center">100.0%</td><td class="py-3 px-3 border-b text-center">—</td><td class="py-3 px-3 border-b text-center">100.0%</td><td class="py-3 px-3 border-b text-center">—</td><td class="py-3 px-3 border-b text-center">100.0%</td><td class="py-3 px-3 border-b text-center">—</td><td class="py-3 px-3 border-b text-center">100.0%</td><td class="py-3 px-3 border-b text-center">—</td></tr>
-<tr class="hover:bg-gray-50"><td class="py-3 px-4 border-b font-bold">Gemini 3.1 Pro Preview</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">0.8529</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">1</td><td class="py-3 px-3 border-b text-center">48.0</td><td class="py-3 px-3 border-b text-center">1</td><td class="py-3 px-3 border-b text-center">94.3</td><td class="py-3 px-3 border-b text-center">1</td><td class="py-3 px-3 border-b text-center">92.6</td><td class="py-3 px-3 border-b text-center">1</td><td class="py-3 px-3 border-b text-center">44.4</td><td class="py-3 px-3 border-b text-center">1</td></tr>
-<tr class="hover:bg-gray-50"><td class="py-3 px-4 border-b font-bold">Gemma 4 31B</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">0.7661</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">2</td><td class="py-3 px-3 border-b text-center">30.0</td><td class="py-3 px-3 border-b text-center">2</td><td class="py-3 px-3 border-b text-center">84.3</td><td class="py-3 px-3 border-b text-center">2</td><td class="py-3 px-3 border-b text-center">85.2</td><td class="py-3 px-3 border-b text-center">2</td><td class="py-3 px-3 border-b text-center">19.5</td><td class="py-3 px-3 border-b text-center">2</td></tr>
+<tr class="bg-blue-50"><td class="py-3 px-4 border-b font-bold">Deterministic Solver (Max Possible)<sup>*</sup></td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">100.0%</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">—</td><td class="py-3 px-3 border-b text-center">100.0%</td><td class="py-3 px-3 border-b text-center">—</td><td class="py-3 px-3 border-b text-center">100.0%</td><td class="py-3 px-3 border-b text-center">—</td><td class="py-3 px-3 border-b text-center">100.0%</td><td class="py-3 px-3 border-b text-center">—</td><td class="py-3 px-3 border-b text-center">100.0%</td><td class="py-3 px-3 border-b text-center">—</td></tr>
+<tr class="hover:bg-gray-50"><td class="py-3 px-4 border-b font-bold">Gemini 3.1 Pro Preview</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">73.2</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">1</td><td class="py-3 px-3 border-b text-center">48.0</td><td class="py-3 px-3 border-b text-center">1</td><td class="py-3 px-3 border-b text-center">94.3</td><td class="py-3 px-3 border-b text-center">1</td><td class="py-3 px-3 border-b text-center">92.6</td><td class="py-3 px-3 border-b text-center">1</td><td class="py-3 px-3 border-b text-center">44.4</td><td class="py-3 px-3 border-b text-center">2</td></tr>
+<tr class="hover:bg-gray-50"><td class="py-3 px-4 border-b font-bold">Gemini 3.8 Flash</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">73.0</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">2</td><td class="py-3 px-3 border-b text-center">40.0</td><td class="py-3 px-3 border-b text-center">3</td><td class="py-3 px-3 border-b text-center">94.0</td><td class="py-3 px-3 border-b text-center">2</td><td class="py-3 px-3 border-b text-center">90.2</td><td class="py-3 px-3 border-b text-center">3</td><td class="py-3 px-3 border-b text-center">42.0</td><td class="py-3 px-3 border-b text-center">3</td></tr>
+<tr class="hover:bg-gray-50"><td class="py-3 px-4 border-b font-bold">Grok 4.20 Reasoning</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">70.1</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">3</td><td class="py-3 px-3 border-b text-center">37.0</td><td class="py-3 px-3 border-b text-center">4</td><td class="py-3 px-3 border-b text-center">88.9</td><td class="py-3 px-3 border-b text-center">4</td><td class="py-3 px-3 border-b text-center">86.6</td><td class="py-3 px-3 border-b text-center">5</td><td class="py-3 px-3 border-b text-center">32.2</td><td class="py-3 px-3 border-b text-center">5</td></tr>
+<tr class="hover:bg-gray-50"><td class="py-3 px-4 border-b font-bold">Gemma 4 31B</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">69.0</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">4</td><td class="py-3 px-3 border-b text-center">30.0</td><td class="py-3 px-3 border-b text-center">6</td><td class="py-3 px-3 border-b text-center">84.3</td><td class="py-3 px-3 border-b text-center">6</td><td class="py-3 px-3 border-b text-center">85.2</td><td class="py-3 px-3 border-b text-center">6</td><td class="py-3 px-3 border-b text-center">19.5</td><td class="py-3 px-3 border-b text-center">6</td></tr>
+<tr class="hover:bg-gray-50"><td class="py-3 px-4 border-b font-bold">Claude Opus 5</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">68.2</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">5</td><td class="py-3 px-3 border-b text-center">45.0</td><td class="py-3 px-3 border-b text-center">2</td><td class="py-3 px-3 border-b text-center">93.2</td><td class="py-3 px-3 border-b text-center">3</td><td class="py-3 px-3 border-b text-center">91.6</td><td class="py-3 px-3 border-b text-center">2</td><td class="py-3 px-3 border-b text-center">52.6</td><td class="py-3 px-3 border-b text-center">1</td></tr>
+<tr class="hover:bg-gray-50"><td class="py-3 px-4 border-b font-bold">GPT-5.6 Terra</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">62.3</td><td class="py-3 px-3 border-b text-center bg-blue-50 font-bold">6</td><td class="py-3 px-3 border-b text-center">33.0</td><td class="py-3 px-3 border-b text-center">5</td><td class="py-3 px-3 border-b text-center">87.0</td><td class="py-3 px-3 border-b text-center">5</td><td class="py-3 px-3 border-b text-center">86.7</td><td class="py-3 px-3 border-b text-center">4</td><td class="py-3 px-3 border-b text-center">33.0</td><td class="py-3 px-3 border-b text-center">4</td></tr>
   </tbody>
 </table>
 
@@ -130,20 +182,41 @@
   <h2 class="mt-1 text-2xl font-bold">Notes</h2>
   <div class="mt-5 bg-white border border-slate-200 rounded-2xl p-6 text-sm text-slate-600 leading-relaxed">
     <ul class="list-disc pl-5 space-y-4">
+
+	<li>At present, GPT-5.6-Sol is not available for benchmarking in kaggle. Similarly, Grok 4.6 could not be benchmarked. </li> 
+
       <li><sup>*</sup> The deterministic solver score is the maximum possible score when the Wordle game is solved by a Python program using the entire word list and search tools.</li>
-      <li>Wordle game scores are scaled against the deterministic solver score. Thus, if a solver-normalized score is 85%, it represents a 15% gap relative to the maximum possible score.</li>
+
       <li>The deterministic solver feature applies only to 6L Wordle and has not been performed for 5L Wordle.</li>
+
+      <li>Wordle game scores are scaled against the deterministic solver score. Thus, if a solver-normalized score is 85%, it represents a 15% gap relative to the maximum possible score.</li>
+
       <li><strong>6L success-bonus tiering:</strong> Compared with 5-letter Wordle, the 6-letter benchmark uses a tiered success reward based on the turn in which the model identifies the correct secret word. Earlier success receives a higher reward, while success on later turns receives a progressively lower reward. A model that finds the correct word only on the sixth and final turn therefore receives the lowest success reward for a successful game.</li>
+
+      <li>The current Multi-turn kaggle notebook (unlike cognitive flexibility task) does not do success bonus calculation based on turn in which model succeeds. We have now extracted data from multi turn kaggle task benchmark scores and then manually recalculated and scaled it to reference deterministic solver score. Hence, the scores for Multi-turn in this dashboard will not match with scores available against the benchmark in kaggle. Since scores are normalized with deterministic solver score, the scores are now expressed in terms of percentages. </li> 
+
       <li><strong>Single-Turn coverage and task weights:</strong> For 5-letter Wordle, Single-Turn uses only <code>evaluate_wordle_single_turn_v2</code>, which covers 200 rows (200 API calls), while the 6-letter Single-Turn task covers 40 rows. The 5L task weights are 20% Single-Turn, 50% Multi-Turn and 30% Cognitive Flexibility. The 6L task weights are 10% Single-Turn, 50% Multi-Turn and 40% Cognitive Flexibility.</li>
+
       <li>The overall Wordle score is the equal-weight average of the resulting weighted 5L and 6L benchmark scores.</li>
+
       <li>The front-page model set is discovered automatically from the current leaderboard CSVs. A model is included only when all required Wordle tasks are present in both the 5L and 6L files. Model versions are not substituted for one another, so Claude Opus 4.8 and Claude Opus 5 are treated as separate models.</li>
     </ul>
   </div>
 </section>
 
-<section class="mt-14 flex flex-wrap gap-3">
-  <a href="Wordle-5L-Dashboard/index.html" class="rounded-lg bg-white border border-slate-200 px-4 py-3 text-sm font-semibold text-blue-700">Explore 5L benchmark →</a>
-  <a href="Wordle-6L-Dashboard/index.html" class="rounded-lg bg-white border border-slate-200 px-4 py-3 text-sm font-semibold text-blue-700">Explore 6L benchmark →</a>
+<section class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+  <a href="Wordle-5L-Dashboard/index.html" class="group block rounded-2xl border-2 border-blue-200 bg-blue-50 p-7 shadow-sm hover:shadow-md hover:border-blue-400 transition">
+    <div class="text-xs font-bold uppercase tracking-[0.16em] text-blue-600">5-Letter Wordle</div>
+    <div class="mt-2 text-2xl font-bold text-slate-900">Explore the 5L Benchmark</div>
+    <p class="mt-2 text-sm text-slate-600">View the full 5-letter Wordle benchmark, task results, rankings, and model performance.</p>
+    <div class="mt-5 text-sm font-bold text-blue-700 group-hover:underline">Open 5L Dashboard →</div>
+  </a>
+  <a href="Wordle-6L-Dashboard/index.html" class="group block rounded-2xl border-2 border-blue-200 bg-blue-50 p-7 shadow-sm hover:shadow-md hover:border-blue-400 transition">
+    <div class="text-xs font-bold uppercase tracking-[0.16em] text-blue-600">6-Letter Wordle</div>
+    <div class="mt-2 text-2xl font-bold text-slate-900">Explore the 6L Benchmark</div>
+    <p class="mt-2 text-sm text-slate-600">View the full 6-letter Wordle benchmark, task results, rankings, and model performance.</p>
+    <div class="mt-5 text-sm font-bold text-blue-700 group-hover:underline">Open 6L Dashboard →</div>
+  </a>
 </section>
 
 <footer class="mt-12 pt-6 border-t border-slate-200 text-xs text-slate-400">Executive Function Benchmark · Combined 5L + 6L ranking with selected external benchmark context</footer>
