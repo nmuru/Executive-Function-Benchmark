@@ -827,7 +827,7 @@ def get_weighted_scores():
 
     # 1. Load the CSV you downloaded from Kaggle
 
-    df = pd.read_csv('data/murugesann_wordle-benchmark_leaderboard-6Letter.csv')
+    df = pd.read_csv('data/murugesann_wordle-benchmark_leaderboard.csv')
     
     # 2. Filter for your 3 specific tasks
     relevant_tasks = [

@@ -71,7 +71,7 @@ View Leaderboard →
 <div class="bg-white rounded-lg shadow p-6 border">
 <h2 class="text-xl font-bold mb-2">Multi-turn Wordle</h2>
 <p class="text-gray-600 mb-4">Evaluating executive function and information gain across multi-turn gameplay.</p>
-<p class="text-sm text-gray-500 mb-4">6 models evaluated</p>
+<p class="text-sm text-gray-500 mb-4">8 models evaluated</p>
 <a class="text-blue-600 font-semibold hover:underline"
 href="multi-turn.html">
 View Leaderboard →
@@ -176,10 +176,10 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
     window.addEventListener('load', function() {
         // Raw Data from Python
         const rawData = {
-            models: ["gemini-3.1-pro-preview", "gpt-5.6-sol", "claude-opus-5-default", "gemini-3.6-flash", "gemma-4-31b-it", "grok-4.20-0309-reasoning"],
-            singleTurn: [0.85, 0.78, 0.85, 0.84, 0.85, 0.77],
-            multiTurn: [0.72, 0.67, 0.65, 0.65, 0.59, 0.65],
-            cognitiveFlex: [0.72, 0.67, 0.65, 0.65, 0.59, 0.34]
+            models: ["gemini-3.1-pro-preview", "gpt-5.6-sol", "gemini-3.8-flash", "claude-opus-5-default", "gemini-3.6-flash", "gemma-4-31b-it", "grok-4.20-0309-reasoning", "gpt-5.6-terra", "gemini-3-flash-preview", "glm-5", "deepseek-v3.1", "gpt-5.5-2026-04-23", "grok-4.6"],
+            singleTurn: [0.845929803, 0.782031236, 0.807569789, 0.850924399, 0.837571467, 0.845943133, 0.774047094, 0.764370132, 0.804205089, 0.803748375, 0.0, 0.0, 0.0],
+            multiTurn: [0.495249952, 0.46036356, 0.459679513, 0.446682622, 0.442578341, 0.402903621, 0.399483387, 0.334498932, 0.0, 0.0, 0.0, 0.0, 0.0],
+            cognitiveFlex: [0.365045094, 0.363804984, 0.348124995, 0.345693595, 0.349174602, 0.338257386, 0.336325827, 0.321962484, 0.283430039, 0.0, 0.0, 0.0, 0.0]
         };
 
         let myChart = null;
@@ -399,6 +399,15 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
         
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="py-3 px-4 border-b text-gray-700 font-medium">7</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gemini-3.8-flash</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.059</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">63.3</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">8</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">gemma-4-31b</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.109</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
@@ -407,7 +416,7 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">8</td>
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">9</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">claude-opus-5</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.577</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.3457</td>
@@ -416,7 +425,16 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
             </tr>
         
             <tr class="hover:bg-gray-50 transition-colors">
-                <td class="py-3 px-4 border-b text-gray-700 font-medium">9</td>
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">10</td>
+                <td class="py-3 px-4 border-b font-bold text-gray-900">gpt-5.6-terra</td>
+                <td class="py-3 px-4 border-b text-blue-700">0.173</td>
+                <td class="py-3 px-4 border-b text-purple-700">0.0000</td>
+                <td class="py-3 px-4 border-b text-red-700">0.000</td>
+                <td class="py-3 px-4 border-b bg-blue-50 font-black text-blue-800 text-lg">56.7</td>
+            </tr>
+        
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4 border-b text-gray-700 font-medium">11</td>
                 <td class="py-3 px-4 border-b font-bold text-gray-900">grok-4.2-reasoning</td>
                 <td class="py-3 px-4 border-b text-blue-700">0.365</td>
                 <td class="py-3 px-4 border-b text-purple-700">0.3363</td>
@@ -534,7 +552,7 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
                     <span class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">Reasoning Masters</span>
                     <span class="text-xs text-blue-400 mb-2">High Win Rate, High Strategy</span>
                     <ul class="text-sm font-bold text-gray-900">
-    <li>gemini-3.1-pro-preview</li><li>claude-opus-5</li>
+    <li>gemini-3.1-pro-preview</li><li>gemini-3.8-flash</li><li>claude-opus-5</li>
                     </ul>
                 </div>
 
@@ -542,7 +560,7 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
                     <span class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Struggling</span>
                     <span class="text-xs text-gray-400 mb-2">Low Win Rate, Low Strategy</span>
                     <ul class="text-sm font-medium text-gray-600">
-    <li>gemini-3.6-flash</li><li>gemma-4-31b</li>
+    <li>gemini-3.6-flash</li><li>gemma-4-31b</li><li>gpt-5.6-terra</li>
                     </ul>
                 </div>
 
@@ -611,6 +629,34 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
                 </div>
             </div>
         
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-green-50 border-green-200 text-green-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gpt-5.6-terra</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Production Ready</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">100.0<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 0.0%</div>
+                </div>
+            </div>
+        
+            <div class="border rounded-lg p-4 flex items-center justify-between bg-blue-50 border-blue-200 text-blue-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">✅</span>
+                    <div>
+                        <h4 class="font-bold text-lg leading-tight">gemini-3.8-flash</h4>
+                        <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Stable</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-black">98.1<span class="text-lg text-gray-500 font-medium">%</span></div>
+                    <div class="text-xs opacity-75 mt-1">API Errors: 1.9%</div>
+                </div>
+            </div>
+        
             <div class="border rounded-lg p-4 flex items-center justify-between bg-blue-50 border-blue-200 text-blue-800">
                 <div class="flex items-center gap-3">
                     <span class="text-2xl">✅</span>
@@ -669,7 +715,7 @@ While Wordle game performance itself serves as a perfect proxy for the EF skills
             &copy; 2026 N Murugesan. All rights reserved.
         </div>
         <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-6 text-center md:text-right">
-            <span>Last updated: August 29, 2026</span>
+            <span>Last updated: September 08, 2026</span>
             <span>For questions or feedback, contact: <a href="mailto:nmurugs@gmail.com" class="text-gray-700 hover:text-blue-600 transition-colors font-semibold">nmurugs@gmail.com</a></span>
         </div>
     </footer>
