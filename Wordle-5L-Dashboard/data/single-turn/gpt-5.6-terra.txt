@@ -1,0 +1,7 @@
+{
+  "item_count": 200,
+  "overall_score": 0.6139950511197707,
+  "average_info_gain": 0.5489950511197708,
+  "win_rate": 0.065,
+  "format_adherence_rate": 0.97
+}
