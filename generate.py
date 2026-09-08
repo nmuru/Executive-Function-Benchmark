@@ -14,6 +14,23 @@ FILE_5L = DATA_DIR_5L / "murugesann_executivefunction-infogain-wordle-bench_lead
 FILE_6L = DATA_DIR_6L / "murugesann_wordle-benchmark_leaderboard.csv"
 FILE_EXTERNAL = DATA_DIR / "benchmark_data.xlsx"
 FILE_SOLVER = DATA_DIR / "Deterministic_solver_scores.txt"
+def find_resource_csv(data_dir):
+    candidates = [
+        data_dir / "resource_metrics" / "resource_metrics.csv",
+        data_dir / "resource_metrics.csv",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    # Also tolerate a differently named CSV inside the resource_metrics directory.
+    resource_dir = data_dir / "resource_metrics"
+    if resource_dir.exists():
+        csvs = sorted(resource_dir.glob("*.csv"))
+        if len(csvs) == 1:
+            return csvs[0]
+    return candidates[0]
+
+RESOURCE_COMBINED = BASE_DIR / "resource_metrics_combined.csv"
 
 # ---------------------------------------------------------------------------
 # The parent page is intentionally embedded here.
@@ -46,6 +63,22 @@ TEMPLATE_HTML = r"""<!DOCTYPE html>
   <div class="mt-6 h-1 w-16 rounded-full bg-blue-600"></div>
 </header>
 
+<section class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+  <a href="Wordle-5L-Dashboard/index.html" class="group block rounded-2xl border-2 border-blue-200 bg-blue-50 p-7 shadow-sm hover:shadow-md hover:border-blue-400 transition">
+    <div class="text-xs font-bold uppercase tracking-[0.16em] text-blue-600">5-Letter Wordle</div>
+    <div class="mt-2 text-2xl font-bold text-slate-900">Explore the 5L Benchmark</div>
+    <p class="mt-2 text-sm text-slate-600">View the full 5-letter Wordle benchmark, task results, rankings, and model performance.</p>
+    <div class="mt-5 text-sm font-bold text-blue-700 group-hover:underline">Open 5L Dashboard →</div>
+  </a>
+  <a href="Wordle-6L-Dashboard/index.html" class="group block rounded-2xl border-2 border-blue-200 bg-blue-50 p-7 shadow-sm hover:shadow-md hover:border-blue-400 transition">
+    <div class="text-xs font-bold uppercase tracking-[0.16em] text-blue-600">6-Letter Wordle</div>
+    <div class="mt-2 text-2xl font-bold text-slate-900">Explore the 6L Benchmark</div>
+    <p class="mt-2 text-sm text-slate-600">View the full 6-letter Wordle benchmark, task results, rankings, and model performance.</p>
+    <div class="mt-5 text-sm font-bold text-blue-700 group-hover:underline">Open 6L Dashboard →</div>
+  </a>
+</section>
+
+
 <section class="mt-12">
   <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
     <div>
@@ -67,6 +100,24 @@ TEMPLATE_HTML = r"""<!DOCTYPE html>
     </table>
   </div>
   <p class="mt-3 text-xs text-slate-500">Models are included automatically when all required 5L and 6L task results are present. The Overall Score is the equal-weight average of the weighted 5L and 6L benchmark scores.</p>
+</section>
+
+<section class="mt-14">
+  <div>
+    <div class="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Operational highlights</div>
+    <h2 class="mt-1 text-2xl font-bold">Operational Highlights</h2>
+    <p class="mt-2 text-slate-600 max-w-4xl">The strongest combined 5L + 6L results on cost efficiency, decision velocity, and information density. These metrics use the resource data from both benchmark suites and include only models with complete resource coverage in both resource files.</p>
+  </div>
+  {{OPERATIONAL_HIGHLIGHTS}}
+</section>
+
+<section class="mt-14">
+  <div>
+    <div class="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Resource footprint</div>
+    <h2 class="mt-1 text-2xl font-bold">Resource &amp; Efficiency Metrics</h2>
+    <p class="mt-2 text-slate-600 max-w-4xl">Combined resource footprint across the 5L and 6L resource files. The Combined Efficiency Score gives equal weight to bang-for-buck, velocity, and information density after max-value normalization within the eligible model set.</p>
+  </div>
+  {{RESOURCE_EFFICIENCY}}
 </section>
 
 <section class="mt-14">
@@ -140,20 +191,6 @@ TEMPLATE_HTML = r"""<!DOCTYPE html>
   </div>
 </section>
 
-<section class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-  <a href="Wordle-5L-Dashboard/index.html" class="group block rounded-2xl border-2 border-blue-200 bg-blue-50 p-7 shadow-sm hover:shadow-md hover:border-blue-400 transition">
-    <div class="text-xs font-bold uppercase tracking-[0.16em] text-blue-600">5-Letter Wordle</div>
-    <div class="mt-2 text-2xl font-bold text-slate-900">Explore the 5L Benchmark</div>
-    <p class="mt-2 text-sm text-slate-600">View the full 5-letter Wordle benchmark, task results, rankings, and model performance.</p>
-    <div class="mt-5 text-sm font-bold text-blue-700 group-hover:underline">Open 5L Dashboard →</div>
-  </a>
-  <a href="Wordle-6L-Dashboard/index.html" class="group block rounded-2xl border-2 border-blue-200 bg-blue-50 p-7 shadow-sm hover:shadow-md hover:border-blue-400 transition">
-    <div class="text-xs font-bold uppercase tracking-[0.16em] text-blue-600">6-Letter Wordle</div>
-    <div class="mt-2 text-2xl font-bold text-slate-900">Explore the 6L Benchmark</div>
-    <p class="mt-2 text-sm text-slate-600">View the full 6-letter Wordle benchmark, task results, rankings, and model performance.</p>
-    <div class="mt-5 text-sm font-bold text-blue-700 group-hover:underline">Open 6L Dashboard →</div>
-  </a>
-</section>
 
 <footer class="mt-12 pt-6 border-t border-slate-200 text-xs text-slate-400">Executive Function Benchmark · Combined 5L + 6L ranking with selected external benchmark context</footer>
 </main>
@@ -636,6 +673,262 @@ def build_external_rows(wordle, external, deterministic_score):
     return "\n".join(rows)
 
 
+def _load_resource_csv(path, benchmark_label):
+    """Load one benchmark's resource_metrics.csv using the same field conventions as 5L/6L generators."""
+    if not path.exists():
+        print(f"Warning: Could not find {path} ({benchmark_label} resource metrics).")
+        return pd.DataFrame()
+    try:
+        df = pd.read_csv(path)
+    except Exception as exc:
+        print(f"Warning: Could not read {path}: {exc}")
+        return pd.DataFrame()
+
+    df.columns = [str(c).strip().lower() for c in df.columns]
+    if "task" in df.columns and "task_id" not in df.columns:
+        df = df.rename(columns={"task": "task_id"})
+    if "model" in df.columns and "model_name" not in df.columns:
+        df = df.rename(columns={"model": "model_name"})
+
+    required = {"task_id", "model_name", "score", "cost_usd", "time_seconds", "output_tokens"}
+    missing = required - set(df.columns)
+    if missing:
+        print(f"Warning: {path} is missing resource columns: {sorted(missing)}")
+        return pd.DataFrame()
+
+    df = df.copy()
+    df["model_id"] = df["model_name"].map(canonical_model_id)
+    for col in ["score", "cost_usd", "time_seconds", "output_tokens"]:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+    df = df.dropna(subset=["model_id", "task_id", "score", "cost_usd", "time_seconds", "output_tokens"])
+    df["benchmark"] = benchmark_label
+    return df
+
+
+def _aggregate_resource_benchmark(df, required_tasks):
+    """Aggregate resource metrics using the individual dashboard convention."""
+    if df.empty:
+        return pd.DataFrame()
+
+    df = df[df["task_id"].isin(required_tasks)].copy()
+    task_counts = df.groupby("model_id")["task_id"].nunique()
+    complete_models = task_counts[task_counts == len(required_tasks)].index
+    df = df[df["model_id"].isin(complete_models)].copy()
+
+    if df.empty:
+        return pd.DataFrame()
+
+    # Match generate-5l.py: average duplicate runs within each model/task,
+    # then equally average the three task scores and sum resource usage.
+    task_level = df.groupby(["model_id", "task_id"], as_index=False).agg({
+        "score": "mean",
+        "cost_usd": "sum",
+        "time_seconds": "sum",
+        "output_tokens": "sum",
+    })
+
+    agg = task_level.groupby("model_id").agg({
+        "score": "mean",
+        "cost_usd": "sum",
+        "time_seconds": "sum",
+        "output_tokens": "sum",
+    }).reset_index()
+
+    return agg.rename(columns={
+        "cost_usd": "cost",
+        "time_seconds": "time_seconds",
+        "output_tokens": "tokens",
+    })
+
+
+def load_combined_resource_metrics(common_model_ids=None):
+    """Load and aggregate the single combined resource_metrics CSV.
+
+    A model is eligible when the combined file contains all three resource
+    task IDs: single-turn, multi-turn, and cognitive-flexibility. The number
+    of rows is not used as an eligibility requirement; duplicate rows/runs
+    within a task are averaged for score and summed for resource usage,
+    matching the individual resource-metrics convention.
+    """
+    required_tasks = {
+        "single-turn",
+        "multi-turn",
+        "cognitive-flexibility",
+    }
+
+    if not RESOURCE_COMBINED.exists():
+        print(f"Warning: Could not find combined resource metrics: {RESOURCE_COMBINED}")
+        return []
+
+    df = _load_resource_csv(RESOURCE_COMBINED, "combined")
+    if df.empty:
+        return []
+
+    # Normalize task names defensively in case the combined file contains
+    # the original 6L spelling.
+    df["task_id"] = (
+        df["task_id"]
+        .astype(str)
+        .str.strip()
+        .str.lower()
+        .replace({
+            "single-turn-v2": "single-turn",
+            "single-turn-larger": "single-turn",
+        })
+    )
+
+    df = df[df["task_id"].isin(required_tasks)].copy()
+
+    # Eligibility is based only on presence of every required task.
+    # Do NOT require exactly 3 or 6 rows: duplicate runs are valid.
+    task_counts = df.groupby("model_id")["task_id"].nunique()
+    eligible_ids = set(
+        task_counts[task_counts == len(required_tasks)].index
+    )
+
+    print("Complete combined-resource models:", sorted(eligible_ids))
+
+    if not eligible_ids:
+        print(
+            "Warning: No model has all three required resource tasks "
+            "in resource_metrics_combined.csv."
+        )
+        return []
+
+    df = df[df["model_id"].isin(eligible_ids)].copy()
+
+    # For each model/task, average duplicate score observations and sum the
+    # actual resource footprint of those observations.
+    task_level = df.groupby(
+        ["model_id", "task_id"], as_index=False
+    ).agg({
+        "score": "mean",
+        "cost_usd": "sum",
+        "time_seconds": "sum",
+        "output_tokens": "sum",
+    })
+
+    # Aggregate the three resource tasks for each model.
+    agg = task_level.groupby("model_id", as_index=False).agg({
+        "score": "mean",
+        "cost_usd": "sum",
+        "time_seconds": "sum",
+        "output_tokens": "sum",
+    })
+
+    rows = []
+    for _, row in agg.iterrows():
+        score = float(row["score"])
+        cost = float(row["cost_usd"])
+        time_mins = float(row["time_seconds"]) / 60.0
+        tokens = float(row["output_tokens"])
+
+        rows.append({
+            "model_id": row["model_id"],
+            "model_name": display_model_name(row["model_id"]),
+            "score": score,
+            "cost": cost,
+            "time_mins": time_mins,
+            "tokens": tokens,
+            "score_per_dollar": score / cost if cost > 0 else 0.0,
+            "score_per_min": score / time_mins if time_mins > 0 else 0.0,
+            "score_per_10k_tokens": (
+                (score / tokens) * 10000 if tokens > 0 else 0.0
+            ),
+        })
+
+    print(
+        f"Resource-efficiency model set: {len(rows)} models "
+        "with all three resource tasks present."
+    )
+    return rows
+
+
+def build_operational_highlights_html(data):
+    if not data:
+        return '<div class="mt-6 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-900">No model has complete resource coverage in both 5L and 6L resource files.</div>'
+
+    top_dollar = max(data, key=lambda x: x["score_per_dollar"])
+    top_speed = max(data, key=lambda x: x["score_per_min"])
+    top_dense = max(data, key=lambda x: x["score_per_10k_tokens"])
+
+    return f"""
+    <div class="mt-6 grid md:grid-cols-3 gap-6">
+      <div class="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-2xl p-6 shadow-sm">
+        <div class="text-green-800 text-xs font-bold uppercase tracking-wider mb-1">Most Economical Genius</div>
+        <div class="text-gray-600 text-sm mb-4">Highest Score per Dollar</div>
+        <div class="text-2xl font-black text-gray-900 mb-1">{html_lib.escape(top_dollar['model_name'])}</div>
+        <div class="text-green-700 font-semibold">{top_dollar['score_per_dollar']:.3f} <span class="text-sm font-normal text-green-600">points/$</span></div>
+      </div>
+      <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl p-6 shadow-sm">
+        <div class="text-blue-800 text-xs font-bold uppercase tracking-wider mb-1">Fastest Decision Maker</div>
+        <div class="text-gray-600 text-sm mb-4">Highest Score per Minute</div>
+        <div class="text-2xl font-black text-gray-900 mb-1">{html_lib.escape(top_speed['model_name'])}</div>
+        <div class="text-blue-700 font-semibold">{top_speed['score_per_min']:.3f} <span class="text-sm font-normal text-blue-600">points/min</span></div>
+      </div>
+      <div class="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-2xl p-6 shadow-sm">
+        <div class="text-purple-800 text-xs font-bold uppercase tracking-wider mb-1">Most Concise Thinker</div>
+        <div class="text-gray-600 text-sm mb-4">Highest Score per 10k Tokens</div>
+        <div class="text-2xl font-black text-gray-900 mb-1">{html_lib.escape(top_dense['model_name'])}</div>
+        <div class="text-purple-700 font-semibold">{top_dense['score_per_10k_tokens']:.3f} <span class="text-sm font-normal text-purple-600">points/10k</span></div>
+      </div>
+    </div>
+    """
+
+
+def build_resource_efficiency_html(data):
+    if not data:
+        return '<div class="mt-6 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-900">No model has complete resource coverage in both 5L and 6L resource files.</div>'
+
+    max_bfb = max(m["score_per_dollar"] for m in data) or 1.0
+    max_vel = max(m["score_per_min"] for m in data) or 1.0
+    max_den = max(m["score_per_10k_tokens"] for m in data) or 1.0
+    for m in data:
+        m["combined_efficiency"] = (
+            (m["score_per_dollar"] / max_bfb) * 0.33
+            + (m["score_per_min"] / max_vel) * 0.34
+            + (m["score_per_10k_tokens"] / max_den) * 0.33
+        ) * 100
+    data = sorted(data, key=lambda x: x["combined_efficiency"], reverse=True)
+
+    rows = []
+    for rank, row in enumerate(data, 1):
+        rank_style = "text-yellow-600 font-bold text-lg" if rank == 1 else ("text-gray-500 font-bold text-lg" if rank == 2 else ("text-yellow-800 font-bold text-lg" if rank == 3 else "text-gray-700 font-semibold"))
+        rows.append(f"""
+        <tr class="hover:bg-gray-50 transition-colors">
+          <td class="py-3 px-4 border-b {rank_style}">{rank}</td>
+          <td class="py-3 px-4 border-b font-bold text-gray-800">{html_lib.escape(row['model_name'])}</td>
+          <td class="py-3 px-4 border-b font-black text-indigo-600">{row['combined_efficiency']:.1f} <span class="text-xs font-normal text-gray-400">/ 100</span></td>
+          <td class="py-3 px-4 border-b font-mono text-gray-600">${row['cost']:.4f}</td>
+          <td class="py-3 px-4 border-b font-bold text-green-600">{row['score_per_dollar']:.3f}</td>
+          <td class="py-3 px-4 border-b font-mono text-gray-600">{row['time_mins']:.1f}m</td>
+          <td class="py-3 px-4 border-b font-bold text-blue-600">{row['score_per_min']:.4f}</td>
+          <td class="py-3 px-4 border-b font-bold text-purple-600">{row['score_per_10k_tokens']:.3f}</td>
+        </tr>
+        """)
+
+    return f"""
+    <div class="mt-6 bg-white border border-slate-200 rounded-2xl shadow-sm table-wrap">
+      <table class="w-full text-left border-collapse min-w-[900px]">
+        <thead>
+          <tr class="bg-slate-50 text-xs text-slate-500 font-semibold uppercase tracking-wider">
+            <th class="py-3 px-4 border-b">Rank</th>
+            <th class="py-3 px-4 border-b">Model</th>
+            <th class="py-3 px-4 border-b text-indigo-700">Combined Score</th>
+            <th class="py-3 px-4 border-b">Cost ($)</th>
+            <th class="py-3 px-4 border-b">Bang-for-Buck</th>
+            <th class="py-3 px-4 border-b">Time (Mins)</th>
+            <th class="py-3 px-4 border-b">Velocity</th>
+            <th class="py-3 px-4 border-b">Info Density</th>
+          </tr>
+        </thead>
+        <tbody>{''.join(rows)}</tbody>
+      </table>
+    </div>
+    <p class="mt-3 text-xs text-slate-500">The efficiency score uses 33% cost efficiency, 34% speed, and 33% information density, with each raw efficiency metric normalized to the maximum among eligible combined models.</p>
+    """
+
+
 def main():
     for path in [FILE_5L, FILE_6L, FILE_EXTERNAL, FILE_SOLVER]:
         require_file(path)
@@ -644,6 +937,7 @@ def main():
     print(f"6L source: {FILE_6L}")
     print(f"External benchmark source: {FILE_EXTERNAL}")
     print(f"Deterministic solver source: {FILE_SOLVER}")
+    print(f"Combined resource source: {RESOURCE_COMBINED}")
 
     wordle = load_wordle_scores()
 
@@ -656,6 +950,10 @@ def main():
     deterministic_score = load_deterministic_solver_score()
     print(f"Deterministic solver score: {deterministic_score}")
 
+    resource_metrics = load_combined_resource_metrics()
+    operational_highlights = build_operational_highlights_html(resource_metrics)
+    resource_efficiency = build_resource_efficiency_html(resource_metrics)
+
     output = TEMPLATE_HTML
     output = output.replace(
         "{{COMBINED_ROWS}}",
@@ -666,6 +964,8 @@ def main():
         build_external_rows(wordle, external, deterministic_score),
     )
     output = output.replace("{{MODEL_COUNT}}", str(len(wordle)))
+    output = output.replace("{{OPERATIONAL_HIGHLIGHTS}}", operational_highlights)
+    output = output.replace("{{RESOURCE_EFFICIENCY}}", resource_efficiency)
 
     OUTPUT_FILE.write_text(
         output,
