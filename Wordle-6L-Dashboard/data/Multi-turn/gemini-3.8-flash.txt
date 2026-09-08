@@ -1,5 +1,5 @@
 {
-  "overall_benchmark_score": 0.7310298080816039,
+  "overall_benchmark_score": 0.672,
   "raw_overall_score": 1.0686837605528026,
   "reference_solver_score": 1.4618880772554035,
   "normalized_overall_score": 0.7310298080816039,
