@@ -1,8 +1,8 @@
 {
-  "overall_benchmark_score": 0.724,
-  "raw_overall_score": 1.1244568490393438,
+  "overall_benchmark_score": 0.4952499519383599,
+  "raw_overall_score": 0.724,
   "reference_solver_score": 1.4618880772554035,
-  "normalized_overall_score": 0.769181216082175,
+  "normalized_overall_score": 0.4952499519383599,
   "average_info_gain": 0.42880467512630027,
   "win_rate": 0.6956521739130435,
   "avg_violations_per_game": 0.0,
