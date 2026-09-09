@@ -92,7 +92,7 @@ TASK_INSIGHTS = {
         <h3 class="text-xl font-bold mb-4 text-blue-900">Task Insights</h3>
         <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
 
-            <li>Data Source: <a href='https://www.kaggle.com/benchmarks/murugesann/wordle-benchmark-6letter-singleturn' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_6L_single_turn_larger</a>.</li>
+            <li>Data Source: <a href='https://www.kaggle.com/benchmarks/tasks/murugesann/evaluate-wordle-6l-single-turn-larger/2' target='_blank' class='underline font-semibold hover:text-blue-900'>evaluate_wordle_6L_single_turn_larger</a>.</li>
             <li><strong>Metric Shift:</strong> Because single-turn win rates are inherently low, Information Gain proves to be a far more granular and robust metric for ranking models than standard win rates.</li>
             <li><strong>Model Divergence:</strong> Claude Sonnet outperforms Claude Opus, with a noticeably wider performance gap here than in multi-turn scenarios.</li>
             <li><strong>The Reasoning Imperative:</strong> A stark performance gap between Grok-reasoning and Grok-non-reasoning provides concrete proof that reasoning models are essential for Executive Function (EF) skills.</li>
